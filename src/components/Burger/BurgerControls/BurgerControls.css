@@ -1,0 +1,11 @@
+@media (max-width:768px){
+    .controls h2{
+        text-align: center;
+    }
+    .controls{
+        margin:-50px auto 20px;
+    }
+    .BurgerControl{
+        width: 300px;
+    }
+}

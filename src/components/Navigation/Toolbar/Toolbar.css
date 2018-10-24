@@ -1,0 +1,36 @@
+header{
+	width: 100vw;
+	margin:0 0 30px;
+	padding:20px 30px;
+	background-color: #8CBBF8;
+    color:#fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 7;
+    display: flex;
+    align-items: center;
+}
+header #logo{
+    height: 50px;
+}
+header div, header nav{
+    display: inline-block;
+}
+header .nav{
+    display:inline-block;
+    margin:0 50px;
+}
+header .nav li{
+    display: inline-block;
+    margin: 0 15px;
+    padding: 10px;
+}
+header .nav a{
+    color:#fff;
+    text-decoration: none;
+    margin: 0 15px;
+}
+header .nav li a.active{
+    border-bottom: 3px solid #fff;
+}

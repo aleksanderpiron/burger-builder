@@ -1,0 +1,75 @@
+.modal{
+	position: fixed;
+	background-color: #fff;
+	max-width: 400px;
+	height: 500px;
+	z-index: 9;
+	border:1px solid #ccc;
+	left: 0;
+	right: 0;
+	top:20px;
+	margin:0 auto;
+	padding: 50px 100px;
+	animation-name: FadeIn;
+	animation-duration: .5s;
+}
+.modal h1{
+	text-align: center;
+	margin-top: 0;
+}
+.OrderModal ul{
+	padding: 0;
+	list-style: none;
+}
+.OrderModal ul li{
+	text-transform: capitalize;
+	font-size: 22px;
+	border-bottom: 1px solid #707070;
+}
+.OrderModal .buttons{
+	position: absolute;
+	bottom: 50px;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+.OrderModal ul li .ing-amount{
+	float: right;
+}
+.OrderModal #totalPrice{
+	position: absolute;
+	font-size: 22px;
+	bottom: 150px;
+	right: 100px;
+}
+.OrderModal #totalPrice .priceNumber{
+	font-size: 28px;
+	font-weight: 700;
+}
+.SuccessModal{
+	color: #1D6302;
+	height: 170px;
+	top:200px;
+}
+.SuccessModal Button{
+	margin: 70px auto 0;
+	display: block;
+}
+.error{
+	color: #860303;
+	font-size: 13px;
+}
+.mask{
+	position: fixed;
+	z-index: 8;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: #333;
+	opacity: .6
+}
+@keyframes FadeIn {
+    from {opacity:0; transform: translateY(-50px);}
+    to {opacity:1; transform: translateY(0px);}
+}
