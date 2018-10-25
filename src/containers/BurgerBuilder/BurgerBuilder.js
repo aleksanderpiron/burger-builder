@@ -32,7 +32,7 @@ class BurgerBuilder extends Component{
 			inputPhone: false
 		}
 	}
-	
+
 	updateCanOrderState (ingredients){
 		const sum = Object.keys(ingredients).map(igKey => {
 			return ingredients[igKey];
@@ -41,10 +41,10 @@ class BurgerBuilder extends Component{
 		}, 0);
 		this.setState({canOrder: sum > 0});
 	}
-	
+
 	showHideModalHandler=()=>{
 		let decide = this.state.OrderModal;
-		decide = !decide; 
+		decide = !decide;
 		this.setState({OrderModal:decide});
 	}
 
@@ -53,15 +53,15 @@ class BurgerBuilder extends Component{
 		let newCount = oldCount + 1;
 		const updatedIngredients = {...this.state.ingredients};
 		updatedIngredients[type] = newCount;
-		
+
 
 		let oldPrice = this.state.totalPrice;
 		let ingPrice = INGREDIENT_PRICES[type];
-		let newPrice = oldPrice + ingPrice; 
+		let newPrice = oldPrice + ingPrice;
 		newPrice = Math.round(newPrice * 100) / 100;
 		this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
 		this.updateCanOrderState(updatedIngredients);
-	}	
+	}
 
 	removeIngredientsHandler=(type)=>{
 		let oldCount = this.state.ingredients[type];
@@ -69,23 +69,23 @@ class BurgerBuilder extends Component{
 			return;
 		}
 		let newCount = oldCount - 1;
-		
+
 		const updatedIngredients = {...this.state.ingredients};
 		updatedIngredients[type] = newCount;
 
 		let oldPrice = this.state.totalPrice;
 		let ingPrice = INGREDIENT_PRICES[type];
-		let newPrice = oldPrice - ingPrice; 
+		let newPrice = oldPrice - ingPrice;
 		newPrice = Math.round(newPrice * 100) / 100;
 		this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
 		this.updateCanOrderState(updatedIngredients);
-	}	
-	
+	}
+
 	finalizeOrderHandler=(name, phone)=>{
 		if(name != "" && phone != ""){
 			this.setState({loading:true});
 			const orderedBurger = {
-				Ingredients: this.state.ingredients,
+				Ingredients: Object.entries(this.state.ingredients),
 				Price: this.state.totalPrice,
 				PhoneNumber: phone,
 				Name: name

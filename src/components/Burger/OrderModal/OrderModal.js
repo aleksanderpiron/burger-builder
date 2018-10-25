@@ -32,8 +32,9 @@ const OrderModal=(props)=>{
 		<p id="totalPrice">Total price: <span className="priceNumber">{props.price}$</span></p>
 		<p>
 			<span>Please write your name: </span>
-			<input onChange={inputValidateHandler.bind(this)} id="name" type="text"/>
-			<p className="error">{errorMess}</p>
+			<input  id="name" type="text"/>
+			{/* <p className="error">{errorMess}</p> */}
+			{/* onChange={inputValidateHandler.bind(this)} */}
 		</p>
 		<p>
 			<span>And your phone number: </span>

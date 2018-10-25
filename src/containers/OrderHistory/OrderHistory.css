@@ -1,0 +1,10 @@
+.orderHistory{
+    padding: 30px;
+    margin-top: -70px;
+}
+.historyItem{
+    margin: 30px 0;
+}
+#text{
+    display: block;
+}
