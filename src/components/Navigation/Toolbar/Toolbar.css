@@ -31,6 +31,6 @@ header .nav a{
     text-decoration: none;
     margin: 0 15px;
 }
-header .nav li a.active{
+header .nav a.active{
     border-bottom: 3px solid #fff;
 }

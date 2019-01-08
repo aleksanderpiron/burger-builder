@@ -2,6 +2,7 @@ import React from 'react';
 import './OrderModal.css';
 import Button from '../../Tools/Button/Button';
 import Spinner from '../../Tools/Spinner/Spinner';
+import {Link} from 'react-router-dom';
 
 const OrderModal=(props)=>{
 	const orderList = Object.keys(props.ingredients)
@@ -30,18 +31,8 @@ const OrderModal=(props)=>{
 			{orderList}
 		</ul>
 		<p id="totalPrice">Total price: <span className="priceNumber">{props.price}$</span></p>
-		<p>
-			<span>Please write your name: </span>
-			<input  id="name" type="text"/>
-			{/* <p className="error">{errorMess}</p> */}
-			{/* onChange={inputValidateHandler.bind(this)} */}
-		</p>
-		<p>
-			<span>And your phone number: </span>
-			<input id="phone" name='phone' type="number"/>
-		</p>
 		<div className="buttons">
-			<Button clicked={(name, phone)=>props.finishOrder(document.querySelector('#name').value, document.querySelector('#phone').value)} btnType='success'>Send order</Button>
+			<Link to="/checkout" btnType='success'>Next step</Link>
 			<Button btnType='danger' clicked={props.showHideModal}>Cancel</Button>
 		</div>
 	</div>

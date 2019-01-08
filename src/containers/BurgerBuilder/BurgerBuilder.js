@@ -4,6 +4,8 @@ import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/Burger/BurgerControls/BurgerControls';
 import OrderModal from '../../components/Burger/OrderModal/OrderModal';
 import axios from '../../axiosOrders';
+import {connect} from 'react-redux';
+import * as actionsList from '../../store/actions';
 
 const INGREDIENT_PRICES = {
 	meat: 1.5,
@@ -33,7 +35,8 @@ class BurgerBuilder extends Component{
 		}
 	}
 
-	updateCanOrderState (ingredients){
+	updateCanOrderState (){
+		const ingredients = {this.props.ingredients};
 		const sum = Object.keys(ingredients).map(igKey => {
 			return ingredients[igKey];
 		}).reduce((sum, el) =>{
@@ -82,7 +85,7 @@ class BurgerBuilder extends Component{
 	}
 
 	finalizeOrderHandler=(name, phone)=>{
-		if(name != "" && phone != ""){
+		if(name !== "" && phone !== ""){
 			this.setState({loading:true});
 			const orderedBurger = {
 				Ingredients: Object.entries(this.state.ingredients),
@@ -116,19 +119,31 @@ class BurgerBuilder extends Component{
 	}
 
 	render(){
-		let disabledButtons = {...this.state.ingredients};
+		let disabledButtons = {...this.props.ingredients};
 		for(let key in disabledButtons){
 			disabledButtons[key] = disabledButtons[key] <= 0;
 		}
-
+		console.log(this.props.ingredients);
 		return(
 			<React.Fragment>
 				{this.state.OrderModal ? <OrderModal errors={this.state.inputErrors} reset={this.resetHandler} success={this.state.success} loading={this.state.loading} finishOrder={this.finalizeOrderHandler} price={this.state.totalPrice} showHideModal={this.showHideModalHandler} ingredients={this.state.ingredients}/> : null}
-				<Burger ingredients={this.state.ingredients}/>
-				<BurgerControls  showHideModal={this.showHideModalHandler} canOrder={this.state.canOrder} price={this.state.totalPrice} disabledBtns={disabledButtons} addHandler={this.addIngredientsHandler} removeHandler={this.removeIngredientsHandler} ingredients={this.state.ingredients} />
+				<Burger ingredients={this.props.ingredients}/>
+				<BurgerControls  showHideModal={this.showHideModalHandler} canOrder={this.updateCanOrderState()} price={this.props.totalPrice} disabledBtns={disabledButtons} addHandler={this.props.addIngredientHandler} removeHandler={this.props.removeIngredientHandler} ingredients={this.props.ingredients} />
 			</React.Fragment>
 			);
 	}
 }
 
-export default BurgerBuilder;
+const mapStateToProps = (state) =>{
+	return{
+		ingredients: state.ingredients,
+		totalPrice: state.totalPrice,
+	}
+}
+const mapDispatchToProps = (dispatch) =>{
+	return{
+		addIngredientHandler:(ingName)=> dispatch({type: actionsList.ADD_INGREDIENT, ingName:ingName, }),
+		removeIngredientHandler:(ingName)=> dispatch({type: actionsList.REMOVE_INGREDIENT, ingName:ingName})
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);

@@ -1,14 +1,14 @@
 import React from 'react';
 import './Toolbar.css';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import logo from '../../../assets/img/logo.png';
 
 const Toolbar=()=>(
     <header>
-        <Link to="/" ><img id="logo" src={logo} alt="Logo"/></Link>
+        <NavLink to="/" ><img id="logo" src={logo} alt="Logo"/></NavLink>
         <div className="nav">
-            <Link to="/burger-builder" >Burger Builder</Link>
-            <Link to="/order-history" >Previous Orders</Link>
+            <NavLink to="/burger-builder" >Burger Builder</NavLink>
+            <NavLink to="/order-history" >Previous Orders</NavLink>
         </div>
     </header>
 )
