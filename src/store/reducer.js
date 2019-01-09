@@ -1,8 +1,8 @@
 import * as actionsList from './actions';
 
 const INGREDIENT_PRICES = {
+    tomato: 0.5,
 	meat: 1.5,
-	tomato: 0.5,
 	cheese: 0.4,
 	bacon: 0.7,
 	salad: 0.3
@@ -10,9 +10,9 @@ const INGREDIENT_PRICES = {
 
 const initialState ={
     ingredients: {
+        bacon: 0,
         salad: 0,
         tomato: 0,
-        bacon: 0,
         cheese: 0,
         meat: 0,
     },

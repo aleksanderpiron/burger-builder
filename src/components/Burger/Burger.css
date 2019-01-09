@@ -1,8 +1,12 @@
 .Burger{
 	width: 550px;
-	height: 400px;
-	margin:auto;
+	height: 300px;
+	margin:40px;
 	text-align: center;
 	font-weight: bold;
 	font-size: 1.2rem;
+}
+.Burger-box{
+	margin-bottom: 20px;
+	height: auto;
 }

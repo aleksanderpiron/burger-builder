@@ -32,7 +32,7 @@ const OrderModal=(props)=>{
 		</ul>
 		<p id="totalPrice">Total price: <span className="priceNumber">{props.price}$</span></p>
 		<div className="buttons">
-			<Link to="/checkout" btnType='success'>Next step</Link>
+			<Link className="btn success" to="/checkout" btnType='success'>Next step</Link>
 			<Button btnType='danger' clicked={props.showHideModal}>Cancel</Button>
 		</div>
 	</div>

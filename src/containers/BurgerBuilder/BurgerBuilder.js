@@ -35,53 +35,19 @@ class BurgerBuilder extends Component{
 		}
 	}
 
-	updateCanOrderState (){
-		const ingredients = {this.props.ingredients};
+	updateCanOrderState (ingredients){
 		const sum = Object.keys(ingredients).map(igKey => {
 			return ingredients[igKey];
 		}).reduce((sum, el) =>{
 			return sum + el;
 		}, 0);
-		this.setState({canOrder: sum > 0});
+		return sum > 0;
 	}
 
 	showHideModalHandler=()=>{
 		let decide = this.state.OrderModal;
 		decide = !decide;
 		this.setState({OrderModal:decide});
-	}
-
-	addIngredientsHandler=(type)=>{
-		let oldCount = this.state.ingredients[type];
-		let newCount = oldCount + 1;
-		const updatedIngredients = {...this.state.ingredients};
-		updatedIngredients[type] = newCount;
-
-
-		let oldPrice = this.state.totalPrice;
-		let ingPrice = INGREDIENT_PRICES[type];
-		let newPrice = oldPrice + ingPrice;
-		newPrice = Math.round(newPrice * 100) / 100;
-		this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
-		this.updateCanOrderState(updatedIngredients);
-	}
-
-	removeIngredientsHandler=(type)=>{
-		let oldCount = this.state.ingredients[type];
-		if(oldCount <= 0){
-			return;
-		}
-		let newCount = oldCount - 1;
-
-		const updatedIngredients = {...this.state.ingredients};
-		updatedIngredients[type] = newCount;
-
-		let oldPrice = this.state.totalPrice;
-		let ingPrice = INGREDIENT_PRICES[type];
-		let newPrice = oldPrice - ingPrice;
-		newPrice = Math.round(newPrice * 100) / 100;
-		this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
-		this.updateCanOrderState(updatedIngredients);
 	}
 
 	finalizeOrderHandler=(name, phone)=>{
@@ -126,9 +92,9 @@ class BurgerBuilder extends Component{
 		console.log(this.props.ingredients);
 		return(
 			<React.Fragment>
-				{this.state.OrderModal ? <OrderModal errors={this.state.inputErrors} reset={this.resetHandler} success={this.state.success} loading={this.state.loading} finishOrder={this.finalizeOrderHandler} price={this.state.totalPrice} showHideModal={this.showHideModalHandler} ingredients={this.state.ingredients}/> : null}
+				{this.state.OrderModal ? <OrderModal errors={this.state.inputErrors} reset={this.resetHandler} success={this.state.success} loading={this.state.loading} finishOrder={this.finalizeOrderHandler} price={this.props.totalPrice} showHideModal={this.showHideModalHandler} ingredients={this.props.ingredients}/> : null}
 				<Burger ingredients={this.props.ingredients}/>
-				<BurgerControls  showHideModal={this.showHideModalHandler} canOrder={this.updateCanOrderState()} price={this.props.totalPrice} disabledBtns={disabledButtons} addHandler={this.props.addIngredientHandler} removeHandler={this.props.removeIngredientHandler} ingredients={this.props.ingredients} />
+				<BurgerControls  showHideModal={this.showHideModalHandler} canOrder={this.updateCanOrderState(this.props.ingredients)} price={this.props.totalPrice} disabledBtns={disabledButtons} addHandler={this.props.addIngredientHandler} removeHandler={this.props.removeIngredientHandler} ingredients={this.props.ingredients} />
 			</React.Fragment>
 			);
 	}
