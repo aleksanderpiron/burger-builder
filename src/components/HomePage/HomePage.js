@@ -8,8 +8,8 @@ const HomePage = () =>{
         <div className="home">
             <img src={logo} alt=""/>
             <h1>Welcome to Burger Builder!</h1>
-            <Link class="btn success" to="/burger-builder">Burger Builder</Link>
-            <Link class="btn info" to="/order-history">History of orders</Link>
+            <Link className="btn success" to="/burger-builder">Burger Builder</Link>
+            <Link className="btn info" to="/order-history">History of orders</Link>
         </div>
     )
 }

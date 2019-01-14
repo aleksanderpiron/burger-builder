@@ -49,23 +49,7 @@ class BurgerBuilder extends Component{
 		decide = !decide;
 		this.setState({OrderModal:decide});
 	}
-
-	finalizeOrderHandler=(name, phone)=>{
-		if(name !== "" && phone !== ""){
-			this.setState({loading:true});
-			const orderedBurger = {
-				Ingredients: Object.entries(this.state.ingredients),
-				Price: this.state.totalPrice,
-				PhoneNumber: phone,
-				Name: name
-			}
-			axios.post('/orders.json', orderedBurger).then(response=>{
-				this.setState({loading:false, success:true});
-			});
-		}
-		else{
-		}
-	}
+	
 	resetHandler=()=>{
 		const resetedState = {
 			ingredients: {

@@ -1,34 +1,15 @@
 import React from 'react';
 import './CheckoutForm.css';
+import Input from '../Tools/Input/Input';
 
 const CheckoutForm =(props)=>{
     return(
         <div className="form">
-            <label id="name">
-                <input type="text" onInput={props.validate} name='name' onChange={props.change} placeholder=' '/>
-                <span>Name</span>
-                <div className="error-mess">This field is required!</div>
-            </label>
-            <label id="address">
-                <input type="text" onInput={props.validate} name='address' onChange={props.change} placeholder=' '/>
-                <span>Address</span>
-                <div className="error-mess"></div>
-            </label>
-            <label id="city">
-                <input type="text" onInput={props.validate} name='city' onChange={props.change} placeholder=' '/>
-                <span>City</span>
-                <div className="error-mess"></div>
-            </label>
-            <label id="phone">
-                <input type="tel" onInput={props.validate} pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" name='phone' onChange={props.change} placeholder=' '/>
-                <span>Phone</span>
-                <div className="error-mess"></div>
-            </label>
-            <label id="mess">
-                <textarea name="mess" onInput={props.validate} cols="30" rows="10" onChange={props.change}  placeholder=' '></textarea>
-                <span>Message (optional)</span>
-                <div className="error-mess"></div>
-            </label>
+                <Input touched={props.data.name.touched} valid={props.data.name.valid} errorMessage="Name error" inputType="input" labelId="name" placeholder="Name" inputName="name" onChange={props.change} onBlur={props.blur}/>
+                <Input touched={props.data.address.touched} valid={props.data.address.valid} errorMessage="Address error" inputType="input" labelId="address" placeholder="Address" inputName="address" onChange={props.change} onBlur={props.blur}/>
+                <Input touched={props.data.city.touched} valid={props.data.city.valid} errorMessage="City error" inputType="input" labelId="city" placeholder="City" inputName="city" onChange={props.change} onBlur={props.blur}/>
+                <Input touched={props.data.phone.touched} valid={props.data.phone.valid} errorMessage="Phone error" inputType="input" labelId="phone" placeholder="Phone" inputName="phone" onChange={props.change} onBlur={props.blur}/>
+                <Input touched={props.data.message.touched} valid={props.data.message.valid} errorMessage="Message error" inputType="textarea" labelId="mess" placeholder="Message (optional)" inputName="message" onChange={props.change} onBlur={props.blur}/>
         </div>
     )
 }
