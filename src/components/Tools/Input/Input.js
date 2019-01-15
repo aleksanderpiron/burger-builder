@@ -11,7 +11,7 @@ const Input = (props) =>{
         case ('textarea'):
             choosenElement = <textarea onBlur={props.onBlur} className={props.touched?props.valid?'input-success':'input-fail':null} rows={props.rows} cols={props.cols} name={props.inputName} onChange={props.onChange} placeholder=' ' />
         break;
-         
+
     }
     return(
         <label id={props.labelId}>
@@ -20,6 +20,6 @@ const Input = (props) =>{
             <div className="error-mess">{props.errorMessage}</div>
         </label>
     )
-} 
+}
 
 export default Input;

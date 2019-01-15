@@ -59,3 +59,7 @@ label input, label textarea{
 .input-fail{
     border:1px solid red;
 }
+.input-fail ~ .error-mess{
+    right: -150px;
+    transition:300ms;
+}
