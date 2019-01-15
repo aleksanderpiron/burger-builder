@@ -16,6 +16,7 @@ label span{
     margin: 0 auto;
     transition: 300ms;
     font-size: 12px;
+    z-index: 4;
 }
 label input:placeholder-shown ~ span, label textarea:placeholder-shown  ~ span{
     top: 4px;
@@ -28,6 +29,8 @@ label input:focus ~ span, label textarea:focus  ~ span{
     color: #ccc;
 }
 label input, label textarea{
+    position: relative;
+    z-index: 3;
     text-align: center;
     padding: 5px 10px;
     font-size: 18px;
@@ -43,23 +46,46 @@ label input, label textarea{
 .error-mess{
     top: 9px;
     right: 0;
-    z-index: -1;
+    z-index: 2;
     position: absolute;
     color: rgb(250, 39, 39);
     font-size: 14px;
     font-weight: 600;
-    transition: 300ms;
-}
-.error-mess.active{
-    right:-170px;
+    transition: 500ms;
 }
 .input-success{
     border:1px solid green;
+}
+.check{
+    position: absolute;
+    right: -80px;
+    top: 0;
+    display: block;
+    overflow: hidden;
+    width: 25px;
+    height: 30px;
+    transition: 200ms;
+    z-index: 0;
+}
+.check::after{
+    z-index: 1;
+    content: ' ';
+    width: 25px;
+    height: 30px;
+    display: block;
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 300ms;
+}
+.check.active::after{
+    width: 0;
 }
 .input-fail{
     border:1px solid red;
 }
 .input-fail ~ .error-mess{
-    right: -150px;
+    right: -175px;
     transition:300ms;
 }

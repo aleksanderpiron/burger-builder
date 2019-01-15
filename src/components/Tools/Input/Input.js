@@ -1,5 +1,6 @@
 import React from 'react';
 import './Input.css';
+import check from '../../../assets/img/tick.svg';
 
 const Input = (props) =>{
     let choosenElement = null;
@@ -18,6 +19,9 @@ const Input = (props) =>{
             {choosenElement}
             <span>{props.placeholder}</span>
             <div className="error-mess">{props.errorMessage}</div>
+            <div className={props.touched?props.valid?'check active':'check':'check'}>
+                <img src={check} alt=""/>
+            </div>
         </label>
     )
 }

@@ -16,9 +16,9 @@ class Checkout extends Component{
                 errorMessage:null,
                 valid:false,
                 validation:{
-                    notEmpty:false,
                     minLength:false,
-                    minLengthNum:3
+                    minLengthNum:3,
+                    notEmpty:false,
                 },
                 touched:false
             },
@@ -28,8 +28,6 @@ class Checkout extends Component{
                 valid:false,
                 validation:{
                     notEmpty:false,
-                    minLength:false,
-                    minLengthNum:1
                 },
                 touched:false
             },
@@ -39,8 +37,6 @@ class Checkout extends Component{
                 valid:false,
                 validation:{
                     notEmpty:false,
-                    minLength:false,
-                    minLengthNum:1
                 },
                 touched:false
             },
@@ -49,10 +45,10 @@ class Checkout extends Component{
                 errorMessage:null,
                 valid:false,
                 validation:{
-                    notEmpty:false,
                     minLength:false,
                     minLengthNum:9,
-                    isNumber:false
+                    isNumber:false,
+                    notEmpty:false,
                 },
                 touched:false
             },
@@ -61,9 +57,6 @@ class Checkout extends Component{
                 errorMessage:null,
                 valid:false,
                 validation:{
-                    notEmpty:false,
-                    minLength:false,
-                    minLengthNum:1
                 },
                 touched:false
             }
@@ -74,33 +67,56 @@ class Checkout extends Component{
     }
     formValidate = (value, updatedValidaton) =>{
         let validationPassed = true;
-        if(value.trim().length > 0){
-            updatedValidaton.validation.notEmpty = true;
-            updatedValidaton.errorMessage = null;
-        }else if(value.trim().length === 0){
-            updatedValidaton.validation.notEmpty = false;
-            updatedValidaton.errorMessage = 'Input is empty!';
-        }
 
-        if(value.trim().length >= updatedValidaton.validation.minLengthNum){
-            updatedValidaton.validation.minLength = true;
-            updatedValidaton.errorMessage = null;
-        }else if(value.trim().length >= 1){
-            updatedValidaton.validation.minLength = false;
-            updatedValidaton.errorMessage = 'Value is too short!';
-        }
-        for(var o in updatedValidaton.validation){
-            if(!updatedValidaton.validation[o]){
-                validationPassed = false;
+        // RULES START
+        // NOT EMPTY
+        if(typeof updatedValidaton.validation.notEmpty != 'undefined'){
+            if(value.trim().length > 0){
+                updatedValidaton.validation.notEmpty = true;
+            }else if(value.trim().length === 0){
+                updatedValidaton.validation.notEmpty = false;
             }
         }
 
-        if(updatedValidaton.validation.isNumber){
-            console.log('Jest')
+        // NOT TOO SHORT
+        if(typeof updatedValidaton.validation.minLength != 'undefined'){
+            value = value.replace(/\s+/g, '');
+            if(value.trim().length >= updatedValidaton.validation.minLengthNum){
+                updatedValidaton.validation.minLength = true;
+            }else if(value.trim().length >= 1){
+                updatedValidaton.validation.minLength = false;
+            }
         }
-        else{
-            console.log('Nie ma')
+
+        // IS NUMBER
+        if(typeof updatedValidaton.validation.isNumber != 'undefined'){
+            value = value.replace(/\s+/g, '');
+            if(isNaN(value.trim()) === false){
+                updatedValidaton.validation.isNumber = true;
+            }else if(isNaN(value.trim()) === true){
+                updatedValidaton.validation.isNumber = false;
+            }
         }
+
+        // RULES END
+
+        for(var o in updatedValidaton.validation){
+            if(!updatedValidaton.validation[o]){
+                validationPassed = false;
+                switch(o){
+                    case 'isNumber':
+                        updatedValidaton.errorMessage = 'Value must be number!';
+                    break;
+                    case 'minLength':
+                        updatedValidaton.errorMessage = 'Value is too short!';
+                    break;
+                    case 'notEmpty':
+                        updatedValidaton.errorMessage = 'Input is empty!';
+                    break;
+                }
+            }
+        }
+
         return validationPassed;
         }
 
@@ -114,6 +130,8 @@ class Checkout extends Component{
 
     blurHandler = (event) =>{
         const newStateData = {...this.state.formData}
+        const validationPassed = this.formValidate(event.target.value, newStateData[event.target.name]);
+        newStateData[event.target.name].valid = validationPassed;
         newStateData[event.target.name].touched = true;
         this.setState({formData:newStateData});
 
