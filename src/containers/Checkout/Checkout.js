@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Burger from '../../components/Burger/Burger';
-import CheckoutForm from '../../components/CheckoutForm/CheckoutForm';
+import CheckoutForm from '../../components/Forms/CheckoutForm/CheckoutForm';
 import {connect} from 'react-redux';
 import './Checkout.css';
 import {Link} from 'react-router-dom';
@@ -63,8 +63,10 @@ class Checkout extends Component{
         },
         spinner:false,
         postStatus: 0,
-        postError: null
+        postError: null,
+        canFinish:false,
     }
+
     formValidate = (value, updatedValidaton) =>{
         let validationPassed = true;
 
@@ -116,7 +118,6 @@ class Checkout extends Component{
                 }
             }
         }
-
         return validationPassed;
         }
 
@@ -186,11 +187,11 @@ class Checkout extends Component{
     }
 
     render(){
-        let checkoutBody = <CheckoutForm blur={this.blurHandler} data={this.state.formData} errorMessage=           {this.state.errorMessage} change={this.inputChangeHandler}/>;
+        let checkoutBody = <CheckoutForm blur={this.blurHandler} data={this.state.formData} errorMessage={this.state.errorMessage} change={this.inputChangeHandler}/>;
 
         let buttons = <div className="buttons text-center">
                           <Link className="btn info" to="/burger-builder">Back</Link>
-                          <Button clicked={this.finalizeOrderHandler} btnType="success">Finish</Button>
+                          <Button disableBtn={!this.state.canFinish?true:false} clicked={this.finalizeOrderHandler} btnType="success">Finish</Button>
                       </div>;
 
         if(this.state.spinner === true){

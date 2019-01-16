@@ -1,6 +1,6 @@
 import React from 'react';
-import './CheckoutForm.css';
-import Input from '../Tools/Input/Input';
+import '../Forms.css';
+import Input from '../../Tools/Input/Input';
 
 const CheckoutForm =(props)=>{
     return(
@@ -13,7 +13,7 @@ const CheckoutForm =(props)=>{
 
                 <Input touched={props.data.phone.touched} valid={props.data.phone.valid} errorMessage={props.data.phone.errorMessage} inputType="input" labelId="phone" placeholder="Phone" inputName="phone" onChange={props.change} onBlur={props.blur}/>
 
-                <Input touched={props.data.message.touched} valid={props.data.message.valid} errorMessage={props.data.message.errorMessage} inputType="textarea" labelId="mess" placeholder="Message (optional)" inputName="message" onChange={props.change} onBlur={props.blur}/>
+                <Input disableColors={true} touched={props.data.message.touched} valid={props.data.message.valid} errorMessage={props.data.message.errorMessage} inputType="textarea" labelId="mess" placeholder="Message (optional)" inputName="message" onChange={props.change} onBlur={props.blur}/>
         </div>
     )
 }

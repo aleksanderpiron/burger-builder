@@ -89,3 +89,6 @@ label input, label textarea{
     right: -175px;
     transition:300ms;
 }
+.d-none{
+    display:none;
+}

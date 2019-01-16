@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
-
 import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/Burger/BurgerControls/BurgerControls';
 import OrderModal from '../../components/Burger/OrderModal/OrderModal';
-import axios from '../../axiosOrders';
 import {connect} from 'react-redux';
 import * as actionsList from '../../store/actions';
-
-const INGREDIENT_PRICES = {
-	meat: 1.5,
-	tomato: 0.5,
-	cheese: 0.4,
-	bacon: 0.7,
-	salad: 0.3
-}
 
 class BurgerBuilder extends Component{
 	state = {
