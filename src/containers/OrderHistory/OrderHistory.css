@@ -3,8 +3,29 @@
     margin-top: -70px;
 }
 .historyItem{
+    width: 300px;
     margin: 30px 0;
+    border-bottom: 1px solid #ccc;
 }
-#text{
-    display: block;
+.flex-box{
+    display: flex;
+    justify-content: space-between;
+}
+.historyItem p{
+    font-weight: 700;
+}
+.historyItem .totalPrice{
+    font-weight: 700;
+    text-align: center;
+}
+.historyItem ul{
+    list-style:none;
+    padding-left: 0;
+}
+.historyItem ul li{
+    margin-bottom: 3px;
+}
+.historyItem .ingredients li{
+    display: flex;
+    justify-content: space-between;
 }

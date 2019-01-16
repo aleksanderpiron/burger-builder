@@ -1,44 +1,76 @@
 import React, { Component } from 'react';
+import Spinner from '../../components/Tools/Spinner/Spinner';
+import Button from '../../components/Tools/Button/Button';
 import axios from '../../axiosOrders';
 import './OrderHistory.css';
 
 class OrderHistory extends Component{
     state = {
-        history: null,
+        loading: true,
+        historyData:null,
     }
-    componentDidMount(){
-        axios.get('/orders.json').then(response=>{
-            const historyData = response.data;
-            this.setState({history: historyData});
+
+    clearHistoryHandler=()=>{
+        this.setState({loading:true});
+        axios.delete('/orders.json').then(response=>{
+            this.setState({loading:false, historyData: response.data});
         });
     }
+
+    componentDidMount(){
+        axios.get('/orders.json').then(response=>{
+            this.setState({loading:false, historyData: response.data});
+        });
+    }
+
     render(){
-        let historyList = "No orders to list";
-        // if(this.state.history !== null){
-            const data = {...this.state.history};
-            historyList = Object.values(data).map((obj, index)=>{
-                return <div key={index} className="historyItem">{Object.entries(obj).map((line, index)=>{
-                    return <p key={index}>{line.map((word, index)=>{
-                        if(Object.prototype.toString.call(word) === '[object Array]'){
-                                let tabItemFin
-                            word.map(tabItem=>{
-                                tabItemFin = tabItem.join(" ");
-                            })
-                            return <span className="aa">{tabItemFin}</span>;
-                        }else{
-                            return <span key={index}>{word}</span>
-                        }
-                    })}</p>
-                })}</div>
-            });
-        //     historyList.map(elem=>{
-        //         return <p> Object.values(elem) </p>;
-        //     })
-        // }
+        let historyContent;
+        if(this.state.loading){
+            historyContent = <Spinner />
+        }else{
+            const historyData = this.state.historyData;
+            if(historyData == null){
+                historyContent = <p>History is empty! Go order some burgers</p>
+            }else{
+            historyContent = Object.values(historyData).map(obj=>{
+                return(
+                    <div className="historyItem">
+                        <div className="flex-box">
+                            <div className="userData">
+                                <p>User data: </p>
+                                <ul>
+                                    <li>Name: {obj.userData.name}</li>
+                                    <li>Address: {obj.userData.address}</li>
+                                    <li>City: {obj.userData.city}</li>
+                                    <li>Phone: {obj.userData.phone}</li>
+                                    <li>Message: {obj.userData.message}</li>
+                                </ul>
+                            </div>
+                            <div className="ingredients">
+                                <p>Ingredients:</p>
+                                <ul>
+                                    <li><span>Bacon:</span> x{obj.ingredients.bacon}</li>
+                                    <li><span>Cheese:</span> x{obj.ingredients.cheese}</li>
+                                    <li><span>Meat:</span> x{obj.ingredients.meat}</li>
+                                    <li><span>Salad:</span> x{obj.ingredients.salad}</li>
+                                    <li><span>Tomato:</span> x{obj.ingredients.tomato}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="totalPrice">
+                            <p>Total price: {obj.totalPrice} $</p>
+                        </div>
+                    </div>
+                )
+            })
+            }
+
+        }
         return(
             <div className='orderHistory'>
                 <h2>Orders history</h2>
-                {historyList}
+                {historyContent}
+                <Button clicked={this.clearHistoryHandler}>Clear history</Button>
             </div>
         )
     }
