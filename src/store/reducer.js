@@ -87,11 +87,12 @@ const initialState ={
             },
             touched:false
         },
-        repeatPassword:{
+        repeat:{
             value:'',
             errorMessage:null,
             valid:false,
             validation:{
+                notEmpty:false,
                 // sameAs: 'password',
             },
             touched:false
@@ -136,6 +137,25 @@ const reducer=(state=initialState, actions)=>{
                 updatedValidaton.validation.isNumber = false;
             }
         }
+
+        // IS SAME AS
+        // if(typeof updatedValidaton.validation.sameAs !== 'undefined'){
+        //     const targetId = updatedValidaton.validation.sameAs;
+        //     let model = {...state.formData[targetId]};
+        //     model = model.value;
+        //     if(value === model){
+        //         console.log('takie samo');
+        //         console.log(model);
+        //         console.log(value);
+
+        //         updatedValidaton.validation.sameAs = true;
+        //     }else if(value !== model){
+        //         console.log('nie takie samo');
+        //         console.log(model);
+        //         console.log(value);
+        //         updatedValidaton.validation.sameAs = false;
+        //     }
+        // }
 
         // RULES END
 
