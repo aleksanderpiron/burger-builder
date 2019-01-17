@@ -14,17 +14,6 @@ const OrderModal=(props)=>{
 			</li>)
 		}
 	});
-	let errorMess = "";
-	const inputValidateHandler=(input)=>{
-		const inputValue = input.target.value;
-		console.log(inputValue);
-		if(inputValue == ""){
-			errorMess = "This field is required!"
-		}
-		else if(inputValue < 3){
-			errorMess = "It's too short!"
-		}
-	}
 	let modalContent = <div className="OrderModal modal">
 		<h1>Your Order</h1>
 		<ul>

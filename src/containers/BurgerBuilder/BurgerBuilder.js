@@ -39,7 +39,7 @@ class BurgerBuilder extends Component{
 		decide = !decide;
 		this.setState({OrderModal:decide});
 	}
-	
+
 	resetHandler=()=>{
 		const resetedState = {
 			ingredients: {
@@ -63,7 +63,6 @@ class BurgerBuilder extends Component{
 		for(let key in disabledButtons){
 			disabledButtons[key] = disabledButtons[key] <= 0;
 		}
-		console.log(this.props.ingredients);
 		return(
 			<React.Fragment>
 				{this.state.OrderModal ? <OrderModal errors={this.state.inputErrors} reset={this.resetHandler} success={this.state.success} loading={this.state.loading} finishOrder={this.finalizeOrderHandler} price={this.props.totalPrice} showHideModal={this.showHideModalHandler} ingredients={this.props.ingredients}/> : null}

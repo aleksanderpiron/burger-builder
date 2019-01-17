@@ -15,7 +15,8 @@ const Input = (props) =>{
         case ('textarea'):
             choosenElement = <textarea onBlur={props.onBlur} className={props.disableColors?null:props.touched?props.valid?'input-success':'input-fail':null} rows={props.rows} cols={props.cols} name={props.inputName} onChange={props.onChange} placeholder=' ' />
         break;
-
+        default:
+        return null;
     }
     return(
         <label id={props.labelId}>

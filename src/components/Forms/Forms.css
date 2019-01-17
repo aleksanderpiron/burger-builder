@@ -4,3 +4,10 @@
     width: 350px;
     margin: 0 auto;
 }
+.formChanger{
+    cursor: pointer;
+    transition: 300ms;
+}
+.formChanger:hover{
+    color: #ec0000;
+}
