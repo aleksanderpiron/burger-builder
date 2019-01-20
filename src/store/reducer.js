@@ -17,7 +17,7 @@ const initialState ={
         meat: 0,
     },
     totalPrice: 0,
-    formData:{
+    checkoutForm:{
         name:{
             value:'',
             errorMessage:null,
@@ -62,12 +62,14 @@ const initialState ={
         message:{
             value:'',
             errorMessage:null,
-            valid:false,
+            valid:true,
             validation:{
             },
             touched:false
         },
-        login:{
+    },
+    registerForm:{
+        registerEmail:{
             value:'',
             errorMessage:null,
             valid:false,
@@ -76,13 +78,13 @@ const initialState ={
             },
             touched:false
         },
-        password:{
+        registerPassword:{
             value:'',
             errorMessage:null,
             valid:false,
             validation:{
                 minLength:false,
-                minLengthNum:6,
+                minLengthNum:9,
                 notEmpty:false,
             },
             touched:false
@@ -98,7 +100,29 @@ const initialState ={
             touched:false
         }
     },
-}
+    loginForm:{
+        loginEmail:{
+            value:'',
+            errorMessage:null,
+            valid:false,
+            validation:{
+                notEmpty:false,
+            },
+            touched:false
+        },
+        loginPassword:{
+            value:'',
+            errorMessage:null,
+            valid:false,
+            validation:{
+                minLength:false,
+                minLengthNum:9,
+                notEmpty:false,
+            },
+            touched:false
+        }
+    }
+    }
 let newTotalPrice = null;
 let ingPrice = null;
 let validationPassed;
@@ -213,23 +237,23 @@ const reducer=(state=initialState, actions)=>{
             }
 
         case actionsList.INPUT_HANDLE:
-            const updatedState = {...state.formData};
+        const updatedState = {...state[actions.formName]};
             updatedState[actions.targetName].value = actions.targetValue;
             validationPassed = formValidate(actions.targetValue, updatedState[actions.targetName]);
             updatedState[actions.targetName].valid = validationPassed;
             return{
                 ...state,
-                formData:updatedState
+                [actions.formName]:updatedState
             }
 
         case actionsList.BLUR_HANDLE:
-            const newStateData = {...state.formData};
+            const newStateData = {...state[actions.formName]};
             validationPassed = formValidate(actions.targetValue, newStateData[actions.targetName]);
             newStateData[actions.targetName].valid = validationPassed;
             newStateData[actions.targetName].touched = true;
             return{
                 ...state,
-                formData:newStateData
+                [actions.formName]:newStateData
             }
 
         case actionsList.RESET_VALID:
@@ -251,7 +275,21 @@ const reducer=(state=initialState, actions)=>{
                 formData:resetedValid,
                 ingredients:resetedIngredients
             }
+    
+        case actionsList.LOGIN:
+            localStorage.setItem('token', actions.tokenId);
+            localStorage.setItem('userEmail', actions.userEmail);
+            localStorage.setItem('expirationTime', new Date(new Date().getTime() + 3600 * 1000));
+        
+        return state;
 
+        case actionsList.LOGOUT:
+            localStorage.removeItem('token');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('expirationTime');
+
+            return state;
+    
             default:
             return state;
 

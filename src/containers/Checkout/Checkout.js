@@ -36,8 +36,6 @@ class Checkout extends Component{
             },
             totalPrice: this.props.totalPrice
         }
-        this.props.resetValid();
-        console.log(this.props.ingredients);
         if(allFormTrue === true){
         this.setState(prevState=>{
             return {spinner:true}
@@ -87,6 +85,12 @@ class Checkout extends Component{
             buttons = null;
             console.log(this.state.postError);
         }
+        // if(localStorage.getItem('token') === null){
+        //     checkoutBody = <div><p>You have to be logged to see orders history!</p>
+        //                         <Link className="btn info" to='/login'>Login</Link>
+        //                     </div>;
+        //     buttons= null;
+        // }
         return(
             <div className="checkout-page">
                 {/* <div><Burger ingredients={this.props.ingredients} /></div> */}
@@ -100,14 +104,14 @@ const mapStateToProps = (state) =>{
 	return{
 		ingredients: state.ingredients,
         totalPrice: state.totalPrice,
-        formData: state.formData,
+        formData: state.checkoutForm,
 	}
 }
 
 const mapDispatchToProps = (dispatch) =>{
 	return{
-        inputChangeHandler:(event)=>dispatch({type: actionsList.INPUT_HANDLE, targetValue:event.target.value, targetName:event.target.name}),
-        blurHandler:(event)=>dispatch({type: actionsList.BLUR_HANDLE, targetValue:event.target.value, targetName:event.target.name}),
+        inputChangeHandler:(event)=>dispatch({type: actionsList.INPUT_HANDLE, targetValue:event.target.value, targetName:event.target.name, formName: 'checkoutForm'}),
+        blurHandler:(event)=>dispatch({type: actionsList.BLUR_HANDLE, targetValue:event.target.value, targetName:event.target.name, formName: 'checkoutForm'}),
         resetValid:()=>dispatch({type: actionsList.RESET_VALID})
 	}
 }

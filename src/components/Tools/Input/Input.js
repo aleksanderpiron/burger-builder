@@ -7,13 +7,13 @@ const Input = (props) =>{
 
     switch (props.inputType){
         case ('input'):
-            choosenElement = <input onBlur={props.onBlur} type="text" className={props.disableColors?null:props.touched?props.valid?'input-success':'input-fail':null} name={props.inputName} onChange={props.onChange} placeholder=' '/>
+            choosenElement = <input form={props.formName} onBlur={props.onBlur} type="text" className={props.disableColors?null:props.touched?props.valid?'input-success':'input-fail':null} name={props.inputName} onChange={props.onChange} placeholder=' '/>
         break;
         case ('input-password'):
-            choosenElement = <input onBlur={props.onBlur} type="password" className={props.disableColors?null:props.touched?props.valid?'input-success':'input-fail':null} name={props.inputName} onChange={props.onChange} placeholder=' '/>
+            choosenElement = <input form={props.formName} onBlur={props.onBlur} type="password" className={props.disableColors?null:props.touched?props.valid?'input-success':'input-fail':null} name={props.inputName} onChange={props.onChange} placeholder=' '/>
         break;
         case ('textarea'):
-            choosenElement = <textarea onBlur={props.onBlur} className={props.disableColors?null:props.touched?props.valid?'input-success':'input-fail':null} rows={props.rows} cols={props.cols} name={props.inputName} onChange={props.onChange} placeholder=' ' />
+            choosenElement = <textarea form={props.formName} onBlur={props.onBlur} className={props.disableColors?null:props.touched?props.valid?'input-success':'input-fail':null} rows={props.rows} cols={props.cols} name={props.inputName} onChange={props.onChange} placeholder=' ' />
         break;
         default:
         return null;

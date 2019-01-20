@@ -14,7 +14,16 @@ header{
 header #logo{
     height: 50px;
 }
-header div, header nav{
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header > div{
+    display: flex;
+    align-items: center;
+}
+header nav{
     display: inline-block;
 }
 header .nav{
@@ -33,4 +42,7 @@ header .nav a{
 }
 header .nav a.active{
     border-bottom: 3px solid #fff;
+}
+header .user{
+    margin-right: 50px;
 }

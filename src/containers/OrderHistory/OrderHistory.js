@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Spinner from '../../components/Tools/Spinner/Spinner';
 import Button from '../../components/Tools/Button/Button';
 import axios from '../../axiosOrders';
+import {Link} from 'react-router-dom';
 import './OrderHistory.css';
 
 class OrderHistory extends Component{
@@ -18,19 +19,25 @@ class OrderHistory extends Component{
     }
 
     componentDidMount(){
-        axios.get('/orders.json').then(response=>{
-            this.setState({loading:false, historyData: response.data});
-        });
+        if(localStorage.getItem('token') !== null){
+            axios.get('/orders.json').then(response=>{
+                this.setState({loading:false, historyData: response.data});
+            });
+        }
+        else{
+            this.setState({loading:false});
+        }
     }
 
     render(){
+        console.log(localStorage.getItem('token'));
         let historyContent;
         if(this.state.loading){
             historyContent = <Spinner />
         }else{
             const historyData = this.state.historyData;
             if(historyData == null){
-                historyContent = <p>History is empty! Go order some burgers</p>
+                historyContent = <p>Your history is empty! Go order some burgers</p>
             }else{
             historyContent = Object.values(historyData).map(obj=>{
                 return(
@@ -64,13 +71,18 @@ class OrderHistory extends Component{
                 )
             })
             }
+            if(localStorage.getItem('token') === null){
+                historyContent = <div><p>You have to be logged to see orders history!</p>
+                    <Link className="btn info" to='/login'>Login</Link>
+                </div>
+            }
 
         }
         return(
             <div className='orderHistory'>
                 <h2>Orders history</h2>
                 {historyContent}
-                <Button clicked={this.clearHistoryHandler}>Clear history</Button>
+                {historyContent===null?<Button clicked={this.clearHistoryHandler}>Clear history</Button>:null}
             </div>
         )
     }

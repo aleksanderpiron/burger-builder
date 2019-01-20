@@ -11,3 +11,6 @@
 .formChanger:hover{
     color: #ec0000;
 }
+.error-message{
+    color:#ec0000;
+}
