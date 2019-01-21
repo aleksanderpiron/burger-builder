@@ -65,8 +65,7 @@ class Checkout extends Component{
     }
 
     render(){
-        console.log(localStorage.getItem('userId'))
-        let checkoutBody = <CheckoutForm blur={this.props.blurHandler} data={this.props.formData} change={this.props.inputChangeHandler}/>;
+        let checkoutBody = <CheckoutForm blur={this.props.blurHandler} formData={this.props.formData} change={this.props.inputChangeHandler}/>;
 
         let buttons = <div className="buttons text-center">
                           <Link className="btn info" to="/burger-builder">Back</Link>
@@ -86,11 +85,10 @@ class Checkout extends Component{
         if(this.state.postError !== null){
             checkoutBody = <p>Something went wrong!</p>;
             buttons = null;
-            console.log(this.state.postError);
         }
         if(localStorage.getItem('token') === null){
             checkoutBody = <div><p>You have to be logged to see orders history!</p>
-                                <Link className="btn info" to='/login'>Login</Link>
+                                <Link className="btn info" to='/'>Login</Link>
                             </div>;
             buttons= null;
         }

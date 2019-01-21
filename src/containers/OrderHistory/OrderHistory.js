@@ -76,7 +76,7 @@ class OrderHistory extends Component{
             }
             if(localStorage.getItem('token') === null){
                 historyContent = <div><p>You have to be logged to see orders history!</p>
-                    <Link className="btn info" to='/login'>Login</Link>
+                    <Link className="btn info" to='/'>Login</Link>
                 </div>
             }
 

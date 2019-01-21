@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 
 const Toolbar=(props)=>{
     let userEmail = localStorage.getItem('userEmail');
+    console.log(props.logged);
     return(
     <header>
         <div>
@@ -16,15 +17,19 @@ const Toolbar=(props)=>{
                 <NavLink to="/order-history" >Previous Orders</NavLink>
             </div>
         </div>
-        <p onClick={props.logout} className="user">{userEmail?userEmail:<Link to="/login">Log in</Link>}</p>
+        <p onClick={props.logout} className="user">{props.logged?userEmail:<Link to="/">Log in</Link>}</p>
     </header>
     )
 }
-
+const mapStateToProps = (state) =>{
+	return{
+        logged: state.logged
+	}
+}
 const mapDispatchToProps = (dispatch) =>{
 	return{
         logout:()=>dispatch({type: actionsList.LOGOUT})
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Toolbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);

@@ -38,7 +38,6 @@ label input, label textarea{
     border-radius: 10px;
     width: 100%;
     border: none;
-    box-shadow: 0 0 12px #ccc;
     -webkit-appearance: none;
     -moz-appearance: none;
     transition: 300ms;

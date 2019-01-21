@@ -1,8 +1,41 @@
 .home{
-    background-color: #8CBBF8;
+    background-image: url('../../assets/img/bg.jpeg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
     color: #fff;
-    padding:100px 30px 30px;
+}
+.home .mask{
+    background-color: #11203fce;
+    opacity: .8;
+    z-index: 1;
+}
+.home .home-body{
+    width: 450px;
+    padding: 20px 40px;
+    position: relative;
+}
+.home .bg{
+    z-index: 2;
+    height: 100%;
+    width:100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.4);
+    border-radius: 25px;
+    border: 3px solid rgba(255,255,255,.3);
+}
+.home .home-content{
+    padding: 0 10px;
+    position: relative;
+    z-index: 3;
 }
 .home h1{
     margin: 0;

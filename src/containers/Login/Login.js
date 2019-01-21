@@ -6,6 +6,7 @@ import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import * as actionsList from '../../store/actions';
 import Spinner from '../../components/Tools/Spinner/Spinner';
+import Button from '../../components/Tools/Button/Button';
 
 class Login extends Component {
     state={
@@ -66,8 +67,11 @@ class Login extends Component {
         if(this.state.loading){
             loginContent = <Spinner />
         }
-        if(this.state.logged){
-            loginContent = <div><p>You are logged</p> <Redirect to="/"/></div>
+        if(this.props.logged || localStorage.getItem('token')!==null){
+            loginContent = <div>
+                <p>You are logged as {localStorage.getItem('userEmail')}</p>
+                <Button clicked={this.props.logout}>Logout</Button>
+                </div>
         }
         return(
             <div className="Login">
@@ -80,7 +84,8 @@ class Login extends Component {
 const mapStateToProps = (state) =>{
 	return{
         loginForm: state.loginForm,
-        registerForm: state.registerForm
+        registerForm: state.registerForm,
+        logged: state.logged
 	}
 }
 
@@ -91,7 +96,8 @@ const mapDispatchToProps = (dispatch) =>{
         loginBlurHandler:(event)=>dispatch({type: actionsList.BLUR_HANDLE, targetValue:event.target.value, targetName:event.target.name, formName:'loginForm'}),
         registerBlurHandler:(event)=>dispatch({type: actionsList.BLUR_HANDLE, targetValue:event.target.value, targetName:event.target.name, formName:'registerForm'}),
         resetValid:()=>dispatch({type: actionsList.RESET_VALID}),
-        login:(responseData)=>dispatch({type: actionsList.LOGIN, tokenId: responseData.idToken, userId: responseData.localId, userEmail: responseData.email})
+        login:(responseData)=>dispatch({type: actionsList.LOGIN, tokenId: responseData.idToken, userId: responseData.localId, userEmail: responseData.email}),
+        logout:()=>dispatch({type: actionsList.LOGOUT})
 	}
 }
 

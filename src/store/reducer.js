@@ -282,7 +282,6 @@ const reducer=(state=initialState, actions)=>{
             localStorage.setItem('userId', actions.userId);
             localStorage.setItem('userEmail', actions.userEmail);
             localStorage.setItem('expirationTime', new Date(new Date().getTime() + 3600 * 1000));
-
         return {
             ...state,
             logged:true
@@ -293,10 +292,16 @@ const reducer=(state=initialState, actions)=>{
             localStorage.removeItem('userId');
             localStorage.removeItem('userEmail');
             localStorage.removeItem('expirationTime');
-
             return {
                 ...state,
                 logged:false
+            };
+
+        case actionsList.ISLOGGED:
+        console.log('ISLOGGED');
+            return {
+                ...state,
+                logged:true
             };
 
             default:

@@ -14,11 +14,17 @@ const HomePage = () =>{
     }
     return (
         <div className="home">
-            <img src={logo} alt=""/>
-            <h1>{helloUser} Welcome to Burger Builder!</h1>
-            <Link className="btn success" to="/burger-builder">Burger Builder</Link>
-            <Link className="btn info" to="/order-history">History of orders</Link>
-            <Login />
+            <div className="mask"></div>
+            <div className="home-body">
+            <div className="bg"></div>
+                <div className="home-content">
+                    {/* <img src={logo} alt=""/> */}
+                    <h1>{helloUser} Welcome to Burger Builder!</h1>
+                    <Link className="btn info" to="/burger-builder">Order Burger</Link>
+                    <Link className="btn info" to="/order-history">Show History</Link>
+                    <Login />
+                </div>
+            </div>
         </div>
     )
 }
