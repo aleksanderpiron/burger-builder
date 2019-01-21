@@ -13,14 +13,18 @@ class OrderHistory extends Component{
 
     clearHistoryHandler=()=>{
         this.setState({loading:true});
-        axios.delete('/orders.json').then(response=>{
+        let address = localStorage.getItem('userId');
+        address = 'orders/'+address+'.json';
+        axios.delete(address).then(response=>{
             this.setState({loading:false, historyData: response.data});
         });
     }
 
     componentDidMount(){
         if(localStorage.getItem('token') !== null){
-            axios.get('/orders.json').then(response=>{
+            let address = localStorage.getItem('userId');
+            address = 'orders/'+address+'.json';
+            axios.get(address).then(response=>{
                 this.setState({loading:false, historyData: response.data});
             });
         }
@@ -30,7 +34,6 @@ class OrderHistory extends Component{
     }
 
     render(){
-        console.log(localStorage.getItem('token'));
         let historyContent;
         if(this.state.loading){
             historyContent = <Spinner />
@@ -82,7 +85,7 @@ class OrderHistory extends Component{
             <div className='orderHistory'>
                 <h2>Orders history</h2>
                 {historyContent}
-                {historyContent===null?<Button clicked={this.clearHistoryHandler}>Clear history</Button>:null}
+                {this.state.historyData===null?null:<Button clicked={this.clearHistoryHandler}>Clear history</Button>}
             </div>
         )
     }

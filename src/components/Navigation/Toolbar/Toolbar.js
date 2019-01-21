@@ -7,7 +7,6 @@ import {connect} from 'react-redux';
 
 const Toolbar=(props)=>{
     let userEmail = localStorage.getItem('userEmail');
-    console.log(userEmail);
     return(
     <header>
         <div>

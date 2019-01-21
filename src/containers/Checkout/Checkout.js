@@ -40,7 +40,9 @@ class Checkout extends Component{
         this.setState(prevState=>{
             return {spinner:true}
          });
-        axios.post('/orders.json', order)
+         let address = localStorage.getItem('userId');
+         address = 'orders/'+address+'.json';
+        axios.post(address, order)
         .then( response =>{
             if(response.status === 200){
                 this.setState(prevState=>{
@@ -63,6 +65,7 @@ class Checkout extends Component{
     }
 
     render(){
+        console.log(localStorage.getItem('userId'))
         let checkoutBody = <CheckoutForm blur={this.props.blurHandler} data={this.props.formData} change={this.props.inputChangeHandler}/>;
 
         let buttons = <div className="buttons text-center">
@@ -85,12 +88,12 @@ class Checkout extends Component{
             buttons = null;
             console.log(this.state.postError);
         }
-        // if(localStorage.getItem('token') === null){
-        //     checkoutBody = <div><p>You have to be logged to see orders history!</p>
-        //                         <Link className="btn info" to='/login'>Login</Link>
-        //                     </div>;
-        //     buttons= null;
-        // }
+        if(localStorage.getItem('token') === null){
+            checkoutBody = <div><p>You have to be logged to see orders history!</p>
+                                <Link className="btn info" to='/login'>Login</Link>
+                            </div>;
+            buttons= null;
+        }
         return(
             <div className="checkout-page">
                 {/* <div><Burger ingredients={this.props.ingredients} /></div> */}

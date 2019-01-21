@@ -17,6 +17,7 @@ const initialState ={
         meat: 0,
     },
     totalPrice: 0,
+    logged:false,
     checkoutForm:{
         name:{
             value:'',
@@ -275,21 +276,29 @@ const reducer=(state=initialState, actions)=>{
                 formData:resetedValid,
                 ingredients:resetedIngredients
             }
-    
+
         case actionsList.LOGIN:
             localStorage.setItem('token', actions.tokenId);
+            localStorage.setItem('userId', actions.userId);
             localStorage.setItem('userEmail', actions.userEmail);
             localStorage.setItem('expirationTime', new Date(new Date().getTime() + 3600 * 1000));
-        
-        return state;
+
+        return {
+            ...state,
+            logged:true
+        };
 
         case actionsList.LOGOUT:
             localStorage.removeItem('token');
+            localStorage.removeItem('userId');
             localStorage.removeItem('userEmail');
             localStorage.removeItem('expirationTime');
 
-            return state;
-    
+            return {
+                ...state,
+                logged:false
+            };
+
             default:
             return state;
 

@@ -12,6 +12,7 @@ class Login extends Component {
         changeForm:false,
         loading:false,
         loginError:false,
+        logged:false,
     }
 
     registerUserHandler=()=>{
@@ -42,12 +43,11 @@ class Login extends Component {
             password: this.props.loginForm.loginPassword.value,
             returnSecureToken: true
         }
-        console.log(formData);
         axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyB1euGeZQ8S4E2FBzsowQn8wK_UriQg9-U', formData)
         .then(response=>{
             this.props.login(response.data);
-            this.setState({loading:false, loginError:false});
-            <Redirect to="/dashboard"/>
+            console.log(response.data);
+            this.setState({loading:false, loginError:false, logged:true});
         })
         .catch(error=>{
             console.log(error);
@@ -65,6 +65,9 @@ class Login extends Component {
         let loginContent = <LoginForm loginError={this.state.loginError} login={this.loginUserHandler} register={this.registerUserHandler} registerBlur={this.props.registerBlurHandler} loginBlur={this.props.loginBlurHandler} loginData={this.props.loginForm} registerData={this.props.registerForm} registerChange={this.props.registerInputChangeHandler} loginChange={this.props.loginInputChangeHandler} switch={this.switchHandler} changeForm={this.state.changeForm}/>;
         if(this.state.loading){
             loginContent = <Spinner />
+        }
+        if(this.state.logged){
+            loginContent = <div><p>You are logged</p> <Redirect to="/"/></div>
         }
         return(
             <div className="Login">
