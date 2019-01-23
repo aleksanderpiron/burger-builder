@@ -35,10 +35,11 @@ class BurgerBuilder extends Component{
 		for(let key in disabledButtons){
 			disabledButtons[key] = disabledButtons[key] <= 0;
 		}
+		console.log(this.props.ingredients);
 		return(
 			<React.Fragment>
 				{this.state.OrderModal ? <OrderModal errors={this.state.inputErrors} reset={this.resetHandler} success={this.state.success} loading={this.state.loading} finishOrder={this.finalizeOrderHandler} price={this.props.totalPrice} showHideModal={this.showHideModalHandler} ingredients={this.props.ingredients}/> : null}
-				<BurgersList />
+				<BurgersList addBurger={this.props.addBurger} switchBurger={this.props.switchBurger}/>
 				<Burger ingredients={this.props.ingredients}/>
 				<BurgerControls  showHideModal={this.showHideModalHandler} canOrder={this.updateCanOrderState(this.props.ingredients)} price={this.props.totalPrice} disabledBtns={disabledButtons} addHandler={this.props.addIngredientHandler} removeHandler={this.props.removeIngredientHandler} ingredients={this.props.ingredients} />
 			</React.Fragment>
@@ -48,14 +49,16 @@ class BurgerBuilder extends Component{
 
 const mapStateToProps = (state) =>{
 	return{
-		ingredients: state.ingredients,
+		ingredients: state.burgersIngredients[state.currentBurger],
 		totalPrice: state.totalPrice,
 	}
 }
 const mapDispatchToProps = (dispatch) =>{
 	return{
 		addIngredientHandler:(ingName)=> dispatch({type: actionsList.ADD_INGREDIENT, ingName:ingName, }),
-		removeIngredientHandler:(ingName)=> dispatch({type: actionsList.REMOVE_INGREDIENT, ingName:ingName})
+		removeIngredientHandler:(ingName)=> dispatch({type: actionsList.REMOVE_INGREDIENT, ingName:ingName}),
+		switchBurger:(pointedBrg)=> dispatch({type: actionsList.SWITCH_BURGER, pointedBurger:pointedBrg}),
+		addBurger:()=> dispatch({type: actionsList.ADD_BURGER}),
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);

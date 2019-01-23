@@ -17,13 +17,16 @@ const INGREDIENT_LIMITS = {
 }
 
 const initialState ={
-    ingredients: {
-        bacon: 0,
-        salad: 0,
-        tomato: 0,
-        cheese: 0,
-        meat: 0,
+    burgersIngredients:{
+        burger0: {
+            bacon: 0,
+            salad: 0,
+            tomato: 0,
+            cheese: 0,
+            meat: 0,
+        },
     },
+    currentBurger:'burger0',
     totalPrice: 3,
     logged:false,
     checkoutForm:{
@@ -135,6 +138,7 @@ const initialState ={
 let newTotalPrice = null;
 let ingPrice = null;
 let validationPassed;
+let updatedBurgerIng;
 
 const reducer=(state=initialState, actions)=>{
 
@@ -218,13 +222,15 @@ const reducer=(state=initialState, actions)=>{
             ingPrice = INGREDIENT_PRICES[actions.ingName];
             newTotalPrice = state.totalPrice + ingPrice;
             newTotalPrice = Math.round(newTotalPrice * 100) / 100;
+            updatedBurgerIng = {...state.burgersIngredients[state.currentBurger]};
+            updatedBurgerIng[actions.ingName] = updatedBurgerIng[actions.ingName] + 1;
 
-            if(state.ingredients[actions.ingName] < INGREDIENT_LIMITS[actions.ingName]){
+            if(state.burgersIngredients[state.currentBurger][actions.ingName] < INGREDIENT_LIMITS[actions.ingName]){
                 return{
                     ...state,
-                    ingredients:{
-                        ...state.ingredients,
-                        [actions.ingName]:state.ingredients[actions.ingName] + 1
+                    burgersIngredients:{
+                        ...state.burgersIngredients,
+                        [state.currentBurger]:updatedBurgerIng
                     },
                     totalPrice:newTotalPrice
                 }
@@ -236,18 +242,47 @@ const reducer=(state=initialState, actions)=>{
             ingPrice = INGREDIENT_PRICES[actions.ingName];
             newTotalPrice = state.totalPrice - ingPrice;
             newTotalPrice = Math.round(newTotalPrice * 100) / 100;
+            updatedBurgerIng = {...state.burgersIngredients[state.currentBurger]};
+            updatedBurgerIng[actions.ingName] = updatedBurgerIng[actions.ingName] - 1;
 
             if(newTotalPrice<0){
                 newTotalPrice = 0;
             }
             return{
                 ...state,
-                ingredients:{
-                    ...state.ingredients,
-                    [actions.ingName]:state.ingredients[actions.ingName] - 1
+                    burgersIngredients:{
+                        ...state.burgersIngredients,
+                        [state.currentBurger]:updatedBurgerIng
                 },
                 totalPrice:newTotalPrice
             }
+
+        case actionsList.SWITCH_BURGER:
+        const newCurrentBurger = actions.pointedBurger;
+        return {
+            ...state,
+            currentBurger:newCurrentBurger
+        };
+
+        case actionsList.ADD_BURGER:
+
+        const id = Object.values(state.burgersIngredients).length
+        const newBurgerName = "burger"+id;
+        const newBurgerBody = {
+            bacon: 0,
+            salad: 0,
+            tomato: 0,
+            cheese: 0,
+            meat: 0,
+        }
+        const updatedburgersIngredients = {
+            ...state.burgersIngredients,
+            [newBurgerName]: newBurgerBody
+        }
+        return {
+            ...state,
+            burgersIngredients: updatedburgersIngredients
+        };
 
         case actionsList.INPUT_HANDLE:
         const updatedState = {...state[actions.formName]};
@@ -286,7 +321,8 @@ const reducer=(state=initialState, actions)=>{
             return{
                 ...state,
                 formData:resetedValid,
-                ingredients:resetedIngredients
+                burgersIngredients:{
+                    burger0:resetedIngredients}
             }
 
         case actionsList.LOGIN:

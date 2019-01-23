@@ -7,3 +7,5 @@ export const RESET_VALID = "RESET_VALID";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const ISLOGGED = "ISLOGGED";
+export const SWITCH_BURGER = "SWITCH_BURGER";
+export const ADD_BURGER = "ADD_BURGER";
