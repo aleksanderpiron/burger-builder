@@ -29,6 +29,7 @@ label input:focus ~ span, label textarea:focus  ~ span{
     color: #ccc;
 }
 label input, label textarea{
+    box-shadow: 0 0 15px #ccc;
     position: relative;
     z-index: 3;
     text-align: center;
@@ -36,7 +37,7 @@ label input, label textarea{
     font-size: 18px;
     color: #333;
     border-radius: 10px;
-    width: 100%;
+    width: 90%;
     border: none;
     -webkit-appearance: none;
     -moz-appearance: none;

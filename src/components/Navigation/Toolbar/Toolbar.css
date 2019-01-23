@@ -44,5 +44,13 @@ header .nav a.active{
     border-bottom: 3px solid #fff;
 }
 header .user{
+    cursor: default;
     margin-right: 50px;
+}
+header .user span{
+    cursor: pointer;
+    transition: 300ms;
+}
+header .user span:hover{
+    color: #c51d1d;
 }

@@ -7,7 +7,10 @@ import {connect} from 'react-redux';
 
 const Toolbar=(props)=>{
     let userEmail = localStorage.getItem('userEmail');
-    console.log(props.logged);
+    let topContent = null
+    if(userEmail !== null){
+        topContent = <div>{userEmail} | <span onClick={props.logout}>Logout</span></div>
+    }
     return(
     <header>
         <div>
@@ -17,7 +20,7 @@ const Toolbar=(props)=>{
                 <NavLink to="/order-history" >Previous Orders</NavLink>
             </div>
         </div>
-        <p onClick={props.logout} className="user">{props.logged?userEmail:<Link to="/">Log in</Link>}</p>
+        <p className="user">{props.logged?topContent:<Link to="/">Login</Link>}</p>
     </header>
     )
 }

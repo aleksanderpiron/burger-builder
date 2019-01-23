@@ -11,8 +11,13 @@
 }
 .historyItem{
     width: 300px;
-    margin: 30px 0;
+    margin: 30px 50px;
     border-bottom: 1px solid #ccc;
+}
+.historyItem .Burger{
+    width: 300px;
+    height: 190px;
+    margin: 0;
 }
 .flex-box{
     display: flex;
@@ -35,4 +40,7 @@
 .historyItem .ingredients li{
     display: flex;
     justify-content: space-between;
+}
+.orderHistoryBody{
+    display: flex;
 }

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-// import Burger from '../../components/Burger/Burger';
 import CheckoutForm from '../../components/Forms/CheckoutForm/CheckoutForm';
 import {connect} from 'react-redux';
 import './Checkout.css';
 import {Link} from 'react-router-dom';
+import Login from '../../containers/Login/Login';
 import Button from '../../components/Tools/Button/Button';
 import axios from '../../axiosOrders';
 import Spinner from '../../components/Tools/Spinner/Spinner';
@@ -87,9 +87,9 @@ class Checkout extends Component{
             buttons = null;
         }
         if(localStorage.getItem('token') === null){
-            checkoutBody = <div><p>You have to be logged to see orders history!</p>
-                                <Link className="btn info" to='/'>Login</Link>
-                            </div>;
+            checkoutBody = <div><p class="text-center">You have to be logged to see orders history!</p>
+             <Login />
+                 </div>
             buttons= null;
         }
         return(

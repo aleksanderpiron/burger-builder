@@ -8,6 +8,14 @@ const INGREDIENT_PRICES = {
 	salad: 0.3
 }
 
+const INGREDIENT_LIMITS = {
+    tomato: 3,
+	meat: 2,
+	cheese: 4,
+	bacon: 3,
+	salad: 3
+}
+
 const initialState ={
     ingredients: {
         bacon: 0,
@@ -16,7 +24,7 @@ const initialState ={
         cheese: 0,
         meat: 0,
     },
-    totalPrice: 0,
+    totalPrice: 3,
     logged:false,
     checkoutForm:{
         name:{
@@ -211,14 +219,18 @@ const reducer=(state=initialState, actions)=>{
             newTotalPrice = state.totalPrice + ingPrice;
             newTotalPrice = Math.round(newTotalPrice * 100) / 100;
 
-            return{
-                ...state,
-                ingredients:{
-                    ...state.ingredients,
-                    [actions.ingName]:state.ingredients[actions.ingName] + 1
-                },
-                totalPrice:newTotalPrice
+            if(state.ingredients[actions.ingName] < INGREDIENT_LIMITS[actions.ingName]){
+                return{
+                    ...state,
+                    ingredients:{
+                        ...state.ingredients,
+                        [actions.ingName]:state.ingredients[actions.ingName] + 1
+                    },
+                    totalPrice:newTotalPrice
+                }
             }
+
+            return state;
 
         case actionsList.REMOVE_INGREDIENT:
             ingPrice = INGREDIENT_PRICES[actions.ingName];
@@ -298,7 +310,6 @@ const reducer=(state=initialState, actions)=>{
             };
 
         case actionsList.ISLOGGED:
-        console.log('ISLOGGED');
             return {
                 ...state,
                 logged:true

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Spinner from '../../components/Tools/Spinner/Spinner';
 import Button from '../../components/Tools/Button/Button';
+import Burger from '../../components/Burger/Burger';
+import Login from '../../containers/Login/Login';
 import axios from '../../axiosOrders';
-import {Link} from 'react-router-dom';
 import './OrderHistory.css';
 
 class OrderHistory extends Component{
@@ -43,8 +44,10 @@ class OrderHistory extends Component{
                 historyContent = <p>Your history is empty! Go order some burgers</p>
             }else{
             historyContent = Object.values(historyData).map(obj=>{
+                console.log(obj)
                 return(
                     <div className="historyItem">
+                        <Burger ingredients={obj.ingredients} />
                         <div className="flex-box">
                             <div className="userData">
                                 <p>User data: </p>
@@ -70,13 +73,16 @@ class OrderHistory extends Component{
                         <div className="totalPrice">
                             <p>Total price: {obj.totalPrice} $</p>
                         </div>
+                        <div className="button">
+                            <Button btnType="danger">Remove</Button>
+                        </div>
                     </div>
                 )
             })
             }
             if(localStorage.getItem('token') === null){
-                historyContent = <div><p>You have to be logged to see orders history!</p>
-                    <Link className="btn info" to='/'>Login</Link>
+                historyContent = <div><p class="text-center">You have to be logged to see orders history!</p>
+                    <Login />
                 </div>
             }
 
@@ -84,8 +90,10 @@ class OrderHistory extends Component{
         return(
             <div className='orderHistory'>
                 <h2>Orders history</h2>
-                {historyContent}
-                {this.state.historyData===null?null:<Button clicked={this.clearHistoryHandler}>Clear history</Button>}
+                    <div className="orderHistoryBody">
+                        {historyContent}
+                    </div>
+                {this.state.historyData===null?null:<Button clicked={this.clearHistoryHandler}>Clear all history</Button>}
             </div>
         )
     }
