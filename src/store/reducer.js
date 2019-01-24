@@ -259,13 +259,13 @@ const reducer=(state=initialState, actions)=>{
 
         case actionsList.SWITCH_BURGER:
         const newCurrentBurger = actions.pointedBurger;
+        console.log('active');
         return {
             ...state,
             currentBurger:newCurrentBurger
         };
 
         case actionsList.ADD_BURGER:
-
         const id = Object.values(state.burgersIngredients).length
         const newBurgerName = "burger"+id;
         const newBurgerBody = {
@@ -282,6 +282,22 @@ const reducer=(state=initialState, actions)=>{
         return {
             ...state,
             burgersIngredients: updatedburgersIngredients
+        };
+
+        case actionsList.REMOVE_BURGER:
+        console.log(actions.targetBurger)
+        const afterRemoveBurgersIngredients = {
+            ...state
+        }
+        console.log(afterRemoveBurgersIngredients);
+
+        delete afterRemoveBurgersIngredients.burgersIngredients[actions.targetBurger];
+        afterRemoveBurgersIngredients.currentBurger = 'burger0';  
+        console.log(afterRemoveBurgersIngredients);
+        return {
+            ...state,
+            currentBurger: afterRemoveBurgersIngredients.currentBurger,
+            burgersIngredients: afterRemoveBurgersIngredients.burgersIngredients
         };
 
         case actionsList.INPUT_HANDLE:

@@ -1,0 +1,48 @@
+.BurgersList ul{
+    padding: 0;
+}
+.BurgersList ul li{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc;
+    height: 150px;
+    width: 150px;
+    margin: 15px auto;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 300ms;
+}
+.BurgersList ul li span{
+    transition: 300ms;
+}
+.BurgersList ul li span.hidden{
+    opacity: 0;
+    pointer-events: none;
+}
+.close-btn{
+    background-color: #C51212;
+    height: 12px;
+    width: 12px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    top: -6px;
+    border-radius: 50%;
+    right: -6px;
+    padding: 5px;
+}
+.BurgersList ul li.current{
+    background-color: rgb(241, 232, 178);
+}
+.BurgersList ul li .Burger{
+    margin: 0;
+    height: 60px;
+    width: 120px;
+}
+.BurgersList ul li .Burger p{
+    font-size: 7px;
+    margin: 5px;
+}

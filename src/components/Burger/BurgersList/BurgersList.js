@@ -1,13 +1,17 @@
 import React from 'react';
 import Button from '../../Tools/Button/Button';
+import './BurgersList.css';
 import {connect} from 'react-redux'
+import Burger from '../Burger';
+import cross from '../../../assets/img/close.svg';
+import * as actionsList from '../../../store/actions';
 
 const AddBurger =(props)=>{
     let BurgersListBody = Object.values(props.burgers).map((obj, index)=>{
         const targetName = 'burger' + index;
-        return (<li onClick={()=>props.switchBurger(targetName)}>{targetName}</li>)
+        return (<li id={targetName} className={targetName === props.currentBurger?'current':null} onClick={()=>props.switchBurger(targetName)}><Burger ingredients={props.burgers[targetName]} /><span className={Object.values(props.burgers).length === 1?'hidden':null} onClick={()=>props.removeBurger(targetName)}><img className="close-btn" src={cross} alt=""/></span></li>)
     });
-    console.log(props.burgers);
+    console.log(Object.values(props.burgers).length);
     return(
         <div className="BurgersList">
             <ul>
@@ -20,7 +24,13 @@ const AddBurger =(props)=>{
 
 const mapStateToProps=(state)=>{
     return{
-        burgers: state.burgersIngredients
+        burgers: state.burgersIngredients,
+        currentBurger: state.currentBurger
     }
 }
-export default connect(mapStateToProps)(AddBurger);
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        removeBurger: (targetBurger)=>{dispatch({type:actionsList.REMOVE_BURGER, targetBurger:targetBurger})}
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AddBurger);

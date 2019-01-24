@@ -9,3 +9,4 @@ export const LOGOUT = "LOGOUT";
 export const ISLOGGED = "ISLOGGED";
 export const SWITCH_BURGER = "SWITCH_BURGER";
 export const ADD_BURGER = "ADD_BURGER";
+export const REMOVE_BURGER = "REMOVE_BURGER";
