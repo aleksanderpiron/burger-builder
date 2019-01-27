@@ -6,18 +6,16 @@ import Burger from '../Burger';
 import cross from '../../../assets/img/close.svg';
 import * as actionsList from '../../../store/actions';
 
-const AddBurger =(props)=>{
-    let BurgersListBody = Object.values(props.burgers).map((obj, index)=>{
-        const targetName = 'burger' + index;
-        return (<li id={targetName} className={targetName === props.currentBurger?'current':null} onClick={()=>props.switchBurger(targetName)}><Burger ingredients={props.burgers[targetName]} /><span className={Object.values(props.burgers).length === 1?'hidden':null} onClick={()=>props.removeBurger(targetName)}><img className="close-btn" src={cross} alt=""/></span></li>)
+const BurgersList =(props)=>{
+    let BurgersListBody = Object.entries(props.burgers).map((obj)=>{
+        return (<li id={obj[0]} className={obj[0] === props.currentBurger?'current':null}><div onClick={()=>props.switchBurger(obj[0])}><Burger ingredients={obj[1]}/></div><span className={Object.values(props.burgers).length === 1?'hidden':null} onClick={()=>props.removeBurger(obj[0])}><img className="close-btn" src={cross} alt=""/></span></li>)
     });
-    console.log(Object.values(props.burgers).length);
     return(
         <div className="BurgersList">
             <ul>
                 {BurgersListBody}
             </ul>
-            <Button clicked={props.addBurger} btnType="success">Add Burger</Button>
+            <Button disableBtn={props.disableAddingButton} clicked={props.addBurger} btnType="success">Add Burger</Button>
         </div>
     )
 }
@@ -25,7 +23,8 @@ const AddBurger =(props)=>{
 const mapStateToProps=(state)=>{
     return{
         burgers: state.burgersIngredients,
-        currentBurger: state.currentBurger
+        currentBurger: state.currentBurger,
+        disableAddingButton: state.blockAdding
     }
 }
 const mapDispatchToProps=(dispatch)=>{
@@ -33,4 +32,4 @@ const mapDispatchToProps=(dispatch)=>{
         removeBurger: (targetBurger)=>{dispatch({type:actionsList.REMOVE_BURGER, targetBurger:targetBurger})}
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AddBurger);
+export default connect(mapStateToProps, mapDispatchToProps)(BurgersList);

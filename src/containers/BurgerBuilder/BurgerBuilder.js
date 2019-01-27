@@ -35,13 +35,14 @@ class BurgerBuilder extends Component{
 		for(let key in disabledButtons){
 			disabledButtons[key] = disabledButtons[key] <= 0;
 		}
-		console.log(this.props.ingredients);
 		return(
 			<React.Fragment>
-				{this.state.OrderModal ? <OrderModal errors={this.state.inputErrors} reset={this.resetHandler} success={this.state.success} loading={this.state.loading} finishOrder={this.finalizeOrderHandler} price={this.props.totalPrice} showHideModal={this.showHideModalHandler} ingredients={this.props.ingredients}/> : null}
+				{this.state.OrderModal ? <OrderModal reset={this.resetHandler} success={this.state.success} loading={this.state.loading} finishOrder={this.finalizeOrderHandler} price={this.props.totalPrice} showHideModal={this.showHideModalHandler} ingredients={this.props.ingredients}/> : null}
 				<BurgersList addBurger={this.props.addBurger} switchBurger={this.props.switchBurger}/>
-				<Burger ingredients={this.props.ingredients}/>
-				<BurgerControls  showHideModal={this.showHideModalHandler} canOrder={this.updateCanOrderState(this.props.ingredients)} price={this.props.totalPrice} disabledBtns={disabledButtons} addHandler={this.props.addIngredientHandler} removeHandler={this.props.removeIngredientHandler} ingredients={this.props.ingredients} />
+				<div>
+					<Burger ingredients={this.props.ingredients}/>
+				</div>
+				<BurgerControls  showHideModal={this.showHideModalHandler} canOrder={this.updateCanOrderState(this.props.allIngredients)} price={this.props.totalPrice} disabledBtns={disabledButtons} addHandler={this.props.addIngredientHandler} removeHandler={this.props.removeIngredientHandler} ingredients={this.props.ingredients} />
 			</React.Fragment>
 			);
 	}
@@ -50,6 +51,8 @@ class BurgerBuilder extends Component{
 const mapStateToProps = (state) =>{
 	return{
 		ingredients: state.burgersIngredients[state.currentBurger],
+		allIngredients: state.burgersIngredients,
+		currentBurger: state.currentBurger,
 		totalPrice: state.totalPrice,
 	}
 }

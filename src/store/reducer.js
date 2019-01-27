@@ -139,7 +139,7 @@ let newTotalPrice = null;
 let ingPrice = null;
 let validationPassed;
 let updatedBurgerIng;
-
+let newBurgerId = 1;
 const reducer=(state=initialState, actions)=>{
 
         const formValidate = (value, updatedValidaton) =>{
@@ -259,15 +259,14 @@ const reducer=(state=initialState, actions)=>{
 
         case actionsList.SWITCH_BURGER:
         const newCurrentBurger = actions.pointedBurger;
-        console.log('active');
         return {
             ...state,
             currentBurger:newCurrentBurger
         };
 
         case actionsList.ADD_BURGER:
-        const id = Object.values(state.burgersIngredients).length
-        const newBurgerName = "burger"+id;
+        const newBurgerName = "burger"+newBurgerId;
+        newBurgerId++;
         const newBurgerBody = {
             bacon: 0,
             salad: 0,
@@ -285,20 +284,25 @@ const reducer=(state=initialState, actions)=>{
         };
 
         case actionsList.REMOVE_BURGER:
-        console.log(actions.targetBurger)
-        const afterRemoveBurgersIngredients = {
-            ...state
+        const burgersIng = {...state.burgersIngredients}
+        let filtered = Object.assign(
+            {},
+            ...Object.entries(burgersIng)
+               .filter(([k]) => k!== actions.targetBurger)
+               .map(([k, v]) => ({[k]: v})));
+        if(actions.targetBurger === state.currentBurger){
+            const newCurrent= Object.keys(filtered)[0];
+            return {
+                ...state,
+                currentBurger: newCurrent,
+                burgersIngredients: filtered,
+            };
+        }else{
+            return {
+                ...state,
+                burgersIngredients: filtered,
+            };
         }
-        console.log(afterRemoveBurgersIngredients);
-
-        delete afterRemoveBurgersIngredients.burgersIngredients[actions.targetBurger];
-        afterRemoveBurgersIngredients.currentBurger = 'burger0';  
-        console.log(afterRemoveBurgersIngredients);
-        return {
-            ...state,
-            currentBurger: afterRemoveBurgersIngredients.currentBurger,
-            burgersIngredients: afterRemoveBurgersIngredients.burgersIngredients
-        };
 
         case actionsList.INPUT_HANDLE:
         const updatedState = {...state[actions.formName]};
