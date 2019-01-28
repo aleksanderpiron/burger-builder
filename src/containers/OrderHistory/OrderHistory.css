@@ -10,18 +10,15 @@
     display: block;
 }
 .historyItem{
+    padding-bottom: 10px;
     width: 300px;
-    margin: 30px 50px;
+    margin: 0 50px 30px;
     border-bottom: 1px solid #ccc;
-}
-.historyItem .Burger{
-    width: 300px;
-    height: 190px;
-    margin: 0;
 }
 .flex-box{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .historyItem p{
     font-weight: 700;
@@ -32,7 +29,8 @@
 }
 .historyItem ul{
     list-style:none;
-    padding-left: 0;
+    padding: 0;
+    margin: 5px 0 0;
 }
 .historyItem ul li{
     margin-bottom: 3px;
@@ -41,6 +39,21 @@
     display: flex;
     justify-content: space-between;
 }
+.historyItem .ingredients p{
+    margin:15px 0 3px;
+}
+.historyItem .ingredients .burgerName{
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+.historyItem .ingredients .burgerIngList{
+    width: 45%;
+    margin-bottom: 10px;
+}
 .orderHistoryBody{
     display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }

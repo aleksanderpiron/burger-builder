@@ -18,7 +18,7 @@ const INGREDIENT_LIMITS = {
 
 const initialState ={
     burgersIngredients:{
-        burger0: {
+        burger_1: {
             bacon: 0,
             salad: 0,
             tomato: 0,
@@ -26,7 +26,7 @@ const initialState ={
             meat: 0,
         },
     },
-    currentBurger:'Burger #1',
+    currentBurger:'burger_1',
     totalPrice: 3,
     logged:false,
     loginModalShowed: false,
@@ -266,7 +266,7 @@ const reducer=(state=initialState, actions)=>{
         };
 
         case actionsList.ADD_BURGER:
-        const newBurgerName = "Burger #"+newBurgerId;
+        const newBurgerName = "burger_"+newBurgerId;
         newBurgerId++;
         const newBurgerBody = {
             bacon: 0,
@@ -326,24 +326,27 @@ const reducer=(state=initialState, actions)=>{
             }
 
         case actionsList.RESET_VALID:
-            const resetedValid = {...state.formData};
+            const resetedValid = {...state[actions.resetedFormName]};
             const resetedIngredients = {
-                bacon: 0,
-                salad: 0,
-                tomato: 0,
-                cheese: 0,
-                meat: 0,
+                burger_0:{
+                    bacon: 0,
+                    salad: 0,
+                    tomato: 0,
+                    cheese: 0,
+                    meat: 0,
+                }
             };
             Object.values(resetedValid).map(item=>{
+                item.value = "";
                 item.valid = false;
                 item.touched = false;
             });
 
             return{
                 ...state,
-                formData:resetedValid,
-                burgersIngredients:{
-                    burger0:resetedIngredients}
+                [actions.resetedFormName]:resetedValid,
+                burgersIngredients:resetedIngredients,
+                currentBurger:'burger_0',
             }
 
         case actionsList.LOGIN:

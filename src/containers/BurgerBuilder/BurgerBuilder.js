@@ -35,8 +35,8 @@ class BurgerBuilder extends Component{
 		decide = !decide;
 		this.setState({OrderModal:decide});
 	}
-	console.log(this.props.ingredients)
 	render(){
+		console.log(this.props.ingredients)
 		let disabledButtons = {...this.props.ingredients};
 		for(let key in disabledButtons){
 			disabledButtons[key] = disabledButtons[key] <= 0;

@@ -45,6 +45,7 @@ class Checkout extends Component{
         axios.post(address, order)
         .then( response =>{
             if(response.status === 200){
+                this.props.resetValid();
                 this.setState(prevState=>{
                    return {spinner:false,
                             postStatus:response.status
@@ -63,7 +64,6 @@ class Checkout extends Component{
             console.log('Fill form!')
         }
     }
-
     render(){
         let checkoutBody = <CheckoutForm blur={this.props.blurHandler} formData={this.props.formData} change={this.props.inputChangeHandler}/>;
 
@@ -103,7 +103,7 @@ class Checkout extends Component{
 }
 const mapStateToProps = (state) =>{
 	return{
-		ingredients: state.ingredients,
+		ingredients: state.burgersIngredients,
         totalPrice: state.totalPrice,
         formData: state.checkoutForm,
 	}
@@ -113,7 +113,7 @@ const mapDispatchToProps = (dispatch) =>{
 	return{
         inputChangeHandler:(event)=>dispatch({type: actionsList.INPUT_HANDLE, targetValue:event.target.value, targetName:event.target.name, formName: 'checkoutForm'}),
         blurHandler:(event)=>dispatch({type: actionsList.BLUR_HANDLE, targetValue:event.target.value, targetName:event.target.name, formName: 'checkoutForm'}),
-        resetValid:()=>dispatch({type: actionsList.RESET_VALID})
+        resetValid:()=>dispatch({type: actionsList.RESET_VALID, resetedFormName: 'checkoutForm'})
 	}
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Checkout);

@@ -17,7 +17,26 @@ class OrderHistory extends Component{
         let address = localStorage.getItem('userId');
         address = 'orders/'+address+'.json';
         axios.delete(address).then(response=>{
-            this.setState({loading:false, historyData: response.data});
+            this.setState({loading:false});
+        });
+    }
+
+    removeOneHandler=(event)=>{
+        this.setState({loading:true});
+        const user = localStorage.getItem('userId');
+        let address = event.target.parentElement.parentElement.id;
+        address = 'orders/'+user+'/'+address+'.json';
+        axios.delete(address).then(response=>{
+            if(localStorage.getItem('token') !== null){
+                let address = localStorage.getItem('userId');
+                address = 'orders/'+address+'.json';
+                axios.get(address).then(response=>{
+                    this.setState({loading:false, historyData: response.data});
+                });
+            }
+            else{
+                this.setState({loading:false});
+            }
         });
     }
 
@@ -43,38 +62,41 @@ class OrderHistory extends Component{
             if(historyData == null){
                 historyContent = <p>Your history is empty! Go order some burgers</p>
             }else{
-            historyContent = Object.values(historyData).map(obj=>{
-                console.log(obj)
+            historyContent = Object.entries(historyData).map(obj=>{
                 return(
-                    <div className="historyItem">
-                        <Burger ingredients={obj.ingredients} />
-                        <div className="flex-box">
+                    <div id={obj[0]} className="historyItem">
                             <div className="userData">
                                 <p>User data: </p>
                                 <ul>
-                                    <li>Name: {obj.userData.name}</li>
-                                    <li>Address: {obj.userData.address}</li>
-                                    <li>City: {obj.userData.city}</li>
-                                    <li>Phone: {obj.userData.phone}</li>
-                                    <li>Message: {obj.userData.message}</li>
+                                    <li>Name: {obj[1].userData.name}</li>
+                                    <li>Address: {obj[1].userData.address}</li>
+                                    <li>City: {obj[1].userData.city}</li>
+                                    <li>Phone: {obj[1].userData.phone}</li>
+                                    <li>Message: {obj[1].userData.message}</li>
                                 </ul>
                             </div>
                             <div className="ingredients">
-                                <p>Ingredients:</p>
-                                <ul>
-                                    <li><span>Bacon:</span> x{obj.ingredients.bacon}</li>
-                                    <li><span>Cheese:</span> x{obj.ingredients.cheese}</li>
-                                    <li><span>Meat:</span> x{obj.ingredients.meat}</li>
-                                    <li><span>Salad:</span> x{obj.ingredients.salad}</li>
-                                    <li><span>Tomato:</span> x{obj.ingredients.tomato}</li>
-                                </ul>
+                                    <p>Ingredients:</p>
+                                <div className="flex-box">
+                                    {Object.entries(obj[1].ingredients).map(item =>{
+                                        return(
+                                        <ul className="burgerIngList">
+                                            <span className="burgerName">{item[0].split('_').join(' #')}</span>
+                                            <li><span>Bacon:</span> x{item[1].bacon}</li>
+                                            <li><span>Cheese:</span> x{item[1].cheese}</li>
+                                            <li><span>Meat:</span> x{item[1].meat}</li>
+                                            <li><span>Salad:</span> x{item[1].salad}</li>
+                                            <li><span>Tomato:</span> x{item[1].tomato}</li>
+                                        </ul>
+                                        )
+                                    })}
+                                </div>
                             </div>
-                        </div>
                         <div className="totalPrice">
-                            <p>Total price: {obj.totalPrice} $</p>
+                            <p>Total price: {obj[1].totalPrice} $</p>
                         </div>
                         <div className="button">
-                            <Button btnType="danger">Remove</Button>
+                            <Button clicked={this.removeOneHandler} btnType="danger">Remove</Button>
                         </div>
                     </div>
                 )
