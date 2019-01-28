@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './Toolbar.css';
 import {NavLink} from 'react-router-dom';
 import Login from '../../../containers/Login/Login';
-import logo from '../../../assets/img/logo.png';
+import logo from '../../../assets/img/logo.svg';
 import * as actionsList from '../../../store/actions';
 import {connect} from 'react-redux';
 
@@ -10,7 +10,7 @@ const Toolbar=(props)=>{
     let userEmail = localStorage.getItem('userEmail');
     let topContent = null
     if(userEmail !== null){
-        topContent = <div>{userEmail} | <span onClick={props.logout}>Logout</span></div>
+        topContent = <div><NavLink className="profileLink" to="/profile">{userEmail}</NavLink> <span className="orange">|</span> <span onClick={props.logout}>Logout</span></div>
     }
     return(
     <React.Fragment>

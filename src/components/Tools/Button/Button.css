@@ -8,19 +8,21 @@
     border-radius: 3px;
     transition: 300ms;
     outline: none;
+    margin: 0 10px;
 }
 .success{
-	background-color: #4cad2e;
+	background-color: #6da34d;
 	border-color: rgb(51, 133, 19);
 }
 .info{
-	background-color: #4979fc;
-	border-color: rgb(2, 48, 146);
+	background-color: #2589bd;
+	border-color: #2589bd;
 }
 .danger{
-	background-color: #B60000;
-	border-color: #860303;
+	background-color: #C51212;
+	border-color: #ff3e41;
 }
 .btn.full-width{
+    margin: 0;
     width: 100%;
 }

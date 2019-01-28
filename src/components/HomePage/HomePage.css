@@ -1,8 +1,9 @@
 .home{
-    background-image: url('../../assets/img/bg.jpeg');
+    /* background-image: url('../../assets/img/bg.jpeg');
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
+    background-size: cover; */
+    background-color: #ff8800;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -12,14 +13,23 @@
     color: #fff;
 }
 .home .mask{
-    background-color: #11203fce;
-    opacity: .8;
+    opacity: .4;
     z-index: 1;
+}
+#main_logo{
+    position: absolute;
+    top: 100px;
+    z-index: 9;
+    height: 200px;
 }
 .home .home-body{
     width: 450px;
     padding: 20px 40px;
     position: relative;
+}
+.home input{
+    box-shadow: none;
+    border-radius: 0;
 }
 .home .bg{
     z-index: 2;
@@ -28,8 +38,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,.4);
-    border-radius: 25px;
+    background-color: #3F4B64;
+    border-radius: 8px;
     border: 3px solid rgba(255,255,255,.3);
 }
 .home .home-content{

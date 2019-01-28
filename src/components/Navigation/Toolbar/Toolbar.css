@@ -50,7 +50,7 @@ header .nav a{
     margin: 0 15px;
 }
 header .nav a.active{
-    border-bottom: 3px solid #fff;
+    border-bottom: 3px solid #ff8000;
 }
 header .user{
     cursor: default;
@@ -60,8 +60,8 @@ header .user span{
     cursor: pointer;
     transition: 300ms;
 }
-header .user span:hover{
-    color: #c51d1d;
+.profileLink.active, header .user span:hover, .profileLink:hover{
+    color: #ff8000;
 }
 .loginModal{
     background-color: #3F4B64;
@@ -73,6 +73,8 @@ header .user span:hover{
     right: 50px;
     z-index: 11;
     transition: 500ms;
+    min-width: 340px;
+    text-align: center;
 }
 .loginModal input{
     box-shadow: none;

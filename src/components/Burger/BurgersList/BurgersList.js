@@ -15,7 +15,7 @@ const BurgersList =(props)=>{
             <ul>
                 {BurgersListBody}
             </ul>
-            <Button disableBtn={props.disableAddingButton} clicked={props.addBurger} btnType="success">Add Burger</Button>
+            <Button disableBtn={props.disableAddingButton} clicked={props.addBurger} btnType="success full-width">Add Burger</Button>
         </div>
     )
 }

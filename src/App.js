@@ -21,6 +21,7 @@ class App extends Component {
           <Route path="/burger-builder" exact component={Layout}/>
           <Route path="/order-history" exact component={Layout}/>
           <Route path="/checkout" exact component={Layout}/>
+          <Route path="/profile" exact component={Layout}/>
         </div>
       </BrowserRouter>
     );

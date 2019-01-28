@@ -5,3 +5,9 @@ body {
   padding: 0;
   font-family: roboto;
 }
+.orange{
+  color: #ff8000;
+}
+a{
+  transition: 300ms;
+}

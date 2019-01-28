@@ -28,7 +28,7 @@ const BurgerControls = (props) => {
 						/>
 					))}
 		<h3>Total price: {props.price} $</h3>
-			<Button btnType="danger" clicked={props.showHideModal} id="orderBtn" disableBtn={!props.canOrder}>Order</Button>
+			<Button btnType="danger full-width" clicked={props.showHideModal} id="orderBtn" disableBtn={!props.canOrder}>Order</Button>
 		</div>
 	)
 	}
