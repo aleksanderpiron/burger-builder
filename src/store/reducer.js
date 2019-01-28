@@ -26,9 +26,10 @@ const initialState ={
             meat: 0,
         },
     },
-    currentBurger:'burger0',
+    currentBurger:'Burger #1',
     totalPrice: 3,
     logged:false,
+    loginModalShowed: false,
     checkoutForm:{
         name:{
             value:'',
@@ -139,7 +140,7 @@ let newTotalPrice = null;
 let ingPrice = null;
 let validationPassed;
 let updatedBurgerIng;
-let newBurgerId = 1;
+let newBurgerId = 2;
 const reducer=(state=initialState, actions)=>{
 
         const formValidate = (value, updatedValidaton) =>{
@@ -265,7 +266,7 @@ const reducer=(state=initialState, actions)=>{
         };
 
         case actionsList.ADD_BURGER:
-        const newBurgerName = "burger"+newBurgerId;
+        const newBurgerName = "Burger #"+newBurgerId;
         newBurgerId++;
         const newBurgerBody = {
             bacon: 0,
@@ -352,7 +353,8 @@ const reducer=(state=initialState, actions)=>{
             localStorage.setItem('expirationTime', new Date(new Date().getTime() + 3600 * 1000));
         return {
             ...state,
-            logged:true
+            logged:true,
+            loginModalShowed:false,
         };
 
         case actionsList.LOGOUT:
@@ -369,6 +371,12 @@ const reducer=(state=initialState, actions)=>{
             return {
                 ...state,
                 logged:true
+            };
+
+        case actionsList.TOGGLE_LOGIN_MODAL:
+            return {
+                ...state,
+                loginModalShowed: !state.loginModalShowed
             };
 
             default:

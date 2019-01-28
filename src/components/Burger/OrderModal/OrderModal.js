@@ -5,20 +5,32 @@ import Spinner from '../../Tools/Spinner/Spinner';
 import {Link} from 'react-router-dom';
 
 const OrderModal=(props)=>{
-	const orderList = Object.keys(props.ingredients)
-	.map(igKey=>{
-		if(props.ingredients[igKey]){
+	console.log(Object.entries(props.ingredients));
+	const orderList = Object.entries(props.ingredients)
+	.map(item=>{
 			return (
-			<li key={igKey}>
-				<span className="ing-name">{igKey}</span> <span className="ing-amount">x{props.ingredients[igKey]}</span>
-			</li>)
-		}
+			<div>
+				<p className="burgerName">{item[0]}</p>
+				<ul>
+					{
+						Object.entries(item[1]).map(it=>{
+							if(it[1]>0){
+
+								return (<li>
+										<span className="ing-name">{it[0]}</span> <span className="ing-amount">x{it[1]}</span>
+									</li>);
+								}
+						})
+					}
+				</ul>
+			</div>
+			)
 	});
 	let modalContent = <div className="OrderModal modal">
 		<h1>Your Order</h1>
-		<ul>
+		<div className="modal-ing-body">
 			{orderList}
-		</ul>
+		</div>
 		<p id="totalPrice">Total price: <span className="priceNumber">{props.price}$</span></p>
 		<div className="buttons">
 			<Link className="btn success" to="/checkout" btnType='success'>Next step</Link>

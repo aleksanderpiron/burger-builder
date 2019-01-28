@@ -2,19 +2,24 @@ header{
 	width: 100vw;
 	margin:0 0 30px;
 	padding:20px 30px;
-	background-color: #11203fce;
+	background-color: #3F4B64;
     color:#fff;
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
-    z-index: 7;
+    z-index: 15;
     display: flex;
     align-items: center;
 }
 header #logo{
     height: 50px;
 }
-header{
+.wrapper{
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+}
+header .wrapper{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,6 +34,10 @@ header nav{
 header .nav{
     display:inline-block;
     margin:0 50px;
+}
+header .wrapper > div{
+    display: flex;
+    align-items: center;
 }
 header .nav li{
     display: inline-block;
@@ -53,4 +62,22 @@ header .user span{
 }
 header .user span:hover{
     color: #c51d1d;
+}
+.loginModal{
+    background-color: #3F4B64;
+    border-radius: 4px;
+    color: #fff;
+    position: absolute;
+    padding: 5px 15px 15px;
+    top: -300px;
+    right: 50px;
+    z-index: 11;
+    transition: 500ms;
+}
+.loginModal input{
+    box-shadow: none;
+    border-radius: 0;
+}
+.loginModal.active{
+    top: 75px;
 }

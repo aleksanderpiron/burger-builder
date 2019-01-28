@@ -2,12 +2,11 @@
 	position: fixed;
 	background-color: #fff;
 	max-width: 400px;
-	height: 500px;
-	z-index: 9;
+	z-index: 17;
 	border:1px solid #ccc;
 	left: 0;
 	right: 0;
-	top:20px;
+	top:50px;
 	margin:0 auto;
 	padding: 50px 100px;
 	animation-name: FadeIn;
@@ -20,14 +19,16 @@
 .OrderModal ul{
 	padding: 0;
 	list-style: none;
+	border-bottom: 2px solid #333;
+	margin-bottom: 10px;
 }
 .OrderModal ul li{
 	text-transform: capitalize;
 	font-size: 22px;
-	border-bottom: 1px solid #707070;
+	border-bottom: 1px solid #ccc;
 }
 .OrderModal .buttons{
-	position: absolute;
+	/* position: absolute; */
 	bottom: 50px;
 	left: 0;
 	width: 100%;
@@ -37,10 +38,19 @@
 	float: right;
 }
 .OrderModal #totalPrice{
-	position: absolute;
+	/* position: absolute; */
 	font-size: 22px;
-	bottom: 150px;
-	right: 100px;
+	text-align: right;
+}
+.OrderModal .modal-ing-body{
+	max-height: 500px;
+	padding: 0 10px;
+	overflow: auto;
+}
+.OrderModal .burgerName{
+	font-size: 24px;
+	font-weight: 700;
+	margin: 0 0 5px 0;
 }
 .OrderModal #totalPrice .priceNumber{
 	font-size: 28px;
@@ -61,7 +71,7 @@
 }
 .mask{
 	position: fixed;
-	z-index: 8;
+	z-index: 15;
 	width: 100vw;
 	height: 100vh;
 	top: 0;

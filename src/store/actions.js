@@ -10,3 +10,4 @@ export const ISLOGGED = "ISLOGGED";
 export const SWITCH_BURGER = "SWITCH_BURGER";
 export const ADD_BURGER = "ADD_BURGER";
 export const REMOVE_BURGER = "REMOVE_BURGER";
+export const TOGGLE_LOGIN_MODAL = "TOGGLE_LOGIN_MODAL";
