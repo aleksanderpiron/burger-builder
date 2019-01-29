@@ -8,8 +8,13 @@
     width: 65%;
     padding-left: 20px;
 }
-#userProfile .options a{
+#userProfile .options span{
     color: #333;
     display: block;
     margin-bottom: 5px;
+    transition: 300ms;
+    cursor: pointer;
+}
+#userProfile .options span:hover{
+    color: #ff8800;
 }

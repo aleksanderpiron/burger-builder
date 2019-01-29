@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Spinner from '../../components/Tools/Spinner/Spinner';
 import Button from '../../components/Tools/Button/Button';
-import Burger from '../../components/Burger/Burger';
 import Login from '../../containers/Login/Login';
 import axios from '../../axiosOrders';
 import './OrderHistory.css';
+import { connect } from 'react-redux';
 
 class OrderHistory extends Component{
     state = {
@@ -102,7 +102,7 @@ class OrderHistory extends Component{
                 )
             })
             }
-            if(localStorage.getItem('token') === null){
+            if(localStorage.getItem('token') === null || !this.props.logged){
                 historyContent = <div><p class="text-center">You have to be logged to see orders history!</p>
                     <Login />
                 </div>
@@ -120,5 +120,9 @@ class OrderHistory extends Component{
         )
     }
 }
-
-export default OrderHistory;
+const mapStateToProps=state=>{
+    return{
+        logged:state.logged
+    }
+}
+export default connect(mapStateToProps)(OrderHistory);

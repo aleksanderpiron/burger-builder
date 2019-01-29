@@ -24,7 +24,6 @@ class Login extends Component {
             password: this.props.registerForm.registerPassword.value,
             returnSecureToken: true
         }
-        console.log(formData);
         axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB1euGeZQ8S4E2FBzsowQn8wK_UriQg9-U', formData)
         .then(response=>{
             console.log(response);
@@ -47,7 +46,6 @@ class Login extends Component {
         axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyB1euGeZQ8S4E2FBzsowQn8wK_UriQg9-U', formData)
         .then(response=>{
             this.props.login(response.data);
-            console.log(response.data);
             this.setState({loading:false, loginError:false, logged:true});
         })
         .catch(error=>{
