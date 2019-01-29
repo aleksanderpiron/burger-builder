@@ -9,6 +9,7 @@
     transition: 300ms;
     outline: none;
     margin: 0 10px;
+    display: inline-block;
 }
 .success{
 	background-color: #6da34d;

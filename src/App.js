@@ -4,7 +4,6 @@ import { BrowserRouter, Route} from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomePage from './components/HomePage/HomePage';
 import * as actionsList from './store/actions';
-import Login from './containers/Login/Login';
 
 class App extends Component {
   checkIfLogged=()=>{
