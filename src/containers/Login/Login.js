@@ -14,6 +14,7 @@ class Login extends Component {
         registerError:false,
         loginError:false,
         logged:false,
+        registerSuccess:false,
     }
 
     registerUserHandler=()=>{
@@ -26,8 +27,7 @@ class Login extends Component {
         }
         axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB1euGeZQ8S4E2FBzsowQn8wK_UriQg9-U', formData)
         .then(response=>{
-        console.log(response);
-            this.setState({loading:false, registerError:false});
+            this.setState({loading:false, registerError:false, registerSuccess:true});
         })
         .catch(error=>{
             console.log(error);
@@ -61,7 +61,7 @@ class Login extends Component {
     }
 
     render(){
-        let loginContent = <LoginForm loginError={this.state.loginError} registerError={this.state.registerError} login={this.loginUserHandler} register={this.registerUserHandler} registerBlur={this.props.registerBlurHandler} loginBlur={this.props.loginBlurHandler} loginData={this.props.loginForm} registerData={this.props.registerForm} registerChange={this.props.registerInputChangeHandler} loginChange={this.props.loginInputChangeHandler} switch={this.switchHandler} changeForm={this.state.changeForm}/>;
+        let loginContent = <LoginForm registerSuccess={this.state.registerSuccess} loginError={this.state.loginError} registerError={this.state.registerError} login={this.loginUserHandler} register={this.registerUserHandler} registerBlur={this.props.registerBlurHandler} loginBlur={this.props.loginBlurHandler} loginData={this.props.loginForm} registerData={this.props.registerForm} registerChange={this.props.registerInputChangeHandler} loginChange={this.props.loginInputChangeHandler} switch={this.switchHandler} changeForm={this.state.changeForm}/>;
         if(this.state.loading){
             loginContent = <Spinner />
         }

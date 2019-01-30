@@ -74,6 +74,7 @@ const initialState ={
             valid:false,
             validation:{
                 notEmpty:false,
+                isEmail:false
             },
             touched:false
         },
@@ -104,6 +105,7 @@ const initialState ={
             errorMessage:null,
             valid:false,
             validation:{
+                isEmail:false,
                 notEmpty:false,
             },
             touched:false
@@ -125,7 +127,8 @@ const initialState ={
             valid:false,
             validation:{
                 notEmpty:false,
-                // sameAs: 'password',
+                sameAsTarget: 'registerPassword',
+                sameAs: false,
             },
             touched:false
         }
@@ -136,6 +139,7 @@ const initialState ={
             errorMessage:null,
             valid:false,
             validation:{
+                isEmail:false,
                 notEmpty:false,
             },
             touched:false
@@ -190,24 +194,24 @@ const reducer=(state=initialState, actions)=>{
         }
 
         // IS SAME AS
-        // if(typeof updatedValidaton.validation.sameAs !== 'undefined'){
-        //     const targetId = updatedValidaton.validation.sameAs;
-        //     let model = {...state.formData[targetId]};
-        //     model = model.value;
-        //     if(value === model){
-        //         console.log('takie samo');
-        //         console.log(model);
-        //         console.log(value);
+        if(typeof updatedValidaton.validation.sameAs !== 'undefined'){
+            const targetName = updatedValidaton.validation.sameAsTarget;
+            let model = document.querySelector('input[name="'+targetName+'"]').value;
+            if(value === model){
+                updatedValidaton.validation.sameAs = true;
+            }else if(value !== model){
+                updatedValidaton.validation.sameAs = false;
+            }
+        }
 
-        //         updatedValidaton.validation.sameAs = true;
-        //     }else if(value !== model){
-        //         console.log('nie takie samo');
-        //         console.log(model);
-        //         console.log(value);
-        //         updatedValidaton.validation.sameAs = false;
-        //     }
-        // }
-
+        // IS EMAIL
+        if(typeof updatedValidaton.validation.isEmail !== 'undefined'){
+            if(value.indexOf('@') !== -1 && value.indexOf('.') !== -1){
+                updatedValidaton.validation.isEmail = true;
+            }else{
+                updatedValidaton.validation.isEmail = false;
+            }
+        }
         // RULES END
 
         for(var o in updatedValidaton.validation){
@@ -222,6 +226,12 @@ const reducer=(state=initialState, actions)=>{
                     break;
                     case 'notEmpty':
                         updatedValidaton.errorMessage = 'Input is empty!';
+                    break;
+                    case 'isEmail':
+                        updatedValidaton.errorMessage = "Email isn't correct!";
+                    break;
+                    case 'sameAs':
+                        updatedValidaton.errorMessage = "Passwords aren't same";
                     break;
                     default:
                     return false;

@@ -15,9 +15,10 @@ class Checkout extends Component{
         postStatus: 0,
         postError: null,
         canFinish:false,
+        finalErrorMessage:null
     }
 
-    finalizeOrderHandler=()=>{
+    formCorrectCheck=()=>{
         let allFormTrue = true;
         const stateFormData = {...this.props.formData};
 		Object.values(stateFormData).map(x =>{
@@ -26,6 +27,14 @@ class Checkout extends Component{
             }
                 return allFormTrue;
         })
+        if(allFormTrue){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    finalizeOrderHandler=()=>{
         const order = {
             ingredients: this.props.ingredients,
             userData: {
@@ -38,7 +47,7 @@ class Checkout extends Component{
             },
             totalPrice: this.props.totalPrice
         }
-        if(allFormTrue === true){
+        if(this.formCorrectCheck()){
         this.setState(prevState=>{
             return {spinner:true}
          });
@@ -63,7 +72,7 @@ class Checkout extends Component{
              })
         );
         }else{
-            console.log('Fill form!')
+            this.setState({finalErrorMessage:'Form contains invalid values! Please correct them'})
         }
     }
     render(){
@@ -71,12 +80,12 @@ class Checkout extends Component{
             <div>
                 <h2>Almost there!</h2>
                 <h4>Fill necessary information for delivery your order</h4>
-                <CheckoutForm blur={this.props.blurHandler} formData={this.props.formData} change={this.props.inputChangeHandler}/>
+                <CheckoutForm finalErrorMessage={this.state.finalErrorMessage} blur={this.props.blurHandler} formData={this.props.formData} change={this.props.inputChangeHandler}/>
             </div>;
 
         let buttons = <div className="buttons text-center">
                           <Link className="btn info" to="/burger-builder">Back</Link>
-                          <Button clicked={this.finalizeOrderHandler} btnType="success">Finish</Button>
+                          <Button clicked={this.finalizeOrderHandler} disableBtn={!this.formCorrectCheck()} btnType="success">Finish</Button>
                       </div>;
 // disableBtn={!this.state.canFinish?true:false}
         if(this.state.spinner === true){
@@ -95,7 +104,7 @@ class Checkout extends Component{
         }
         if(localStorage.getItem('token') === null){
             checkoutBody = <div><p class="text-center">You have to be logged to see orders history!</p>
-             <Login />
+                <Login />
                  </div>
             buttons= null;
         }

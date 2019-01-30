@@ -18,6 +18,9 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path="/burger-builder" exact component={Layout}/>
+        <Route path="/order-history" exact component={Layout}/>
+        <Route path="/checkout" exact component={Layout}/>
+        <Route path="/profile" exact component={Layout}/>
         <Route path="/" exact component={HomePage}/>
         <Redirect to="/"/>
       </Switch>

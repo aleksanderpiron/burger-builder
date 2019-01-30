@@ -60,3 +60,12 @@ a{
     text-decoration: none;
     color: #fff;
 }
+.home .register .check{
+    right:-35px;
+}
+.home .register .check::after{
+    background-color: #3F4B64;
+}
+.text-success{
+    color:#6da34d;
+}

@@ -16,6 +16,8 @@ const CheckoutForm =(props)=>{
                 <Input inputData={props.formData.phone} inputType="input" labelId="phone" placeholder="Phone" inputName="phone" onChange={props.change} onBlur={props.blur}/>
 
                 <Input inputData={props.formData.message} disableColors={true} inputType="textarea" labelId="mess" placeholder="Message (optional)" inputName="message" onChange={props.change} onBlur={props.blur}/>
+
+                <p className="error-message">{props.finalErrorMessage}</p>
         </div>
     )
 }
