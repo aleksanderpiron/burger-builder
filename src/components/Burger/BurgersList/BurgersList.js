@@ -8,7 +8,7 @@ import * as actionsList from '../../../store/actions';
 
 const BurgersList =(props)=>{
     let BurgersListBody = Object.entries(props.burgers).map((obj)=>{
-        return (<li id={obj[0]} className={obj[0] === props.currentBurger?'current':null}><div onClick={()=>props.switchBurger(obj[0])}><Burger ingredients={obj[1]}/></div><span className={Object.values(props.burgers).length === 1?'hidden':null} onClick={()=>props.removeBurger(obj[0])}><img className="close-btn" src={cross} alt=""/></span></li>)
+        return (<li key={obj[0]} id={obj[0]} className={obj[0] === props.currentBurger?'current':null}><div onClick={()=>props.switchBurger(obj[0])}><Burger ingredients={obj[1]}/></div><span className={Object.values(props.burgers).length === 1?'hidden':null} onClick={()=>props.removeBurger(obj[0])}><img className="close-btn" src={cross} alt=""/></span></li>)
     });
     return(
         <div className="BurgersList">

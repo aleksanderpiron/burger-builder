@@ -16,6 +16,14 @@ const INGREDIENT_LIMITS = {
 	salad: 3
 }
 
+let newTotalPrice = null;
+let ingPrice = null;
+let validationPassed;
+let updatedBurgerIng;
+let newBurgerId = 2;
+let emailCheckout = localStorage.getItem('userEmail') !==null?localStorage.getItem('userEmail'):'';
+
+
 const initialState ={
     burgersIngredients:{
         burger_1: {
@@ -53,6 +61,15 @@ const initialState ={
         },
         city:{
             value:'',
+            errorMessage:null,
+            valid:false,
+            validation:{
+                notEmpty:false,
+            },
+            touched:false
+        },
+        email:{
+            value:emailCheckout,
             errorMessage:null,
             valid:false,
             validation:{
@@ -136,11 +153,7 @@ const initialState ={
         }
     }
     }
-let newTotalPrice = null;
-let ingPrice = null;
-let validationPassed;
-let updatedBurgerIng;
-let newBurgerId = 2;
+
 const reducer=(state=initialState, actions)=>{
 
         const formValidate = (value, updatedValidaton) =>{
@@ -340,6 +353,7 @@ const reducer=(state=initialState, actions)=>{
                 item.value = "";
                 item.valid = false;
                 item.touched = false;
+                return item;
             });
 
             return{

@@ -11,9 +11,10 @@ class App extends Component {
       this.props.isLogged();
     }
   }
-    
+  componentDidMount(){
+    this.checkIfLogged();
+  }
   render() {
-    // this.checkIfLogged();
     let routes = (
       <Switch>
         <Route path="/burger-builder" exact component={Layout}/>
@@ -22,16 +23,18 @@ class App extends Component {
       </Switch>
     )
     if(this.props.logged){
-      routes= (<Switch>
+      routes= (
+      <Switch>
         <Route path="/burger-builder" exact component={Layout}/>
         <Route path="/order-history" exact component={Layout}/>
         <Route path="/checkout" exact component={Layout}/>
         <Route path="/profile" exact component={Layout}/>
         <Route path="/" exact component={HomePage}/>
         <Redirect to="/"/>
-      </Switch>)
+      </Switch>
+      )
     }
-    
+
     return (
       <BrowserRouter>
         <div className="App">

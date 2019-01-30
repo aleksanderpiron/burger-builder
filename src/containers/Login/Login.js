@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import LoginForm from '../../components/Forms/LoginForm/LoginForm';
 import './Login.css';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import * as actionsList from '../../store/actions';
 import Spinner from '../../components/Tools/Spinner/Spinner';
@@ -12,6 +11,7 @@ class Login extends Component {
     state={
         changeForm:false,
         loading:false,
+        registerError:false,
         loginError:false,
         logged:false,
     }
@@ -26,12 +26,12 @@ class Login extends Component {
         }
         axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB1euGeZQ8S4E2FBzsowQn8wK_UriQg9-U', formData)
         .then(response=>{
-            console.log(response);
-            this.setState({loading:false});
+        console.log(response);
+            this.setState({loading:false, registerError:false});
         })
         .catch(error=>{
             console.log(error);
-            this.setState({loading:false});
+            this.setState({loading:false, registerError:true});
 
         });
     }
@@ -61,7 +61,7 @@ class Login extends Component {
     }
 
     render(){
-        let loginContent = <LoginForm loginError={this.state.loginError} login={this.loginUserHandler} register={this.registerUserHandler} registerBlur={this.props.registerBlurHandler} loginBlur={this.props.loginBlurHandler} loginData={this.props.loginForm} registerData={this.props.registerForm} registerChange={this.props.registerInputChangeHandler} loginChange={this.props.loginInputChangeHandler} switch={this.switchHandler} changeForm={this.state.changeForm}/>;
+        let loginContent = <LoginForm loginError={this.state.loginError} registerError={this.state.registerError} login={this.loginUserHandler} register={this.registerUserHandler} registerBlur={this.props.registerBlurHandler} loginBlur={this.props.loginBlurHandler} loginData={this.props.loginForm} registerData={this.props.registerForm} registerChange={this.props.registerInputChangeHandler} loginChange={this.props.loginInputChangeHandler} switch={this.switchHandler} changeForm={this.state.changeForm}/>;
         if(this.state.loading){
             loginContent = <Spinner />
         }

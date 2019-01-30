@@ -21,8 +21,9 @@ class BurgerBuilder extends Component{
 				amount = amount+item;
 				return item;
 			})
+			return sum;
 		})
-		if(amount>0){
+		if(amount>0 && this.props.logged){
 			return true;
 		}
 		else if(amount === 0){
@@ -36,7 +37,6 @@ class BurgerBuilder extends Component{
 		this.setState({OrderModal:decide});
 	}
 	render(){
-		console.log(this.props.ingredients)
 		let disabledButtons = {...this.props.ingredients};
 		for(let key in disabledButtons){
 			disabledButtons[key] = disabledButtons[key] <= 0;
@@ -58,6 +58,7 @@ const mapStateToProps = (state) =>{
 	return{
 		ingredients: state.burgersIngredients[state.currentBurger],
 		allIngredients: state.burgersIngredients,
+		logged:state.logged,
 		currentBurger: state.currentBurger,
 		totalPrice: state.totalPrice,
 	}

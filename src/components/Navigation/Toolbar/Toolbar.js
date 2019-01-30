@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './Toolbar.css';
 import {NavLink} from 'react-router-dom';
 import Login from '../../../containers/Login/Login';
@@ -8,9 +8,16 @@ import {connect} from 'react-redux';
 
 const Toolbar=(props)=>{
     let userEmail = localStorage.getItem('userEmail');
-    let topContent = null
+    let topContent = null;
+    let nav =   <div className="nav">
+                    <NavLink to="/burger-builder" >Burger Builder</NavLink>
+                </div>;
     if(userEmail !== null){
-        topContent = <div><NavLink className="profileLink" to="/profile">{userEmail}</NavLink> <span className="orange">|</span> <span onClick={props.logout}>Logout</span></div>
+        topContent = <div><NavLink className="profileLink" to="/profile">{userEmail}</NavLink> <span className="orange">|</span> <span onClick={props.logout}>Logout</span></div>;
+        nav =   <div className="nav">
+                    <NavLink to="/burger-builder" >Burger Builder</NavLink>
+                    <NavLink to="/order-history" >Previous Orders</NavLink>
+                </div>;
     }
     return(
     <React.Fragment>
@@ -18,12 +25,9 @@ const Toolbar=(props)=>{
             <div className='wrapper'>
                 <div>
                 <NavLink to="/" ><img id="logo" src={logo} alt="Logo"/></NavLink>
-                    <div className="nav">
-                        <NavLink to="/burger-builder" >Burger Builder</NavLink>
-                        <NavLink to="/order-history" >Previous Orders</NavLink>
-                    </div>
+                {nav}
                 </div>
-                <p className="user">{props.logged?topContent:<span onClick={props.toggleModal}>Login</span>}</p>
+                <div className="user">{props.logged?topContent:<span onClick={props.toggleModal}>Login</span>}</div>
             </div>
         </header>
                 <div className={props.loginModalShowed?'loginModal active':'loginModal'}>

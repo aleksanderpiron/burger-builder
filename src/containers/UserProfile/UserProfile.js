@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './UserProfile.css';
 import axios from 'axios';
 import Button from '../../components/Tools/Button/Button';
-import Input from '../../components/Tools/Input/Input';
+// import Input from '../../components/Tools/Input/Input';
 
 class UserProfile extends Component{
     state = {
@@ -21,13 +21,13 @@ class UserProfile extends Component{
         }).catch(err=>{
             console.log(err);
         });
-        
+
         axios.delete('https://burgerbuilder-949ce.firebaseio.com/orders/'+userId+'.json').then(response=>{
             console.log(response);
         }).catch(err=>{
             console.log(err);
         });
-        
+
     }
     switchStateValue=(targetName)=>{
         const updatedState = {...this.state};

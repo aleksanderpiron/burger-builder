@@ -24,6 +24,7 @@ class Checkout extends Component{
             if(!x.valid){
                 allFormTrue = false;
             }
+                return allFormTrue;
         })
         const order = {
             ingredients: this.props.ingredients,
@@ -31,6 +32,7 @@ class Checkout extends Component{
                 name: this.props.formData.name.value,
                 address: this.props.formData.address.value,
                 city: this.props.formData.city.value,
+                email: this.props.formData.email.value,
                 phone: this.props.formData.phone.value,
                 message: this.props.formData.message.value,
             },
@@ -65,7 +67,12 @@ class Checkout extends Component{
         }
     }
     render(){
-        let checkoutBody = <CheckoutForm blur={this.props.blurHandler} formData={this.props.formData} change={this.props.inputChangeHandler}/>;
+        let checkoutBody =
+            <div>
+                <h2>Almost there!</h2>
+                <h4>Fill necessary information for delivery your order</h4>
+                <CheckoutForm blur={this.props.blurHandler} formData={this.props.formData} change={this.props.inputChangeHandler}/>
+            </div>;
 
         let buttons = <div className="buttons text-center">
                           <Link className="btn info" to="/burger-builder">Back</Link>
@@ -77,7 +84,7 @@ class Checkout extends Component{
             buttons = null
         }
         if(this.state.postStatus === 200){
-            checkoutBody = <p>Your order has been successfully placed</p>
+            checkoutBody = <p>Your order has been successfully placed<br /> Thank you!</p>
             buttons = <div className="buttons text-center">
                             <Link className="btn info" to="/">Homepage</Link>
                         </div>;
@@ -94,7 +101,6 @@ class Checkout extends Component{
         }
         return(
             <div className="checkout-page">
-                {/* <div><Burger ingredients={this.props.ingredients} /></div> */}
                 {checkoutBody}
                 {buttons}
             </div>

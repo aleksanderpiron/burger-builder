@@ -5,20 +5,21 @@ import Spinner from '../../Tools/Spinner/Spinner';
 import {Link} from 'react-router-dom';
 
 const OrderModal=(props)=>{
-	console.log(Object.entries(props.ingredients));
 	const orderList = Object.entries(props.ingredients)
 	.map(item=>{
 			return (
-			<div>
-				<p className="burgerName">{item[0]}</p>
+			<div key={item[0]}>
+				<p className="burgerName">{item[0].split('_').join(' #')}</p>
 				<ul>
 					{
 						Object.entries(item[1]).map(it=>{
 							if(it[1]>0){
-
-								return (<li>
+								return (<li key={item[0]}>
 										<span className="ing-name">{it[0]}</span> <span className="ing-amount">x{it[1]}</span>
 									</li>);
+								}
+								else{
+									return false;
 								}
 						})
 					}
@@ -33,7 +34,7 @@ const OrderModal=(props)=>{
 		</div>
 		<p id="totalPrice">Total price: <span className="priceNumber">{props.price}$</span></p>
 		<div className="buttons">
-			<Link className="btn success" to="/checkout" btnType='success'>Next step</Link>
+			<Link className="btn success" to="/checkout">Next step</Link>
 			<Button btnType='danger' clicked={props.showHideModal}>Cancel</Button>
 		</div>
 	</div>

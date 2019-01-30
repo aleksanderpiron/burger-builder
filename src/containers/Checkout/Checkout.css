@@ -1,5 +1,3 @@
-.checkout-page .Burger{
-    height: 100px;
-    width: 250px;
-    background-color: #AD6614;
+.checkout-page {
+    text-align: center;
 }
