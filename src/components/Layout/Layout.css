@@ -1,6 +1,4 @@
-main{
-	display: flex;
-	justify-content: center;
+#main{
 }
 .text-center{
 	text-align: center;

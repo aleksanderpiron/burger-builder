@@ -1,0 +1,46 @@
+#main{
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.flex-box{
+  display: flex;
+  justify-content: space-between;
+}
+.flex-box > div{
+  width: 50%;
+  color: #fff;
+  min-height: calc(100vh - 94px);
+}
+.step-box > div{
+  /* padding: 0 50px; */
+  text-align: center;
+}
+.curtain{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(92, 92, 255);
+  width: 50%;
+  z-index: 10;
+  height: 100%;
+  transition: 500ms;
+}
+.curtain.left-pos{
+  right: 50%;
+}
+.step-one{
+  background-color: rgb(255, 147, 147);
+}
+.step-two{
+  background-color: rgb(208, 255, 147);
+}
+.step-three{
+  background-color: pink;
+}
+.step-four{
+  background-color: goldenrod;
+}
+.step-five{
+  background-color: rgb(24, 60, 77);
+}
