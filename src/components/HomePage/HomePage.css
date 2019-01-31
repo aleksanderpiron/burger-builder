@@ -19,8 +19,11 @@
     height: 200px;
 }
 .home .home-body{
-    width: 450px;
+    margin:10px;
+    max-width: 100%;
+    max-width: 450px;
     padding: 20px 40px;
+    margin-top: 130px;
     position: relative;
 }
 .home input{
@@ -68,4 +71,9 @@ a{
 }
 .text-success{
     color:#6da34d;
+}
+@media (max-width:500px){
+    .home .home-body{
+        padding: 10px;
+    }
 }
