@@ -1,40 +1,74 @@
+.BurgersList {
+    position: absolute;
+    left: 0;
+}
 .BurgersList ul{
+    position: relative;
     padding: 0;
     max-height: 500px;
     width: 170px;
-    overflow: auto;
 }
 .BurgersList ul li{
+    transform: translateX(-260px);
+    position: absolute;
     position: relative;
+    display: flex;
+    border: 1px solid #fff;
+    justify-content: flex-end;
+    align-items: center;
+    height: 50px;
+    margin: 5px auto;
+    cursor: pointer;
+    border-radius: 50px;
+    width: 300px;
+    transition: 500ms;
+    padding:10px;
+}
+.BurgersList ul li:nth-child(1){
+    background-color: #01295f;
+}
+.BurgersList ul li:nth-child(2){
+    background-color: #437f97;
+}
+.BurgersList ul li:nth-child(3){
+    background-color: #849324;
+}
+.BurgersList ul li:nth-child(4){
+    background-color: #ffb30f;
+}
+.BurgersList ul li:nth-child(5){
+    background-color: #fd151b;
+}
+.BurgersList ul li:hover{
+    transform: translateX(-160px);
+}
+.BurgersList ul li .circle{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid #ccc;
-    height: 140px;
-    width: 140px;
-    margin: 15px auto;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: 300ms;
-}
-.BurgersList ul li span{
-    transition: 300ms;
+    /* padding-right: 15px; */
+    /* background-color: #fff; */
+    color: #fff;
+    font-size: 24px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
 .BurgersList ul li span.hidden{
     opacity: 0;
     pointer-events: none;
 }
 .close-btn{
-    background-color: #C51212;
-    height: 12px;
-    width: 12px;
+    /* background-color: #C51212; */
+    height: 30px;
+    width: 30px;
     display: flex;
     justify-content: center;
     align-content: center;
     position: absolute;
-    top: -6px;
+    top: 15px;
     border-radius: 50%;
-    right: -6px;
+    right: 100px;
     padding: 5px;
 }
 .BurgersList ul li.current{
@@ -48,4 +82,15 @@
 .BurgersList ul li .Burger p{
     font-size: 7px;
     margin: 5px;
+}
+.add-burger-btn{
+    border:1px solid #fff;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    padding: 0;
+    margin: 0;
+    left: -0;
+    position: absolute;
 }

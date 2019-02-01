@@ -14,13 +14,16 @@
 }
 .step-box > div{
   /* padding: 0 50px; */
+
   text-align: center;
 }
 .curtain{
+  position: relative;
+  overflow: hidden;
   position: absolute;
   top: 0;
   right: 0;
-  background-color: rgb(92, 92, 255);
+  background-color: rgb(226, 247, 107);
   width: 50%;
   z-index: 10;
   height: 100%;
@@ -28,6 +31,32 @@
 }
 .curtain.left-pos{
   right: 50%;
+}
+.curtain .BurgersPreviewItem{
+  margin: 100px auto 0;
+  transition: 500ms;
+  top: 100px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.curtain .BurgersPreviewItem p{
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.curtain .BurgersPreviewItem.active{
+  left: 0;
+  right: 0;
+}
+.curtain .BurgersPreviewItem.left{
+  left: -1000px;
+}
+.curtain .BurgersPreviewItem.right{
+  left: 1000px;
 }
 .step-one{
   background-color: rgb(255, 147, 147);

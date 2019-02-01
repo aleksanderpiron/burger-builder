@@ -281,12 +281,12 @@ const reducer=(state=initialState, actions)=>{
                 totalPrice:newTotalPrice
             }
 
-        case actionsList.SWITCH_BURGER:
-        const newCurrentBurger = actions.pointedBurger;
-        return {
-            ...state,
-            currentBurger:newCurrentBurger
-        };
+        // case actionsList.SWITCH_BURGER:
+        // const newCurrentBurger = actions.pointedBurger;
+        // return {
+        //     ...state,
+        //     currentBurger:newCurrentBurger
+        // };
 
         case actionsList.ADD_BURGER:
         const newBurgerName = "burger_"+newBurgerId;
