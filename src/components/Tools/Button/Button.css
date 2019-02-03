@@ -20,8 +20,8 @@
 	border-color: #2589bd;
 }
 .danger{
-	background-color: #C51212;
-	border-color: #ff3e41;
+    background-color: #C51212;
+    border: none;
 }
 .btn.full-width{
     margin: 0;

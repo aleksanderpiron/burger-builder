@@ -13,7 +13,7 @@ const BurgersList =(props)=>{
             onClick={()=>props.switchBurger(obj[0])}
             key={obj[0]}
             id={obj[0]}
-            className={obj[0] === props.shownBurger?'current':null}>
+            className={obj[0] === props.currentBurger?'current':null}>
                 <span className="circle">
                     {"#"+obj[0].substr(obj[0].length - 1)}
                 </span>
@@ -45,6 +45,7 @@ const mapDispatchToProps=(dispatch)=>{
     return{
 		addBurger:()=> dispatch({type: actionsList.ADD_BURGER}),
         removeBurger: (targetBurger)=>{dispatch({type:actionsList.REMOVE_BURGER, targetBurger:targetBurger})},
+        switchBurger: (pointedBurger)=>{dispatch({type:actionsList.SWITCH_BURGER, pointedBurger:pointedBurger})}
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BurgersList);

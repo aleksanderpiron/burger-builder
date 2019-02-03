@@ -1,6 +1,32 @@
 .orderHistory{
-    padding: 30px;
-    margin-top: -70px;
+    width: 100%;
+    position: absolute;
+    background-color: #2589bd;
+    text-align: center;
+    overflow: hidden;
+    padding-top: 30px;
+}
+.orderHistory .close-btn{
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+    padding: 25px;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    transition: 300ms;
+}
+.orderHistory .close-btn img{
+    width: 20px;
+    height: 20px;
+}
+.orderHistory .close-btn:hover{
+    padding: 70px;
+    width: 175px;
+    height: 175px;
 }
 .orderHistory h2{
     text-align: center;
@@ -11,8 +37,8 @@
 }
 .historyItem{
     padding-bottom: 10px;
-    width: 300px;
-    margin: 0 50px 30px;
+    width: 350px;
+    margin: 0 auto 30px;
     border-bottom: 1px solid #ccc;
 }
 .flex-box{

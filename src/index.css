@@ -3,7 +3,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: roboto;
+  font-family: 'roboto';
+  overflow: hidden;
 }
 .orange{
   color: #ff8000;

@@ -5,6 +5,7 @@ import Login from '../../containers/Login/Login';
 import axios from '../../axiosOrders';
 import './OrderHistory.css';
 import { connect } from 'react-redux';
+import cross from '../../assets/img/close.svg'
 
 class OrderHistory extends Component{
     state = {
@@ -111,6 +112,7 @@ class OrderHistory extends Component{
         }
         return(
             <div className='orderHistory'>
+                <button className="close-btn danger" onClick={()=>this.props.close('orderHistory')}><img src={cross} alt=""/></button>
                 <h2>Orders history</h2>
                     <div className="orderHistoryBody">
                         {historyContent}

@@ -5,7 +5,7 @@
 .BurgersList ul{
     position: relative;
     padding: 0;
-    max-height: 500px;
+    margin: 95px 0 0;
     width: 170px;
 }
 .BurgersList ul li{
@@ -17,12 +17,10 @@
     justify-content: flex-end;
     align-items: center;
     height: 50px;
-    margin: 5px auto;
+    margin: 0 auto;
     cursor: pointer;
-    border-radius: 50px;
     width: 300px;
     transition: 500ms;
-    padding:10px;
 }
 .BurgersList ul li:nth-child(1){
     background-color: #01295f;
@@ -40,7 +38,7 @@
     background-color: #fd151b;
 }
 .BurgersList ul li:hover{
-    transform: translateX(-160px);
+    transform: translateX(-200px);
 }
 .BurgersList ul li .circle{
     display: flex;
@@ -72,7 +70,7 @@
     padding: 5px;
 }
 .BurgersList ul li.current{
-    background-color: #d4e4bc;
+    background-color: #e0de42;
 }
 .BurgersList ul li .Burger{
     margin: 0;
@@ -85,10 +83,10 @@
 }
 .add-burger-btn{
     border:1px solid #fff;
+    border-left: 0;
     font-weight: 700;
-    border-radius: 50%;
-    width: 75px;
-    height: 75px;
+    width: 43px;
+    height: 50px;
     padding: 0;
     margin: 0;
     left: -0;

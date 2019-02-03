@@ -281,12 +281,16 @@ const reducer=(state=initialState, actions)=>{
                 totalPrice:newTotalPrice
             }
 
-        // case actionsList.SWITCH_BURGER:
-        // const newCurrentBurger = actions.pointedBurger;
-        // return {
-        //     ...state,
-        //     currentBurger:newCurrentBurger
-        // };
+        case actionsList.SWITCH_BURGER:
+        const newCurrentBurger = actions.pointedBurger;
+        if(state.burgersIngredients[newCurrentBurger]===undefined){
+            return state;
+        }else{
+            return {
+                ...state,
+                currentBurger:newCurrentBurger
+            };
+        }
 
         case actionsList.ADD_BURGER:
         const newBurgerName = "burger_"+newBurgerId;
@@ -308,12 +312,13 @@ const reducer=(state=initialState, actions)=>{
         };
 
         case actionsList.REMOVE_BURGER:
-        const burgersIng = {...state.burgersIngredients}
+        const burgersIng = {...state.burgersIngredients};
         let filtered = Object.assign(
             {},
             ...Object.entries(burgersIng)
                .filter(([k]) => k!== actions.targetBurger)
                .map(([k, v]) => ({[k]: v})));
+               console.log(Object.keys(filtered)[0]);
         if(actions.targetBurger === state.currentBurger){
             const newCurrent= Object.keys(filtered)[0];
             return {

@@ -1,6 +1,6 @@
 header{
 	margin:0;
-	padding:20px 30px;
+	padding:10px 30px;
 	background-color: #3F4B64;
     color:#fff;
     position: relative;
@@ -64,21 +64,26 @@ header .user span{
 }
 .loginModal{
     background-color: #3F4B64;
-    border-radius: 4px;
     color: #fff;
     position: absolute;
-    padding: 5px 15px 15px;
-    top: -300px;
-    right: 50px;
+    top: 74px;
+    overflow: hidden;
+    right: 0;
     z-index: 11;
     transition: 500ms;
-    min-width: 340px;
+    width: 50%;
+    height: 0%;
     text-align: center;
+}
+.loginModal .Login{
+    width: 65%;
+    margin: 200px auto 0;
+    
 }
 .loginModal input{
     box-shadow: none;
     border-radius: 0;
 }
 .loginModal.active{
-    top: 75px;
+    height: 100%;
 }

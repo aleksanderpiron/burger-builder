@@ -10,12 +10,14 @@
 .flex-box > div{
   width: 50%;
   color: #fff;
-  min-height: calc(100vh - 94px);
+  min-height: calc(100vh - 74px);
+}
+h2{
+  margin-top: 0;
 }
 .step-box > div{
-  /* padding: 0 50px; */
-
   text-align: center;
+  position: relative;
 }
 .curtain{
   position: relative;
@@ -23,7 +25,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  background-color: rgb(226, 247, 107);
+  background-color: #bad5bf;
   width: 50%;
   z-index: 10;
   height: 100%;
@@ -31,6 +33,9 @@
 }
 .curtain.left-pos{
   right: 50%;
+}
+.curtain.away-pos{
+  right: -50%;
 }
 .curtain .BurgersPreviewItem{
   margin: 100px auto 0;
@@ -59,17 +64,66 @@
   left: 1000px;
 }
 .step-one{
-  background-color: rgb(255, 147, 147);
+  padding-top: 200px;
+  background-color: #0d1b1e;
 }
 .step-two{
-  background-color: rgb(208, 255, 147);
+  background-color: #ffa482;
 }
 .step-three{
-  background-color: pink;
+  background-color: #8db955;
+  width: 100%!important;
+  transition: 300ms;
 }
-.step-four{
-  background-color: goldenrod;
+/* ANIMATIONS */
+.fade-enter{
+  opacity: 0;
 }
-.step-five{
-  background-color: rgb(24, 60, 77);
+.fade-enter-active{
+  opacity: 1;
+  transition: 500ms;
+}
+.fade-exit{
+  opacity: 1;
+}
+.fade-exit-active{
+  opacity: 0;
+  transition: 300ms;
+}
+/* FADE LEFT */
+.fade-left-enter{
+  opacity: 0;
+  transform: translateX(-100px);
+}
+.fade-left-enter-active{
+  opacity: 1;
+  transform: translateX(0);
+  transition: 500ms;
+}
+.fade-left-exit{
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-left-exit-active{
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: 300ms;
+}
+/* SLIDE UP */
+.slide-up-enter{
+  top:100%;
+}
+.slide-up-enter-active{
+  top:0;
+  transition: 500ms;
+}
+.slide-up-enter-done{
+  top: 0;
+}
+.slide-up-exit{
+  top:0;
+}
+.slide-up-exit-active{
+  top:100%;
+  transition: 500ms;
 }

@@ -29,7 +29,8 @@ const BurgerControls = (props) => {
 					))}
 			<h3>Total price: {props.price} $</h3>
 			<p className="error-message">{localStorage.getItem('token') === null?'To order you have to login!':null}</p>
-			<Button btnType="danger full-width" clicked={props.showHideModal} id="orderBtn" disableBtn={!props.canOrder}>Order</Button>
+			<Button btnType="success" clicked={props.nextStep} id="orderBtn" disableBtn={!props.canOrder}>Next step</Button>
+			<Button btnType="info" clicked={()=>props.close('newOrder')} id="orderBtn">Back</Button>
 		</div>
 	)
 	}

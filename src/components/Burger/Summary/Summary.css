@@ -1,59 +1,45 @@
-.modal{
-	position: fixed;
-	background-color: #fff;
-	max-width: 400px;
-	z-index: 17;
-	border:1px solid #ccc;
-	left: 0;
-	right: 0;
-	top:50px;
+.Summary{
+	width:70%;
 	margin:0 auto;
-	padding: 50px 100px;
-	animation-name: FadeIn;
-	animation-duration: .5s;
 }
-.modal h1{
-	text-align: center;
-	margin-top: 0;
-}
-.OrderModal ul{
+.Summary ul{
 	padding: 0;
 	list-style: none;
 	border-bottom: 2px solid #333;
 	margin-bottom: 10px;
 }
-.OrderModal ul li{
+.Summary ul li{
 	text-transform: capitalize;
 	font-size: 22px;
 	border-bottom: 1px solid #ccc;
 }
-.OrderModal .buttons{
+.Summary .buttons{
 	/* position: absolute; */
 	bottom: 50px;
 	left: 0;
 	width: 100%;
 	text-align: center;
 }
-.OrderModal ul li .ing-amount{
+.Summary ul li .ing-amount{
 	float: right;
 }
-.OrderModal #totalPrice{
+.Summary #totalPrice{
 	/* position: absolute; */
 	font-size: 22px;
 	text-align: right;
 }
-.OrderModal .modal-ing-body{
+.Summary .modal-ing-body{
 	max-height: 500px;
 	padding: 0 10px;
 	overflow: auto;
 }
-.OrderModal .burgerName{
+.Summary .burgerName{
 	text-transform: capitalize;
 	font-size: 24px;
 	font-weight: 700;
 	margin: 0 0 5px 0;
 }
-.OrderModal #totalPrice .priceNumber{
+.Summary #totalPrice .priceNumber{
 	font-size: 28px;
 	font-weight: 700;
 }

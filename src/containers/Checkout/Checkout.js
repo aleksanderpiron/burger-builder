@@ -84,10 +84,9 @@ class Checkout extends Component{
             </div>;
 
         let buttons = <div className="buttons text-center">
-                          <Link className="btn info" to="/burger-builder">Back</Link>
+                          <Button clicked={this.props.prevStep} btnType="info">Back</Button>
                           <Button clicked={this.finalizeOrderHandler} disableBtn={!this.formCorrectCheck()} btnType="success">Finish</Button>
                       </div>;
-// disableBtn={!this.state.canFinish?true:false}
         if(this.state.spinner === true){
             checkoutBody = <Spinner />
             buttons = null
