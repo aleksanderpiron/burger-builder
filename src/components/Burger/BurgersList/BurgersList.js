@@ -2,34 +2,35 @@ import React from 'react';
 import Button from '../../Tools/Button/Button';
 import './BurgersList.css';
 import {connect} from 'react-redux'
-import Burger from '../Burger';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import bin from '../../../assets/img/bin.svg';
 import * as actionsList from '../../../store/actions';
 
 const BurgersList =(props)=>{
     let BurgersListBody = Object.entries(props.burgers).map((obj)=>{
         return (
-            <li
-            onClick={()=>props.switchBurger(obj[0])}
-            key={obj[0]}
-            id={obj[0]}
-            className={obj[0] === props.currentBurger?'current':null}>
-                <span className="circle">
-                    {"#"+obj[0].substr(obj[0].length - 1)}
-                </span>
-                <span
-                className={Object.values(props.burgers).length === 1?'hidden':null}
-                onClick={()=>props.removeBurger(obj[0])}>
-                    <img className="close-btn" src={bin} alt=""/>
-                </span>
-            </li>)
+            <CSSTransition classNames="fade-left" timeout={1300}>
+                <li
+                onClick={()=>props.switchBurger(obj[0])}
+                key={obj[0]}
+                id={obj[0]}
+                className={obj[0] === props.currentBurger?'current':null}>
+                    
+                </li>
+            </CSSTransition>
+        )
     });
     return(
         <div className="BurgersList">
-            <ul>
+            <Button disableBtn={props.disableAddingButton} clicked={props.addBurger} btnType="success">Add burger</Button>
+            <div
+            className={Object.values(props.burgers).length === 1?'hidden':null}
+            onClick={()=>props.removeBurger(props.currentBurger)}>
+                <img className="close-btn" src={bin} alt=""/>
+            </div>
+            <TransitionGroup component="ul">
                 {BurgersListBody}
-            </ul>
-            <Button disableBtn={props.disableAddingButton} clicked={props.addBurger} customClass={'add-burger-btn'} btnType="success">+</Button>
+            </TransitionGroup>
         </div>
     )
 }

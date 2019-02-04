@@ -1,72 +1,47 @@
-header{
+#logo{
 	margin:0;
 	padding:10px 30px;
-	background-color: #3F4B64;
     color:#fff;
-    position: relative;
+    position: absolute;
+    height: 50px;
     top: 0;
     left: 0;
     z-index: 15;
-    display: flex;
-    align-items: center;
-}
-header #logo{
-    height: 50px;
 }
 .wrapper{
     max-width: 1180px;
     width: 100%;
     margin: 0 auto;
 }
-header .wrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-header > div{
-    display: flex;
-    align-items: center;
-}
-header nav{
-    display: inline-block;
-}
-header .nav{
-    display:inline-block;
-    margin:0 50px;
-}
-header .wrapper > div{
-    display: flex;
-    align-items: center;
-}
-header .nav li{
-    display: inline-block;
-    margin: 0 15px;
-    padding: 10px;
-}
-header .nav a{
-    color:#fff;
-    text-decoration: none;
-    margin: 0 15px;
-}
-header .nav a.active{
-    border-bottom: 3px solid #ff8000;
-}
-header .user{
-    cursor: default;
-    margin-right: 50px;
-}
-header .user span{
+.user{
     cursor: pointer;
+    position: absolute;
+    padding:10px 30px;
+    right: 0;
+    top: 10px;
+    z-index: 15;
+}
+header .user svg{
+    z-index: 2;
+    position: relative;
+}
+header .user svg path{
     transition: 300ms;
 }
+/* header .user:hover svg path{
+    fill:#ff8000;
+} */
+
+
 .profileLink.active, header .user span:hover, .profileLink:hover{
     color: #ff8000;
 }
+            
 .loginModal{
-    background-color: #3F4B64;
+    background-color: #e67e22;
     color: #fff;
     position: absolute;
-    top: 74px;
+    top: 0;
     overflow: hidden;
     right: 0;
     z-index: 11;

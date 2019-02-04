@@ -1,76 +1,30 @@
-.BurgersList {
-    position: absolute;
-    left: 0;
-}
 .BurgersList ul{
     position: relative;
     padding: 0;
-    margin: 95px 0 0;
-    width: 170px;
+    margin:0;
 }
 .BurgersList ul li{
-    transform: translateX(-260px);
-    position: absolute;
+    border: 2px solid #fff;
+    border-radius: 50%;
     position: relative;
-    display: flex;
-    border: 1px solid #fff;
+    display: inline-block;
     justify-content: flex-end;
     align-items: center;
-    height: 50px;
-    margin: 0 auto;
+    height: 15px;
+    margin: 5px;
     cursor: pointer;
-    width: 300px;
+    width: 15px;
     transition: 500ms;
 }
-.BurgersList ul li:nth-child(1){
-    background-color: #01295f;
-}
-.BurgersList ul li:nth-child(2){
-    background-color: #437f97;
-}
-.BurgersList ul li:nth-child(3){
-    background-color: #849324;
-}
-.BurgersList ul li:nth-child(4){
-    background-color: #ffb30f;
-}
-.BurgersList ul li:nth-child(5){
-    background-color: #fd151b;
-}
-.BurgersList ul li:hover{
-    transform: translateX(-200px);
-}
-.BurgersList ul li .circle{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding-right: 15px; */
-    /* background-color: #fff; */
-    color: #fff;
-    font-size: 24px;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-}
-.BurgersList ul li span.hidden{
-    opacity: 0;
-    pointer-events: none;
-}
 .close-btn{
-    /* background-color: #C51212; */
-    height: 30px;
-    width: 30px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    position: absolute;
-    top: 15px;
+    height: 50px;
+    width: 70px;
     border-radius: 50%;
-    right: 100px;
     padding: 5px;
+    transition: 300ms;
 }
 .BurgersList ul li.current{
-    background-color: #e0de42;
+    background-color: #fff;
 }
 .BurgersList ul li .Burger{
     margin: 0;
@@ -80,15 +34,4 @@
 .BurgersList ul li .Burger p{
     font-size: 7px;
     margin: 5px;
-}
-.add-burger-btn{
-    border:1px solid #fff;
-    border-left: 0;
-    font-weight: 700;
-    width: 43px;
-    height: 50px;
-    padding: 0;
-    margin: 0;
-    left: -0;
-    position: absolute;
 }

@@ -1,6 +1,6 @@
 .home{
     position: relative;
-    background-color: #6da34d;
+    z-index: 99;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -8,6 +8,24 @@
     flex-direction: column;
     text-align: center;
     color: #fff;
+}
+.left-curtain{
+    position: absolute;
+    background-color: rgb(121, 16, 20);
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    transition: 300ms;
+}
+.right-curtain{
+    position: absolute;
+    background-color: rgb(121, 16, 20);
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    transition: 300ms;
 }
 #main_logo{
     position: absolute;

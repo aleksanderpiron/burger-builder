@@ -4,7 +4,15 @@
     background-color: #2589bd;
     text-align: center;
     overflow: hidden;
-    padding-top: 30px;
+    width: 100%;
+    height: 100%;
+}
+.orderHistoryBody{
+    width: 100%;
+    height: 90%;
+    overflow-y: scroll;
+    padding-right: 17px; 
+    box-sizing: content-box;
 }
 .orderHistory .close-btn{
     position: absolute;
@@ -77,9 +85,4 @@
 .historyItem .ingredients .burgerIngList{
     width: 45%;
     margin-bottom: 10px;
-}
-.orderHistoryBody{
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
 }

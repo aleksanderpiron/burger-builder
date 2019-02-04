@@ -1,6 +1,7 @@
 import React from 'react';
 import BurgerControl from './BurgerControl/BurgerControl';
 import Button from '../../Tools/Button/Button';
+import BurgersList from '../BurgersList/BurgersList';
 import './BurgerControls.css';
 
 const BurgerControls = (props) => {
@@ -16,6 +17,7 @@ const BurgerControls = (props) => {
 
 	return(
 		<div className="controls">
+			
 			<h2>Ingredients</h2>
 				{controls.map(ctrl=>(
 					<BurgerControl
@@ -27,6 +29,8 @@ const BurgerControls = (props) => {
 					 amount={ctrl.amount}
 						/>
 					))}
+					<h2>Burgers</h2>
+					<BurgersList />
 			<h3>Total price: {props.price} $</h3>
 			<p className="error-message">{localStorage.getItem('token') === null?'To order you have to login!':null}</p>
 			<Button btnType="success" clicked={props.nextStep} id="orderBtn" disableBtn={!props.canOrder}>Next step</Button>

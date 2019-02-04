@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './BurgerBuilder.css'
 import BurgerControls from '../../components/Burger/BurgerControls/BurgerControls';
-import BurgersList from '../../components/Burger/BurgersList/BurgersList';
 import OrderHistory from '../OrderHistory/OrderHistory'
 import BurgersPreview from '../../components/Burger/BurgersPreview/BurgersPreview';
 import Summary from '../../components/Burger/Summary/Summary';
 import Checkout from '../Checkout/Checkout';
 import Button from '../../components/Tools/Button/Button'
+import HomePage from '../../components/HomePage/HomePage'
 import {connect} from 'react-redux';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 import * as actionsList from '../../store/actions';
 
 class BurgerBuilder extends Component{
@@ -19,31 +19,27 @@ class BurgerBuilder extends Component{
 		shownBurger:1,
 		orderHistory:false,
 		newOrder:false,
+		homepage:true
 	}
 
 	updateCanOrderState (ingredients){
-		let amount = 0;
-		const sum = Object.keys(ingredients).map(igKey => {
+		let amountTable = [];
+		let itemAmount;
+		Object.keys(ingredients).map((igKey, ind) => {
+			itemAmount = 0;
 			Object.values(ingredients[igKey]).map((item, index)=>{
-				amount = amount+item;
-				return item;
+				itemAmount = itemAmount+item;
+				amountTable[ind] = itemAmount;
 			})
-			return sum;
-		})
-		if(amount>0 && this.props.logged){
-			return true;
-		}
-		else if(amount === 0){
-			return false;
-		}
+		});
+		let canGo = true;
+		amountTable.map(it=>{
+			if(it === 0){
+				canGo = false;
+			}
+		});
+		return canGo;
 	}
-
-	// switchBurger=(pointedBurger)=>{
-	// 	const newShownBurger = pointedBurger.substr(pointedBurger.length - 1);
-	// 	console.log(newShownBurger);
-	// 	this.setState({shownBurger:newShownBurger});
-	// }
-
 	nextStepHandler=()=>{
       let newStep = this.state.step;
 			newStep++;
@@ -94,12 +90,12 @@ class BurgerBuilder extends Component{
 
 		let leftContent =
         <div className="step-one">
-						<CSSTransition classNames={'fade'} mountOnEnter unmountOnExit timeout={300} in={!this.state.orderHistory && !this.state.newOrder}>
+						<CSSTransition classNames={'fade'} mountOnEnter unmountOnExit timeout={1200} in={!this.state.orderHistory && !this.state.newOrder}>
 							<div>
 								<p>Start</p>
 								<Button clicked={()=>{this.toggleState('newOrder')}} btnType={'success'}>New order</Button>
 								<p>or</p>
-								<Button btnType={'info'} clicked={()=>{this.toggleState('orderHistory')}}>Show order 	history</Button>
+								<Button btnType={'info'} disableBtn={!this.props.logged} clicked={()=>{this.toggleState('orderHistory')}}>Show order history</Button>
 								<p>to repeat past order</p>
 							</div>
 						</CSSTransition>
@@ -139,20 +135,14 @@ class BurgerBuilder extends Component{
 				}
 		return(
 			<React.Fragment>
+				{/* <HomePage enabled={this.state.homepage}/> */}
 				<div className={this.state.fullScreenPart?'curtain away-pos':this.state.curtainState?'curtain left-pos':'curtain'}>
-					<BurgersPreview currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />
-					{this.state.newOrder?
-						<BurgersList
-						burgers={this.props.allIngredients}
-						shownBurger={this.state.shownBurger}
-						/>
-						:null}
-					
+					<BurgersPreview currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />		
 				</div>
-        <div className="step-box flex-box">
-						{leftContent}
-            {rightContent}
-        </div>
+        		<div className="step-box flex-box">
+					{leftContent}
+            		{rightContent}
+       			</div>
 			</React.Fragment>
 			);
 	}

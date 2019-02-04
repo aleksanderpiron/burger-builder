@@ -1,4 +1,5 @@
-#main{
+main{
+  height: 100vh;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -10,12 +11,18 @@
 .flex-box > div{
   width: 50%;
   color: #fff;
-  min-height: calc(100vh - 74px);
+  height: 100%;
 }
 h2{
   margin-top: 0;
 }
+.step-box{
+  height: 100%;
+}
 .step-box > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   position: relative;
 }
@@ -64,14 +71,13 @@ h2{
   left: 1000px;
 }
 .step-one{
-  padding-top: 200px;
-  background-color: #0d1b1e;
+  background-color: #34495e;
 }
 .step-two{
-  background-color: #ffa482;
+  background-color: #e74c3c;
 }
 .step-three{
-  background-color: #8db955;
+  background-color: #A3CB38;
   width: 100%!important;
   transition: 300ms;
 }
@@ -80,6 +86,10 @@ h2{
   opacity: 0;
 }
 .fade-enter-active{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   opacity: 1;
   transition: 500ms;
 }
@@ -87,6 +97,10 @@ h2{
   opacity: 1;
 }
 .fade-exit-active{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   opacity: 0;
   transition: 300ms;
 }
@@ -125,5 +139,22 @@ h2{
 }
 .slide-up-exit-active{
   top:100%;
+  transition: 500ms;
+}
+/* CURTAIN OPEN */
+.curtain-open-enter{
+  width:100%;
+}
+.curtain-open-enter-active{
+  width:100%;
+}
+.curtain-open-enter-done{
+  width:100%;
+}
+.curtain-open-exit{
+  width:0;
+}
+.curtain-open-exit-active{
+  width:100%;
   transition: 500ms;
 }
