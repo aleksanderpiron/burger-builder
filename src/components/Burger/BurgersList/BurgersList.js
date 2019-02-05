@@ -15,22 +15,22 @@ const BurgersList =(props)=>{
                 key={obj[0]}
                 id={obj[0]}
                 className={obj[0] === props.currentBurger?'current':null}>
-                    
+
                 </li>
             </CSSTransition>
         )
     });
     return(
         <div className="BurgersList">
-            <Button disableBtn={props.disableAddingButton} clicked={props.addBurger} btnType="success">Add burger</Button>
-            <div
-            className={Object.values(props.burgers).length === 1?'hidden':null}
-            onClick={()=>props.removeBurger(props.currentBurger)}>
-                <img className="close-btn" src={bin} alt=""/>
-            </div>
             <TransitionGroup component="ul">
                 {BurgersListBody}
             </TransitionGroup>
+            <Button disableBtn={props.disableAddingButton} clicked={props.addBurger} btnType="success">Add burger</Button>
+            <div
+            className={Object.values(props.burgers).length === 1?'hidden':null}
+            >
+                <img onClick={()=>props.removeBurger(props.currentBurger)} className="close-btn" src={bin} alt=""/>
+            </div>
         </div>
     )
 }

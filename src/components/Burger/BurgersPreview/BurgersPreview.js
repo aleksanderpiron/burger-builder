@@ -8,14 +8,14 @@ const BurgersPreview=(props)=>{
         let currentBrg = props.currentBurger;
         currentBrg = currentBrg.substr(currentBrg.length - 1);
         burgerId = parseInt(burgerId);
-        if(currentBrg > burgerId){
-            thisClass = 'left';
-        }
-        if(currentBrg < burgerId){
-            thisClass = 'right';
+        let positon = (currentBrg - burgerId) * 1500;
+
+        const itemStyle = {
+            left: positon,
+            top: 100,
         }
         return (
-            <div key={item[0]+"Preview"} className={thisClass+" BurgersPreviewItem"}>
+            <div style={itemStyle} id={item[0]+"Preview"} key={item[0]+"Preview"} className={thisClass+" BurgersPreviewItem"}>
                 <p>{item[0].split('_').join(' #')}</p>
                 <Burger positionClass={thisClass} ingredients={item[1]} />
             </div>

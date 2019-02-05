@@ -304,11 +304,12 @@ const reducer=(state=initialState, actions)=>{
         }
         const updatedburgersIngredients = {
             ...state.burgersIngredients,
-            [newBurgerName]: newBurgerBody
+            [newBurgerName]: newBurgerBody,
         }
         return {
             ...state,
-            burgersIngredients: updatedburgersIngredients
+            burgersIngredients: updatedburgersIngredients,
+            currentBurger: newBurgerName
         };
 
         case actionsList.REMOVE_BURGER:
@@ -409,6 +410,34 @@ const reducer=(state=initialState, actions)=>{
             return {
                 ...state,
                 loginModalShowed: !state.loginModalShowed
+            };
+        case actionsList.REORDER:
+            console.log(actions.reorderData)
+            const reorderData = actions.reorderData;
+            const newCheckoutForm = {...state.checkoutForm};
+            newCheckoutForm.address.value = reorderData.userData.address;
+            newCheckoutForm.city.value = reorderData.userData.city;
+            newCheckoutForm.message.value = reorderData.userData.message;
+            newCheckoutForm.name.value = reorderData.userData.name;
+            newCheckoutForm.phone.value = reorderData.userData.phone;
+            newCheckoutForm.email.value = reorderData.userData.email;
+            newCheckoutForm.address.touched = true;
+            newCheckoutForm.city.touched = true;
+            newCheckoutForm.message.touched = true;
+            newCheckoutForm.name.touched = true;
+            newCheckoutForm.phone.touched = true;
+            newCheckoutForm.email.touched = true;
+            newCheckoutForm.address.valid = true;
+            newCheckoutForm.city.valid = true;
+            newCheckoutForm.message.valid = true;
+            newCheckoutForm.name.valid = true;
+            newCheckoutForm.phone.valid = true;
+            newCheckoutForm.email.valid = true;
+            return {
+                ...state,
+                burgersIngredients:reorderData.ingredients,
+                totalPrice: reorderData.totalPrice,
+                checkoutForm: newCheckoutForm
             };
 
             default:

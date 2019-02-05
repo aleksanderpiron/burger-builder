@@ -25,8 +25,9 @@
 	cursor: pointer;
 	margin: 0 5px;
 	color:#fff;
-	font-size: 15px;
+	font-size: 16px;
 	border: none;
+	text-transform: capitalize;
 	border-radius: 50%;
 	height: 25px;
 	width: 25px;
@@ -34,7 +35,7 @@
 	transition: 300ms;
 }
 .BurgerControl .more{
-	background-color: #32A306;
+	background-color: #6da34d;
 }
 .BurgerControl .less{
 	background-color: #C51212;

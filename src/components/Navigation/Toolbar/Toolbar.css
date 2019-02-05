@@ -36,12 +36,14 @@ header .user svg path{
 .profileLink.active, header .user span:hover, .profileLink:hover{
     color: #ff8000;
 }
-            
 .loginModal{
     background-color: #e67e22;
     color: #fff;
     position: absolute;
     top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
     right: 0;
     z-index: 11;
@@ -52,8 +54,7 @@ header .user svg path{
 }
 .loginModal .Login{
     width: 65%;
-    margin: 200px auto 0;
-    
+    margin: auto;
 }
 .loginModal input{
     box-shadow: none;

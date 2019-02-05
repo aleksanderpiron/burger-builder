@@ -1,7 +1,7 @@
 .BurgersList ul{
     position: relative;
     padding: 0;
-    margin:0;
+    margin:10px 0 0;
 }
 .BurgersList ul li{
     border: 2px solid #fff;
@@ -20,8 +20,12 @@
     height: 50px;
     width: 70px;
     border-radius: 50%;
-    padding: 5px;
+    padding-top: 20px;
     transition: 300ms;
+    cursor: pointer;
+}
+.hidden{
+    display: none;
 }
 .BurgersList ul li.current{
     background-color: #fff;
@@ -34,4 +38,7 @@
 .BurgersList ul li .Burger p{
     font-size: 7px;
     margin: 5px;
+}
+.BurgersList button{
+    margin-top: 10px;
 }

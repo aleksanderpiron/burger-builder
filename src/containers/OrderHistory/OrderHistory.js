@@ -5,7 +5,8 @@ import Login from '../../containers/Login/Login';
 import axios from '../../axiosOrders';
 import './OrderHistory.css';
 import { connect } from 'react-redux';
-import cross from '../../assets/img/close.svg'
+import cross from '../../assets/img/close.svg';
+import * as actionsList from '../../store/actions';
 
 class OrderHistory extends Component{
     state = {
@@ -38,6 +39,19 @@ class OrderHistory extends Component{
             else{
                 this.setState({loading:false});
             }
+        });
+    }
+
+    reorderHandler=(event)=>{
+        const user = localStorage.getItem('userId');
+        let address = event.target.parentElement.parentElement.id;
+        address = 'orders/'+user+'/'+address+'.json';
+        axios.get(address).then(response=>{
+            this.props.reorder(response.data);
+            this.props.nextStep();
+        })
+        .catch(err=>{
+            console.log(err);
         });
     }
 
@@ -98,6 +112,7 @@ class OrderHistory extends Component{
                         </div>
                         <div className="button">
                             <Button clicked={this.removeOneHandler} btnType="danger">Remove</Button>
+                            <Button clicked={this.reorderHandler} btnType="info">Reorder</Button>
                         </div>
                     </div>
                 )
@@ -127,4 +142,9 @@ const mapStateToProps=state=>{
         logged:state.logged
     }
 }
-export default connect(mapStateToProps)(OrderHistory);
+const mapDispatchToProps=dispatch=>{
+    return{
+        reorder:(reorderData)=>{dispatch({type:actionsList.REORDER, reorderData:reorderData})}
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(OrderHistory);

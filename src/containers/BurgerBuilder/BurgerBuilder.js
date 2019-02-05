@@ -46,17 +46,17 @@ class BurgerBuilder extends Component{
 			if(this.state.step === 2){
       this.setState(prevState=>{
         return {
-					 fullScreenPart:true,					
-           step:newStep }
+			fullScreenPart:true,
+           	step:newStep}
 			})
 		}else{
 			this.setState(prevState=>{
         return {
-          curtainState: !prevState.curtainState,
-           step:newStep}
+          	curtainState: !prevState.curtainState,
+          	step:newStep}
 			})
 		}
-			
+
 	}
   prevStepHandler=()=>{
     let newStep = this.state.step;
@@ -64,7 +64,7 @@ class BurgerBuilder extends Component{
 		if(this.state.step === 3){
       this.setState(prevState=>{
         return {
-					 fullScreenPart:false,					
+					 fullScreenPart:false,
            step:newStep }
 			})
 		}else{
@@ -111,7 +111,7 @@ class BurgerBuilder extends Component{
 							/>
 						</CSSTransition>
 						<CSSTransition classNames={'slide-up'} mountOnEnter unmountOnExit timeout={500} in={this.state.orderHistory}>
-							<OrderHistory close={this.toggleState} />
+							<OrderHistory nextStep={this.nextStepHandler} close={this.toggleState} />
 						</CSSTransition>
 				</div>;
 
@@ -137,7 +137,7 @@ class BurgerBuilder extends Component{
 			<React.Fragment>
 				{/* <HomePage enabled={this.state.homepage}/> */}
 				<div className={this.state.fullScreenPart?'curtain away-pos':this.state.curtainState?'curtain left-pos':'curtain'}>
-					<BurgersPreview currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />		
+					<BurgersPreview currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />
 				</div>
         		<div className="step-box flex-box">
 					{leftContent}

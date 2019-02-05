@@ -1,4 +1,8 @@
 .controls{
     width: 300px;
     margin:0 auto;
+	position: relative;
+}
+h3{
+    margin: 20px 0 20px;
 }
