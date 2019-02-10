@@ -20,6 +20,10 @@
     right: 0;
     top: 10px;
     z-index: 15;
+    color: #fff;
+}
+.user span{
+    transition: 300ms;
 }
 header .user svg{
     z-index: 2;
@@ -28,14 +32,7 @@ header .user svg{
 header .user svg path{
     transition: 300ms;
 }
-/* header .user:hover svg path{
-    fill:#ff8000;
-} */
 
-
-.profileLink.active, header .user span:hover, .profileLink:hover{
-    color: #ff8000;
-}
 .loginModal{
     background-color: #e67e22;
     color: #fff;

@@ -1,5 +1,6 @@
 .checkout-page {
     text-align: center;
     width: 70%;
+    max-width: 500px;
     margin: 0 auto;
 }

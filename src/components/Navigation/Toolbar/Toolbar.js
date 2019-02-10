@@ -2,17 +2,17 @@ import React from 'react';
 import './Toolbar.css';
 import {NavLink} from 'react-router-dom';
 import Login from '../../../containers/Login/Login';
+import UserProfile from '../../../containers/UserProfile/UserProfile';
 import logo from '../../../assets/img/logo.svg';
 import * as actionsList from '../../../store/actions';
 import {connect} from 'react-redux';
-// import userImg from '../../../assets/img/user.svg';
 
 const Toolbar=(props)=>{
     let userEmail = localStorage.getItem('userEmail');
     let topContent = null;
 
     if(userEmail !== null){
-        topContent = <div><NavLink className="profileLink" to="/profile">{userEmail}</NavLink> <span className="orange">|</span> <span onClick={props.logout}>Logout</span></div>;
+        topContent = <div><span onClick={props.toggleModal} className="profileLink">{userEmail}</span> <span className="orange">|</span> <span onClick={props.logout}>Logout</span></div>;
     }
     return(
     <React.Fragment>
@@ -22,7 +22,7 @@ const Toolbar=(props)=>{
         </span>}
         </div>
         <div className={props.loginModalShowed?'loginModal active':'loginModal'}>
-            <Login />
+            {props.logged?<UserProfile />:<Login />}
         </div>
     </React.Fragment>
     )

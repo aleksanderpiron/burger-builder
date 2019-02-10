@@ -19,7 +19,7 @@ class UserProfile extends Component{
         axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/deleteAccount?key=AIzaSyB1euGeZQ8S4E2FBzsowQn8wK_UriQg9-U', userId).then(response=>{
             console.log(response);
         }).catch(err=>{
-            console.log(err);
+            console.log(err.response);
         });
 
         // axios.delete('https://burgerbuilder-949ce.firebaseio.com/orders/'+userId+'.json').then(response=>{
@@ -42,7 +42,7 @@ class UserProfile extends Component{
         axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key=AIzaSyB1euGeZQ8S4E2FBzsowQn8wK_UriQg9-U', dataToSend).then(response=>{
             console.log(response);
         }).catch(err=>{
-            console.log(err);
+            console.log(err.response);
         });
     }
     switchStateValue=(targetName)=>{

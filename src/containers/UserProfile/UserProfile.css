@@ -1,11 +1,15 @@
 #userProfile .sidebar{
-    width: 30%;
+    margin: 0 30px;
+    width: 40%;
     word-wrap: break-word;
     padding-right: 25px;
     border-right: 1px solid #ccc;
 }
+#userProfile .flex-box{
+    flex-wrap: nowrap;
+}
 #userProfile .options{
-    width: 65%;
+    width: 55%;
     padding-left: 20px;
 }
 #userProfile .options span{

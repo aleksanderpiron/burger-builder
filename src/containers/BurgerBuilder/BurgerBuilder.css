@@ -77,9 +77,12 @@ h2{
   background-color: #e74c3c;
 }
 .step-three{
-  background-color: #A3CB38;
+  background-color: #34495e;
   width: 100%!important;
   transition: 300ms;
+}
+.step-three .check:after{
+  background-color: #34495e;
 }
 /* ANIMATIONS */
 .fade-enter{
