@@ -21,7 +21,7 @@ class BurgerBuilder extends Component{
 		newOrder:false,
 		homepage:true
 	}
-
+	
 	updateCanOrderState (ingredients){
 		let amountTable = [];
 		let itemAmount;
@@ -76,18 +76,18 @@ class BurgerBuilder extends Component{
 		}
 	}
 	swipeBurgerHandler=(event)=>{
-		console.log(event.direction);
-		let newCurrentBurgerId = this.props.currentBurger.substr(this.props.currentBurger.length - 1);
+		const burgersList = Object.keys(this.props.allIngredients);
+		let newCurrentBurgerId = burgersList.indexOf(this.props.currentBurger);
 		if(event.direction === 2){
 			newCurrentBurgerId--;
 		}else if(event.direction === 4){
 			newCurrentBurgerId++;
 		}
-		const newCurrentBurger = 'burger_'+newCurrentBurgerId;
+		const newCurrentBurger = burgersList[newCurrentBurgerId];
 		this.props.switchBurger(newCurrentBurger);
 }
 	isMobileHandler=()=>{
-		if(window.innerWidth < 991){
+		if(window.innerWidth < 768){
 			return true;
 		}
 		else{
@@ -103,12 +103,14 @@ class BurgerBuilder extends Component{
 
 	render(){
 		const isMobile = this.isMobileHandler();
-		console.log(isMobile);
-		let disabledButtons = {...this.props.ingredients};
-		for(let key in disabledButtons){
-			disabledButtons[key] = disabledButtons[key] <= 0;
+		let disabledPlusButtons = {...this.props.ingredients};
+		let disabledMinusButtons = {...this.props.ingredients};
+		for(let key in disabledPlusButtons){
+			disabledPlusButtons[key] = disabledPlusButtons[key] >= this.props.ingLimits[key];
 		}
-
+		for(let key in disabledMinusButtons){
+			disabledMinusButtons[key] = disabledMinusButtons[key] <= 0;
+		}
 		let leftContent =
         <div className={this.state.step === 1?"step-one current":"step-one"}>
 						<CSSTransition classNames={'fade'} mountOnEnter unmountOnExit timeout={1200} in={!this.state.orderHistory && !this.state.newOrder}>
@@ -127,7 +129,9 @@ class BurgerBuilder extends Component{
 								nextStep={this.nextStepHandler}
 								close={this.toggleState}
 								canOrder={this.updateCanOrderState(this.props.allIngredients)}
-								price={this.props.totalPrice} disabledBtns={disabledButtons}
+								price={this.props.totalPrice}
+								disabledPlusBtns={disabledPlusButtons}
+								disabledMinusBtns={disabledMinusButtons}
 								addHandler={this.props.addIngredientHandler}
 								removeHandler={this.props.removeIngredientHandler}
 								ingredients={this.props.allIngredients[this.props.currentBurger]}
@@ -179,6 +183,7 @@ const mapStateToProps = (state) =>{
 		logged: state.logged,
 		currentBurger: state.currentBurger,
 		totalPrice: state.totalPrice,
+		ingLimits : state.INGREDIENT_LIMITS
 	}
 }
 const mapDispatchToProps = (dispatch) =>{

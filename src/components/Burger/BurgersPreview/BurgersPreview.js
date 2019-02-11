@@ -15,19 +15,19 @@ const BurgersPreview=(props)=>{
             left: positon,
         };
         return (
-            <Hammer onSwipe={props.swipe}>
                 <div style={itemStyle} id={item[0]+"Preview"} key={item[0]+"Preview"} className={thisClass+" BurgersPreviewItem"}>
                     <p>{item[0].split('_').join(' #')}</p>
                     <Burger positionClass={thisClass} ingredients={item[1]} />
                 </div>
-            </Hammer>
         );
     })
 
     return(
-        <div className="BurgersPreview">
-            {burgerPreviewContent}
-        </div>
+        <Hammer onSwipe={props.swipe}>
+            <div className="BurgersPreview">
+                {burgerPreviewContent}
+            </div>
+        </Hammer>
     )
 
 }

@@ -6,8 +6,8 @@ const BurgerControl = (props) => (
 			<div className="ing-label">{props.label}</div>
 			<div className="ing-amount">{props.amount>0?'x'+props.amount:null}</div>
 			<div className="ing-buttons">
-				<button onClick={props.add} className="more">+</button>
-				<button onClick={props.remove} className="less" disabled={props.disable}>-</button>
+				<button onClick={props.add} className="more" disabled={props.disablePlus}>+</button>
+				<button onClick={props.remove} className="less" disabled={props.disableMinus}>-</button>
 			</div>
 		</div>
 	)

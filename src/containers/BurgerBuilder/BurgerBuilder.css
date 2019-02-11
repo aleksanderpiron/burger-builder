@@ -157,7 +157,7 @@ h2{
   width:100%;
   transition: 500ms;
 }
-@media (max-width:991px){
+@media (max-width:768px){
   h3{
     margin: 10px 0!important;
   }
@@ -165,7 +165,7 @@ h2{
     display: none;
   }
   .step-one .BurgersPreview .BurgersPreviewItem{
-    top: 10px;
+    top: 60px;
     margin: 0 auto;
   }
   .step-one .BurgersPreview .BurgersPreviewItem .Burger p{
@@ -182,10 +182,23 @@ h2{
   }
   .step-one .controls{
     position: absolute;
-    bottom: 10px;
+    bottom: 0;
+    padding-bottom: 30px;
+    margin: 0 auto 10px;
     left: 0;
     right: 0;
     /* margin: 380px auto 0; */
+  }
+  .BurgersPreviewItem p:first-child{
+    display: none;
+  }
+  .step-one .controls .close-btn{
+    position: absolute;
+    right: -20px;
+    top: 0;
+  }
+  .step-one .controls h2{
+    display: none;
   }
   .step-one .controls .next-step-btn, .step-one .controls .prev-step-btn{
     position: absolute;

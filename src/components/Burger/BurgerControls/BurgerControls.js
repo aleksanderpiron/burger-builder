@@ -22,7 +22,8 @@ const BurgerControls = (props) => {
 					<BurgerControl
 					 add={()=> props.addHandler(ctrl.type)}
 					 remove={()=> props.removeHandler(ctrl.type)}
-					 disable={props.disabledBtns[ctrl.type]}
+					 disablePlus={props.disabledPlusBtns[ctrl.type]}
+					 disableMinus={props.disabledMinusBtns[ctrl.type]}
 					 key={ctrl.label}
 					 label={ctrl.label}
 					 amount={ctrl.amount}

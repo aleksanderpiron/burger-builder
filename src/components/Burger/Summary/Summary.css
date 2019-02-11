@@ -1,6 +1,11 @@
 .Summary{
+	height: 90%;
 	width:70%;
 	margin:0 auto;
+}
+.Summary .Summary-list{
+	overflow: auto;
+	max-height: 60%;
 }
 .Summary ul{
 	padding: 0;

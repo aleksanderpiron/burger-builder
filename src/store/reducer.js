@@ -8,14 +8,6 @@ const INGREDIENT_PRICES = {
 	salad: 0.3
 }
 
-const INGREDIENT_LIMITS = {
-    tomato: 3,
-	meat: 2,
-	cheese: 4,
-	bacon: 3,
-	salad: 3
-}
-
 let newTotalPrice = null;
 let ingPrice = null;
 let validationPassed;
@@ -25,6 +17,13 @@ let emailCheckout = localStorage.getItem('userEmail') !==null?localStorage.getIt
 
 
 const initialState ={
+    INGREDIENT_LIMITS:{
+        tomato: 3,
+        meat: 2,
+        cheese: 4,
+        bacon: 3,
+        salad: 3
+    },
     burgersIngredients:{
         burger_1: {
             bacon: 0,
@@ -249,7 +248,7 @@ const reducer=(state=initialState, actions)=>{
             updatedBurgerIng = {...state.burgersIngredients[state.currentBurger]};
             updatedBurgerIng[actions.ingName] = updatedBurgerIng[actions.ingName] + 1;
 
-            if(state.burgersIngredients[state.currentBurger][actions.ingName] < INGREDIENT_LIMITS[actions.ingName]){
+            if(state.burgersIngredients[state.currentBurger][actions.ingName] < state.INGREDIENT_LIMITS[actions.ingName]){
                 return{
                     ...state,
                     burgersIngredients:{
