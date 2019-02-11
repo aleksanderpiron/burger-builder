@@ -111,8 +111,8 @@ class OrderHistory extends Component{
                             <p>Total price: {obj[1].totalPrice} $</p>
                         </div>
                         <div className="button">
+                            <Button clicked={this.reorderHandler} btnType="success">Reorder</Button>
                             <Button clicked={this.removeOneHandler} btnType="danger">Remove</Button>
-                            <Button clicked={this.reorderHandler} btnType="info">Reorder</Button>
                         </div>
                     </div>
                 )

@@ -40,9 +40,10 @@
     text-align: center;
 }
 .orderHistory Button{
-    margin:0 auto;
+    margin:5px auto;
     display: block;
 }
+
 .historyItem{
     padding-bottom: 10px;
     width: 350px;

@@ -5,6 +5,7 @@ body {
   padding: 0;
   font-family: 'roboto';
   background-color: #34495e;
+  overflow: hidden;
 }
 .orange{
   color: #ff8000;
