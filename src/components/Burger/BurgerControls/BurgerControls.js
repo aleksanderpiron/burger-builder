@@ -31,8 +31,8 @@ const BurgerControls = (props) => {
 					<BurgersList />
 			<h3>Total price: {props.price} $</h3>
 			<p className="error-message">{localStorage.getItem('token') === null?'To order you have to login!':null}</p>
-			<Button btnType="success" clicked={props.nextStep} id="orderBtn" disableBtn={!props.canOrder}>Next step</Button>
-			<Button btnType="info" clicked={()=>props.close('newOrder')} id="orderBtn">Back</Button>
+			<Button customClass="next-step-btn" btnType="success" clicked={props.nextStep} id="orderBtn" disableBtn={!props.canOrder}>Next step</Button>
+			<Button customClass="prev-step-btn" btnType="info" clicked={()=>props.close('newOrder')} id="orderBtn">Back</Button>
 		</div>
 	)
 	}

@@ -4,10 +4,6 @@ main{
   margin: 0 auto;
   position: relative;
 }
-.flex-box{
-  display: flex;
-  justify-content: space-between;
-}
 .flex-box > div{
   width: 50%;
   color: #fff;
@@ -44,7 +40,7 @@ h2{
 .curtain.away-pos{
   right: -50%;
 }
-.curtain .BurgersPreviewItem{
+.BurgersPreviewItem{
   margin: 100px auto 0;
   transition: 500ms;
   top: 100px;
@@ -54,20 +50,20 @@ h2{
   align-items: center;
   flex-direction: column;
 }
-.curtain .BurgersPreviewItem p{
+.BurgersPreviewItem p{
   text-align: center;
   font-size: 18px;
   font-weight: 700;
   text-transform: capitalize;
 }
-.curtain .BurgersPreviewItem.active{
+.BurgersPreviewItem.active{
   left: 0;
   right: 0;
 }
-.curtain .BurgersPreviewItem.left{
+.BurgersPreviewItem.left{
   left: -1000px;
 }
-.curtain .BurgersPreviewItem.right{
+.BurgersPreviewItem.right{
   left: 1000px;
 }
 .step-one{
@@ -157,4 +153,80 @@ h2{
 .curtain-open-exit-active{
   width:100%;
   transition: 500ms;
+}
+@media (max-width:991px){
+  h3{
+    margin: 10px 0!important;
+  }
+  .curtain{
+    display: none;
+  }
+  .step-one .BurgersPreview .BurgersPreviewItem{
+    top: 10px;
+    margin: 0 auto;
+  }
+  .step-one .BurgersPreview .BurgersPreviewItem .Burger p{
+    font-size: 12px;
+    margin: 10px auto;
+  }
+  .step-one .BurgersPreview .Burger{
+    margin: 0;
+    width: 250px!important;
+    height: 150px!important;
+  }
+  .BurgersList ul{
+    display: none;
+  }
+  .step-one .controls{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    /* margin: 380px auto 0; */
+  }
+  .step-one .controls .next-step-btn, .step-one .controls .prev-step-btn{
+    position: absolute;
+    bottom: 0;
+  }
+  .step-one .controls .next-step-btn{
+    right: 0;
+  }
+  .step-one .controls .prev-step-btn{
+    left: 0;
+  }
+  .step-box > div{
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+  }
+  .step-box > div.current{
+    right: 0;
+  }
+  .btn{
+    font-size: 16px;
+  }
+  .curtain.left-pos{
+    right: 0;
+    top: -50%;
+  }
+  .loginModal{
+    width: 100%;
+  }
+}
+@media (max-width:500px){
+  .curtain .BurgersPreviewItem .Burger{
+    margin: 10px;
+    height: 180px;
+    width: 330px;
+  }
+  .curtain .BurgersPreviewItem{
+    top: 20px;
+  }
+  .curtain .BurgersPreviewItem p{
+    font-size: 12px;
+    max-width: 280px;
+  }
 }
