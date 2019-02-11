@@ -1,5 +1,6 @@
 import React from 'react';
 import Burger from '../Burger';
+import Hammer from 'react-hammerjs';
 
 const BurgersPreview=(props)=>{
     const burgerPreviewContent = Object.entries(props.allIngredients).map(item=>{
@@ -12,13 +13,14 @@ const BurgersPreview=(props)=>{
 
         const itemStyle = {
             left: positon,
-            top: 100,
-        }
+        };
         return (
-            <div style={itemStyle} id={item[0]+"Preview"} key={item[0]+"Preview"} className={thisClass+" BurgersPreviewItem"}>
-                <p>{item[0].split('_').join(' #')}</p>
-                <Burger positionClass={thisClass} ingredients={item[1]} />
-            </div>
+            <Hammer onSwipe={props.swipe}>
+                <div style={itemStyle} id={item[0]+"Preview"} key={item[0]+"Preview"} className={thisClass+" BurgersPreviewItem"}>
+                    <p>{item[0].split('_').join(' #')}</p>
+                    <Burger positionClass={thisClass} ingredients={item[1]} />
+                </div>
+            </Hammer>
         );
     })
 

@@ -75,6 +75,25 @@ class BurgerBuilder extends Component{
 			})
 		}
 	}
+	swipeBurgerHandler=(event)=>{
+		console.log(event.direction);
+		let newCurrentBurgerId = this.props.currentBurger.substr(this.props.currentBurger.length - 1);
+		if(event.direction === 2){
+			newCurrentBurgerId--;
+		}else if(event.direction === 4){
+			newCurrentBurgerId++;
+		}
+		const newCurrentBurger = 'burger_'+newCurrentBurgerId;
+		this.props.switchBurger(newCurrentBurger);
+}
+	isMobileHandler=()=>{
+		if(window.innerWidth < 991){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 	toggleState=(target)=>{
 		const updated = {...this.state};
@@ -83,13 +102,15 @@ class BurgerBuilder extends Component{
 	}
 
 	render(){
+		const isMobile = this.isMobileHandler();
+		console.log(isMobile);
 		let disabledButtons = {...this.props.ingredients};
 		for(let key in disabledButtons){
 			disabledButtons[key] = disabledButtons[key] <= 0;
 		}
 
 		let leftContent =
-        <div className="step-one">
+        <div className={this.state.step === 1?"step-one current":"step-one"}>
 						<CSSTransition classNames={'fade'} mountOnEnter unmountOnExit timeout={1200} in={!this.state.orderHistory && !this.state.newOrder}>
 							<div>
 								<p>Start</p>
@@ -100,15 +121,18 @@ class BurgerBuilder extends Component{
 							</div>
 						</CSSTransition>
 						<CSSTransition classNames={'fade-left'} mountOnEnter unmountOnExit timeout={500} in={this.state.newOrder}>
-							<BurgerControls
-							nextStep={this.nextStepHandler}
-							close={this.toggleState}
-							canOrder={this.updateCanOrderState(this.props.allIngredients)}
-							price={this.props.totalPrice} disabledBtns={disabledButtons}
-							addHandler={this.props.addIngredientHandler}
-							removeHandler={this.props.removeIngredientHandler}
-							ingredients={this.props.allIngredients[this.props.currentBurger]}
-							/>
+							<div>
+								{isMobile?<BurgersPreview swipe={this.swipeBurgerHandler} currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />:null}
+								<BurgerControls
+								nextStep={this.nextStepHandler}
+								close={this.toggleState}
+								canOrder={this.updateCanOrderState(this.props.allIngredients)}
+								price={this.props.totalPrice} disabledBtns={disabledButtons}
+								addHandler={this.props.addIngredientHandler}
+								removeHandler={this.props.removeIngredientHandler}
+								ingredients={this.props.allIngredients[this.props.currentBurger]}
+								/>
+							</div>
 						</CSSTransition>
 						<CSSTransition classNames={'slide-up'} mountOnEnter unmountOnExit timeout={500} in={this.state.orderHistory}>
 							<OrderHistory nextStep={this.nextStepHandler} close={this.toggleState} />
@@ -116,7 +140,7 @@ class BurgerBuilder extends Component{
 				</div>;
 
     let rightContent =
-        <div className="step-two">
+        <div className={this.state.step === 2?"step-two current":"step-two"}>
 						<Summary
 						price={this.props.totalPrice}
 						ingredients={this.props.allIngredients}
@@ -126,7 +150,7 @@ class BurgerBuilder extends Component{
 				</div>;
         if(this.state.step>2){
           leftContent =
-          <div className="step-three">
+          <div className={this.state.step === 3?"step-three current":"step-three"}>
             <Checkout prevStep={this.prevStepHandler} />
           </div>;
 				}
@@ -137,10 +161,10 @@ class BurgerBuilder extends Component{
 			<React.Fragment>
 				{/* <HomePage enabled={this.state.homepage}/> */}
 				<div className={this.state.fullScreenPart?'curtain away-pos':this.state.curtainState?'curtain left-pos':'curtain'}>
-					<BurgersPreview currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />
+					<BurgersPreview swipe={this.swipeBurgerHandler} currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />
 				</div>
         		<div className="step-box flex-box">
-					{leftContent}
+								{leftContent}
             		{rightContent}
        			</div>
 			</React.Fragment>
@@ -162,6 +186,7 @@ const mapDispatchToProps = (dispatch) =>{
 		addIngredientHandler:(ingName)=> dispatch({type: actionsList.ADD_INGREDIENT, ingName:ingName, }),
 		removeIngredientHandler:(ingName)=> dispatch({type: actionsList.REMOVE_INGREDIENT, ingName:ingName}),
 		addBurger:()=> dispatch({type: actionsList.ADD_BURGER}),
+		switchBurger: (pointedBurger)=>{dispatch({type:actionsList.SWITCH_BURGER, pointedBurger:pointedBurger})}
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);
