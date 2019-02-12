@@ -21,7 +21,7 @@ class BurgerBuilder extends Component{
 		newOrder:false,
 		homepage:true
 	}
-	
+
 	updateCanOrderState (ingredients){
 		let amountTable = [];
 		let itemAmount;
@@ -107,19 +107,20 @@ class BurgerBuilder extends Component{
 		let disabledMinusButtons = {...this.props.ingredients};
 		for(let key in disabledPlusButtons){
 			disabledPlusButtons[key] = disabledPlusButtons[key] >= this.props.ingLimits[key];
-		}
+		};
 		for(let key in disabledMinusButtons){
 			disabledMinusButtons[key] = disabledMinusButtons[key] <= 0;
-		}
+		};
 		let leftContent =
         <div className={this.state.step === 1?"step-one current":"step-one"}>
 						<CSSTransition classNames={'fade'} mountOnEnter unmountOnExit timeout={1200} in={!this.state.orderHistory && !this.state.newOrder}>
 							<div>
 								<p>Start</p>
-								<Button clicked={()=>{this.toggleState('newOrder')}} btnType={'success'}>New order</Button>
+								<Button clicked={()=>{this.toggleState('newOrder');}} btnType={'success'}>New order</Button>
 								<p>or</p>
 								<Button btnType={'info'} disableBtn={!this.props.logged} clicked={()=>{this.toggleState('orderHistory')}}>Show order history</Button>
 								<p>to repeat past order</p>
+								<p className="by">Created By Aleksander Piron</p>
 							</div>
 						</CSSTransition>
 						<CSSTransition classNames={'fade-left'} mountOnEnter unmountOnExit timeout={500} in={this.state.newOrder}>
@@ -135,6 +136,7 @@ class BurgerBuilder extends Component{
 								addHandler={this.props.addIngredientHandler}
 								removeHandler={this.props.removeIngredientHandler}
 								ingredients={this.props.allIngredients[this.props.currentBurger]}
+								toggleModal={this.props.toggleModal}
 								/>
 							</div>
 						</CSSTransition>
@@ -183,7 +185,8 @@ const mapStateToProps = (state) =>{
 		logged: state.logged,
 		currentBurger: state.currentBurger,
 		totalPrice: state.totalPrice,
-		ingLimits : state.INGREDIENT_LIMITS
+		ingLimits : state.INGREDIENT_LIMITS,
+		loginModalShowed: state.loginModalShowed
 	}
 }
 const mapDispatchToProps = (dispatch) =>{
@@ -191,7 +194,8 @@ const mapDispatchToProps = (dispatch) =>{
 		addIngredientHandler:(ingName)=> dispatch({type: actionsList.ADD_INGREDIENT, ingName:ingName, }),
 		removeIngredientHandler:(ingName)=> dispatch({type: actionsList.REMOVE_INGREDIENT, ingName:ingName}),
 		addBurger:()=> dispatch({type: actionsList.ADD_BURGER}),
-		switchBurger: (pointedBurger)=>{dispatch({type:actionsList.SWITCH_BURGER, pointedBurger:pointedBurger})}
+		switchBurger: (pointedBurger)=>{dispatch({type:actionsList.SWITCH_BURGER, pointedBurger:pointedBurger})},
+		toggleModal:()=>dispatch({type: actionsList.TOGGLE_LOGIN_MODAL}),
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);

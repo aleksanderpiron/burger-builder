@@ -80,6 +80,12 @@ h2{
 .step-three .check:after{
   background-color: #34495e;
 }
+.by{
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  font-size: 10px;
+}
 /* ANIMATIONS */
 .fade-enter{
   opacity: 0;

@@ -101,7 +101,7 @@ class Checkout extends Component{
             checkoutBody = <p>Something went wrong!</p>;
             buttons = null;
         }
-        if(localStorage.getItem('token') === null){
+        if(localStorage.getItem('token') === null && this.props.logged){
             checkoutBody = <div><p class="text-center">You have to be logged to see orders history!</p>
                 <Login />
                  </div>
@@ -120,6 +120,7 @@ const mapStateToProps = (state) =>{
 		ingredients: state.burgersIngredients,
         totalPrice: state.totalPrice,
         formData: state.checkoutForm,
+        logged: state.logged
 	}
 }
 
