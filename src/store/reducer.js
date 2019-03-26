@@ -406,7 +406,6 @@ const reducer=(state=initialState, actions)=>{
             };
 
         case actionsList.TOGGLE_LOGIN_MODAL:
-        console.log(actions.toggleTo);
             if(actions.toggleTo === true || actions.toggleTo === false){
                 return{
                     ...state,
@@ -444,7 +443,7 @@ const reducer=(state=initialState, actions)=>{
                 ...state,
                 burgersIngredients:reorderData.ingredients,
                 totalPrice: reorderData.totalPrice,
-                checkoutForm: newCheckoutForm
+                checkoutForm: newCheckoutForm,
             };
 
             default:

@@ -32,7 +32,7 @@ class UserProfile extends Component{
 
     }
     changeEmailHandler=()=>{
-        
+
     }
     changePasswordHandler=()=>{
         const dataToSend = {
@@ -95,15 +95,12 @@ class UserProfile extends Component{
         }
         return(
             <div id="userProfile" className="wrapper">
-                <div className="flex-box">
-                    <div className="sidebar">
-                        <h3>Your data: </h3>
-                        <p>Email: {userEmail}</p>
-                        <p>Id: {userId}</p>
-                        <p>Expiration time of current session: {userExpiration}</p>
-                    </div>
-                    {optionsBody}
+                <div className="sidebar">
+                    <h3>Your are logged as: </h3>
+                    <p>Email: {userEmail}</p>
+                    <p>Id: {userId}</p>
                 </div>
+                <Button clicked={this.props.logout} btnType="danger">Logout</Button>
             </div>
         )
     }

@@ -99,7 +99,7 @@ class BurgerBuilder extends Component{
 		updated[target] = !updated[target];
 		this.setState(updated);
 	}
-		
+
 	render(){
 		const isMobile = this.isMobileHandler();
 		let disabledPlusButtons = {...this.props.ingredients};
@@ -110,6 +110,11 @@ class BurgerBuilder extends Component{
 		for(let key in disabledMinusButtons){
 			disabledMinusButtons[key] = disabledMinusButtons[key] <= 0;
 		};
+		if(this.state.step > 1 && !this.state.newOrder){
+			this.setState({
+				newOrder:true,
+				orderHistory:false})
+		}
 		if(!this.state.newOrder && !this.props.loginModalShowed){
 			this.props.toggleModal(true);
 		}else if(this.state.newOrder && this.props.loginModalShowed){
@@ -124,7 +129,6 @@ class BurgerBuilder extends Component{
 								<p>or</p>
 								<Button btnType={'info'} disableBtn={!this.props.logged} clicked={()=>{this.toggleState('orderHistory')}}>Show order history</Button>
 								<p>to repeat past order</p>
-								<p className="by">Created By Aleksander Piron</p>
 							</div>
 						</CSSTransition>
 						<CSSTransition classNames={'fade-left'} mountOnEnter unmountOnExit timeout={500} in={this.state.newOrder}>
@@ -167,18 +171,19 @@ class BurgerBuilder extends Component{
 				if(this.state.fullScreenPart){
 					rightContent = null;
 				}
-				
+
 		return(
 			<React.Fragment>
 				{/* <HomePage enabled={this.state.homepage}/> */}
 				<div className={this.state.fullScreenPart?'curtain away-pos':this.state.curtainState?'curtain left-pos':'curtain'}>
-					<CSSTransition classNames={'fade-right'} mountOnEnter unmountOnExit timeout={500} in={this.state.newOrder}>
+					<CSSTransition classNames={'fade-down'} mountOnEnter unmountOnExit timeout={500} in={this.state.newOrder}>
 						<BurgersPreview swipe={this.swipeBurgerHandler} currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />
 					</CSSTransition>
 				</div>
         	<div className="step-box flex-box">
 							{leftContent}
-          		{rightContent}
+							{rightContent}
+							<p className="by">Created By Aleksander Piron</p>
        		</div>
 			</React.Fragment>
 			);

@@ -1,6 +1,5 @@
 import React from 'react';
 import './Toolbar.css';
-import {NavLink} from 'react-router-dom';
 import Login from '../../../containers/Login/Login';
 import UserProfile from '../../../containers/UserProfile/UserProfile';
 import * as actionsList from '../../../store/actions';
@@ -16,6 +15,9 @@ const Toolbar=(props)=>{
     return(
     <React.Fragment>
         <div className={props.loginModalShowed?'loginModal active':'loginModal'}>
+            <div className={'title-page'}>
+				<h1>BURGER <span>BUILDER</span></h1>
+			</div>
             {props.logged?<UserProfile />:<Login />}
         </div>
     </React.Fragment>

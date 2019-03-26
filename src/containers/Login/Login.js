@@ -73,9 +73,6 @@ class Login extends Component {
         }
         return(
             <div className="Login">
-                <div className={'title-page'}>
-					<h1>BURGER <span>BUILDER</span></h1>
-				</div>
                 {loginContent}
             </div>
         )

@@ -49,6 +49,7 @@ class OrderHistory extends Component{
         axios.get(address).then(response=>{
             this.props.reorder(response.data);
             this.props.nextStep();
+            this.props.toggleModal(false);
         })
         .catch(err=>{
             console.log(err);
@@ -144,7 +145,8 @@ const mapStateToProps=state=>{
 }
 const mapDispatchToProps=dispatch=>{
     return{
-        reorder:(reorderData)=>{dispatch({type:actionsList.REORDER, reorderData:reorderData})}
+        reorder:(reorderData)=>{dispatch({type:actionsList.REORDER, reorderData:reorderData})},
+		toggleModal:(toggleTo)=>{dispatch({type: actionsList.TOGGLE_LOGIN_MODAL, toggleTo:toggleTo})},
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(OrderHistory);

@@ -24,6 +24,7 @@ h2{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  z-index: -1;
 }
 .title-page h1{
   margin-left: -50px;
@@ -106,7 +107,15 @@ h2{
   position: absolute;
   bottom: 0;
   left: 10px;
-  font-size: 10px;
+  font-size: 8px;
+  color:#fff;
+}
+.error-notification{
+  position:absolute;
+  right:0;
+  left:0;
+  margin:auto;
+  color:#ec0000;
 }
 /* ANIMATIONS */
 .fade-enter{
@@ -150,23 +159,23 @@ h2{
   transform: translateX(-100px);
   transition: 300ms;
 }
-/* FADE RIGHT */
-.fade-right-enter{
+/* FADE DOWN */
+.fade-down-enter{
   opacity: 0;
-  transform: translateX(100px);
+  transform: translateY(100px);
 }
-.fade-right-enter-active{
+.fade-down-enter-active{
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
   transition: 500ms;
 }
-.fade-right-exit{
+.fade-down-exit{
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
-.fade-right-exit-active{
+.fade-down-exit-active{
   opacity: 0;
-  transform: translateX(100px);
+  transform: translateY(100px);
   transition: 300ms;
 }
 /* SLIDE UP */
