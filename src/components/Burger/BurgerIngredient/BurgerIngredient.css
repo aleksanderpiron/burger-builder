@@ -10,7 +10,7 @@
 .BreadTop {
     height: 36%;
     width: 80%;
-    background: linear-gradient(#bc581e, #e27b36);
+    background: linear-gradient(#f87d36, #eb7527);
     border-radius: 50% 50% 0 0;
     box-shadow: inset -15px 0 #c15711;
     margin: 0 auto;
@@ -93,10 +93,22 @@
     width: 85%;
     height: 4%;
     margin: 0 auto;
-    background: linear-gradient(#f4d004, #d6bb22);
+    background-color: #f4d004;
     border-radius: 20px;
+    position: relative;
 }
+.Cheese::after{
+    content: "";
+    background-image: url('../../../assets/img/cheese.svg');
+    background-size: cover;
+    display:block;
+    position: absolute;
+    bottom: -35px;
+    width: 50px;
+    height: 50px;
+    right: 50px;
 
+}
 .Salad {
     width: 85%;
     height: 7%;

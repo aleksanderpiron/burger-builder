@@ -15,6 +15,28 @@ h2{
 .step-box{
   height: 100%;
 }
+.title-page{
+  position: absolute;
+  top: -220px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.title-page h1{
+  margin-left: -50px;
+  max-width: 300px;
+  text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 70px;
+  line-height: 1.1;
+  color: #fff;
+}
+.title-page h1 span{
+  padding-left: 60px;
+}
 .step-box > div{
   display: flex;
   justify-content: center;
@@ -126,6 +148,25 @@ h2{
 .fade-left-exit-active{
   opacity: 0;
   transform: translateX(-100px);
+  transition: 300ms;
+}
+/* FADE RIGHT */
+.fade-right-enter{
+  opacity: 0;
+  transform: translateX(100px);
+}
+.fade-right-enter-active{
+  opacity: 1;
+  transform: translateX(0);
+  transition: 500ms;
+}
+.fade-right-exit{
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-right-exit-active{
+  opacity: 0;
+  transform: translateX(100px);
   transition: 300ms;
 }
 /* SLIDE UP */

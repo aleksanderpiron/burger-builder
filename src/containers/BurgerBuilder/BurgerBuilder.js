@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import './BurgerBuilder.css'
+import './BurgerBuilder.css';
 import BurgerControls from '../../components/Burger/BurgerControls/BurgerControls';
-import OrderHistory from '../OrderHistory/OrderHistory'
+import OrderHistory from '../OrderHistory/OrderHistory';
 import BurgersPreview from '../../components/Burger/BurgersPreview/BurgersPreview';
 import Summary from '../../components/Burger/Summary/Summary';
 import Checkout from '../Checkout/Checkout';
-import Button from '../../components/Tools/Button/Button'
-import HomePage from '../../components/HomePage/HomePage'
+import Button from '../../components/Tools/Button/Button';
 import {connect} from 'react-redux';
 import {CSSTransition} from 'react-transition-group';
 import * as actionsList from '../../store/actions';
@@ -100,7 +99,7 @@ class BurgerBuilder extends Component{
 		updated[target] = !updated[target];
 		this.setState(updated);
 	}
-
+		
 	render(){
 		const isMobile = this.isMobileHandler();
 		let disabledPlusButtons = {...this.props.ingredients};
@@ -110,6 +109,11 @@ class BurgerBuilder extends Component{
 		};
 		for(let key in disabledMinusButtons){
 			disabledMinusButtons[key] = disabledMinusButtons[key] <= 0;
+		};
+		if(!this.state.newOrder && !this.props.loginModalShowed){
+			this.props.toggleModal(true);
+		}else if(this.state.newOrder && this.props.loginModalShowed){
+			this.props.toggleModal(false);
 		};
 		let leftContent =
         <div className={this.state.step === 1?"step-one current":"step-one"}>
@@ -163,16 +167,19 @@ class BurgerBuilder extends Component{
 				if(this.state.fullScreenPart){
 					rightContent = null;
 				}
+				
 		return(
 			<React.Fragment>
 				{/* <HomePage enabled={this.state.homepage}/> */}
 				<div className={this.state.fullScreenPart?'curtain away-pos':this.state.curtainState?'curtain left-pos':'curtain'}>
-					<BurgersPreview swipe={this.swipeBurgerHandler} currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />
+					<CSSTransition classNames={'fade-right'} mountOnEnter unmountOnExit timeout={500} in={this.state.newOrder}>
+						<BurgersPreview swipe={this.swipeBurgerHandler} currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />
+					</CSSTransition>
 				</div>
-        		<div className="step-box flex-box">
-								{leftContent}
-            		{rightContent}
-       			</div>
+        	<div className="step-box flex-box">
+							{leftContent}
+          		{rightContent}
+       		</div>
 			</React.Fragment>
 			);
 	}
@@ -195,7 +202,7 @@ const mapDispatchToProps = (dispatch) =>{
 		removeIngredientHandler:(ingName)=> dispatch({type: actionsList.REMOVE_INGREDIENT, ingName:ingName}),
 		addBurger:()=> dispatch({type: actionsList.ADD_BURGER}),
 		switchBurger: (pointedBurger)=>{dispatch({type:actionsList.SWITCH_BURGER, pointedBurger:pointedBurger})},
-		toggleModal:()=>dispatch({type: actionsList.TOGGLE_LOGIN_MODAL}),
+		toggleModal:(toggleTo)=>dispatch({type: actionsList.TOGGLE_LOGIN_MODAL, toggleTo:toggleTo}),
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);

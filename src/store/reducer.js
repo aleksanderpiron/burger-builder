@@ -406,12 +406,20 @@ const reducer=(state=initialState, actions)=>{
             };
 
         case actionsList.TOGGLE_LOGIN_MODAL:
-            return {
-                ...state,
-                loginModalShowed: !state.loginModalShowed
+        console.log(actions.toggleTo);
+            if(actions.toggleTo === true || actions.toggleTo === false){
+                return{
+                    ...state,
+                    loginModalShowed:actions.toggleTo
+                }
+            }
+            else{
+                return {
+                    ...state,
+                    loginModalShowed: !state.loginModalShowed
+                }
             };
         case actionsList.REORDER:
-            console.log(actions.reorderData)
             const reorderData = actions.reorderData;
             const newCheckoutForm = {...state.checkoutForm};
             newCheckoutForm.address.value = reorderData.userData.address;

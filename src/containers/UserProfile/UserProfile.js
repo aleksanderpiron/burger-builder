@@ -3,6 +3,8 @@ import './UserProfile.css';
 import axios from 'axios';
 import Button from '../../components/Tools/Button/Button';
 import Input from '../../components/Tools/Input/Input';
+import * as actionsList from '../../store/actions';
+import {connect} from 'react-redux';
 
 class UserProfile extends Component{
     state = {
@@ -61,6 +63,7 @@ class UserProfile extends Component{
                 <span onClick={()=>this.switchStateValue('changeEmail')}>Change e-mail</span>
                 <span onClick={()=>this.switchStateValue('changePassword')}>Change password</span>
                 <span onClick={()=>this.switchStateValue('deleteAccound')}>Delete account</span>
+                <span onClick={this.props.logout}>Log out</span>
             </div>
         )
         if(this.state.changeEmail){
@@ -105,5 +108,16 @@ class UserProfile extends Component{
         )
     }
 }
-
-export default UserProfile;
+const mapStateToProps = (state) =>{
+	return{
+        logged: state.logged,
+        loginModalShowed: state.loginModalShowed
+	}
+}
+const mapDispatchToProps = (dispatch) =>{
+	return{
+        logout:()=>dispatch({type: actionsList.LOGOUT}),
+        toggleModal:()=>dispatch({type: actionsList.TOGGLE_LOGIN_MODAL}),
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
