@@ -31,10 +31,8 @@ const BurgerControls = (props) => {
 					))}
 					<BurgersList />
 			<h3>Total price: {props.price} $</h3>
-			<p className="error-notification">{localStorage.getItem('token') === null?'To order you have to login!':null}</p>
 			<Button customClass="next-step-btn" btnType="success" clicked={props.nextStep} id="orderBtn" disableBtn={!props.canOrder}>Next step</Button>
 			<Button customClass="prev-step-btn" btnType="info" clicked={()=>props.close('newOrder')} id="orderBtn">Back</Button>
-			{!props.canOrder?<p class="error-notification">All burgers must have at least one ingredient</p>:null}
 		</div>
 	)
 	}

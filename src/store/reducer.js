@@ -406,7 +406,9 @@ const reducer=(state=initialState, actions)=>{
             };
 
         case actionsList.TOGGLE_LOGIN_MODAL:
-            if(actions.toggleTo === true || actions.toggleTo === false){
+        console.log('A');
+        if(actions.toggleTo === true || actions.toggleTo === false){
+            console.log('B');
                 return{
                     ...state,
                     loginModalShowed:actions.toggleTo

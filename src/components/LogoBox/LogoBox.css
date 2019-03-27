@@ -1,0 +1,13 @@
+.logoBox{
+    position: absolute;
+    top: 0;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #c5090e ;
+    width: 25%;
+    height: 100%;
+    /* border-bottom-left-radius: 15px; */
+    /* border-bottom-right-radius: 15px; */
+}

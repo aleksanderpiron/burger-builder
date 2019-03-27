@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Layout from './components/Layout/Layout';
-import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
 import { connect } from 'react-redux';
-import HomePage from './components/HomePage/HomePage';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import * as actionsList from './store/actions';
 
 class App extends Component {
@@ -15,35 +13,10 @@ class App extends Component {
     this.checkIfLogged();
   }
   render() {
-    let routes = (
-      <Switch>
-        <Route path="/burger-builder" exact component={Layout}/>
-        <Route path="/order-history" exact component={Layout}/>
-        <Route path="/checkout" exact component={Layout}/>
-        <Route path="/profile" exact component={Layout}/>
-        <Route path="/" exact component={HomePage}/>
-        <Redirect to="/"/>
-      </Switch>
-    )
-    if(this.props.logged){
-      routes= (
-      <Switch>
-        <Route path="/burger-builder" exact component={Layout}/>
-        <Route path="/order-history" exact component={Layout}/>
-        <Route path="/checkout" exact component={Layout}/>
-        <Route path="/profile" exact component={Layout}/>
-        <Route path="/" exact component={HomePage}/>
-        <Redirect to="/"/>
-      </Switch>
-      )
-    }
-
     return (
-      <BrowserRouter>
-        <div className="App">
-            {routes}
-        </div>
-      </BrowserRouter>
+      <div className="App">
+        <BurgerBuilder />
+      </div>
     );
   }
 }

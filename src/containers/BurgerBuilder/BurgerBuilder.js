@@ -6,9 +6,12 @@ import BurgersPreview from '../../components/Burger/BurgersPreview/BurgersPrevie
 import Summary from '../../components/Burger/Summary/Summary';
 import Checkout from '../Checkout/Checkout';
 import Button from '../../components/Tools/Button/Button';
+import LoginModal from '../../components/LoginModal/LoginModal';
 import {connect} from 'react-redux';
 import {CSSTransition} from 'react-transition-group';
 import * as actionsList from '../../store/actions';
+import NotificationBox from '../../components/Tools/NotificationBox/NotificationBox';
+import LogoBox from '../../components/LogoBox/LogoBox';
 
 class BurgerBuilder extends Component{
 	state = {
@@ -18,7 +21,19 @@ class BurgerBuilder extends Component{
 		shownBurger:1,
 		orderHistory:false,
 		newOrder:false,
-		homepage:true
+		errorsList:{
+			loginErr:{
+				status:false,
+				errMessage:'To finish order you have to be logged! Click here to login!',
+				errType:'red',
+				clickFunction:()=>{this.props.toggleModal(true)},
+			},
+			IngErr:{
+				status:false,
+				errMessage:'All burgers must have at least one ingredient!',
+				errType:'orange',
+			},
+		}
 	}
 
 	updateCanOrderState (ingredients){
@@ -39,6 +54,7 @@ class BurgerBuilder extends Component{
 		});
 		return canGo;
 	}
+
 	nextStepHandler=()=>{
       let newStep = this.state.step;
 			newStep++;
@@ -55,8 +71,8 @@ class BurgerBuilder extends Component{
           	step:newStep}
 			})
 		}
-
 	}
+
   prevStepHandler=()=>{
     let newStep = this.state.step;
     newStep--;
@@ -74,6 +90,7 @@ class BurgerBuilder extends Component{
 			})
 		}
 	}
+
 	swipeBurgerHandler=(event)=>{
 		const burgersList = Object.keys(this.props.allIngredients);
 		let newCurrentBurgerId = burgersList.indexOf(this.props.currentBurger);
@@ -84,13 +101,60 @@ class BurgerBuilder extends Component{
 		}
 		const newCurrentBurger = burgersList[newCurrentBurgerId];
 		this.props.switchBurger(newCurrentBurger);
-}
+	}
+
 	isMobileHandler=()=>{
 		if(window.innerWidth < 768){
 			return true;
 		}
 		else{
 			return false;
+		}
+	}
+
+	errorsMessagesHandler=()=>{
+		if(!this.updateCanOrderState(this.props.allIngredients) && !this.state.errorsList.IngErr.status){
+			this.setState({
+				errorsList:{
+					...this.state.errorsList,
+					IngErr:{
+						...this.state.errorsList.IngErr,
+						status:true
+					}
+				}
+			})
+		}else if(this.updateCanOrderState(this.props.allIngredients) && this.state.errorsList.IngErr.status){
+			this.setState({
+				errorsList:{
+					...this.state.errorsList,
+					IngErr:{
+						...this.state.errorsList.IngErr,
+						status:false
+					}
+				}
+			})
+		}
+
+		if(!this.props.logged && !this.state.errorsList.loginErr.status){
+			this.setState({
+				errorsList:{
+					...this.state.errorsList,
+					loginErr:{
+						...this.state.errorsList.loginErr,
+						status:true
+					}
+				}
+			})
+		}else if(this.props.logged && this.state.errorsList.loginErr.status){
+			this.setState({
+				errorsList:{
+					...this.state.errorsList,
+					loginErr:{
+						...this.state.errorsList.loginErr,
+						status:false
+					}
+				}
+			})
 		}
 	}
 
@@ -101,6 +165,7 @@ class BurgerBuilder extends Component{
 	}
 
 	render(){
+		this.errorsMessagesHandler();
 		const isMobile = this.isMobileHandler();
 		let disabledPlusButtons = {...this.props.ingredients};
 		let disabledMinusButtons = {...this.props.ingredients};
@@ -117,17 +182,15 @@ class BurgerBuilder extends Component{
 		}
 		if(!this.state.newOrder && !this.props.loginModalShowed){
 			this.props.toggleModal(true);
-		}else if(this.state.newOrder && this.props.loginModalShowed){
-			this.props.toggleModal(false);
-		};
+		}
 		let leftContent =
         <div className={this.state.step === 1?"step-one current":"step-one"}>
 						<CSSTransition classNames={'fade'} mountOnEnter unmountOnExit timeout={1200} in={!this.state.orderHistory && !this.state.newOrder}>
 							<div>
 								<p>Start</p>
-								<Button clicked={()=>{this.toggleState('newOrder');}} btnType={'success'}>New order</Button>
+								<Button clicked={()=>{this.toggleState('newOrder'); this.props.toggleModal(false)}} btnType={'success'}>New order</Button>
 								<p>or</p>
-								<Button btnType={'info'} disableBtn={!this.props.logged} clicked={()=>{this.toggleState('orderHistory')}}>Show order history</Button>
+								<Button btnType={'info'} disableBtn={!this.props.logged} clicked={()=>{this.toggleState('orderHistory');}}>Show order history</Button>
 								<p>to repeat past order</p>
 							</div>
 						</CSSTransition>
@@ -174,17 +237,21 @@ class BurgerBuilder extends Component{
 
 		return(
 			<React.Fragment>
-				{/* <HomePage enabled={this.state.homepage}/> */}
+				<LoginModal newOrder={this.state.newOrder}/>
+				<LogoBox/>
 				<div className={this.state.fullScreenPart?'curtain away-pos':this.state.curtainState?'curtain left-pos':'curtain'}>
 					<CSSTransition classNames={'fade-down'} mountOnEnter unmountOnExit timeout={500} in={this.state.newOrder}>
 						<BurgersPreview swipe={this.swipeBurgerHandler} currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />
 					</CSSTransition>
 				</div>
-        	<div className="step-box flex-box">
-							{leftContent}
-							{rightContent}
-							<p className="by">Created By Aleksander Piron</p>
-       		</div>
+        <div className="step-box flex-box">
+						<CSSTransition classNames={'slide-right'} mountOnEnter unmountOnExit timeout={1200} in={this.state.newOrder}>
+							<NotificationBox toggleModal={this.props.toggleModal} errorsList={this.state.errorsList}/>
+						</CSSTransition>
+						{leftContent}
+						{rightContent}
+						<p className="by">Created By Aleksander Piron</p>
+       	</div>
 			</React.Fragment>
 			);
 	}

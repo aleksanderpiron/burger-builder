@@ -1,0 +1,43 @@
+.notiBox{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 50%;
+    list-style: none;
+}
+.notification{
+    max-width: 300px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    background-color: #ccc;
+}
+.notification .icon{
+    display: block;
+    background-color: #999;
+    min-width: 62px;
+    min-height: 62px;
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.notification .text{
+    padding: 0 20px;
+    color: #fff;
+    font-size: 14px;
+    /* max-width: 0; */
+}
+.notification.red{
+    background-color: #e82929;
+}
+.notification.red .icon{
+    background-color: #C51212;
+    background-image: url('../../../assets/img/user.svg');
+}
+.notification.orange{
+    background-color: #f78d2e;
+}
+.notification.orange .icon{
+    background-color: #e67e22;
+    background-image: url('../../../assets/img/warning.svg');
+}

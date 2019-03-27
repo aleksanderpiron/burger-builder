@@ -1,13 +1,13 @@
 import React from 'react';
-import './Toolbar.css';
-import Login from '../../../containers/Login/Login';
-import UserProfile from '../../../containers/UserProfile/UserProfile';
-import * as actionsList from '../../../store/actions';
+import Login from '../../containers/Login/Login';
+import './LoginModal.css';
+import UserProfile from '../../containers/UserProfile/UserProfile';
+import * as actionsList from '../../store/actions';
 import {connect} from 'react-redux';
 
-const Toolbar=(props)=>{
-    let userEmail = localStorage.getItem('userEmail');
+const LoginModal=(props)=>{
     let topContent = null;
+    let userEmail = localStorage.getItem('userEmail');
 
     if(userEmail !== null){
         topContent = <div><span onClick={props.toggleModal} className="profileLink">{userEmail}</span> <span className="orange">|</span> <span onClick={props.logout}>Logout</span></div>;
@@ -15,10 +15,8 @@ const Toolbar=(props)=>{
     return(
     <React.Fragment>
         <div className={props.loginModalShowed?'loginModal active':'loginModal'}>
-            <div className={'title-page'}>
-				<h1>BURGER <span>BUILDER</span></h1>
-			</div>
             {props.logged?<UserProfile />:<Login />}
+            {props.newOrder?<button className="closeModalBtn" onClick={()=>{props.toggleModal(false)}}></button>:null}
         </div>
     </React.Fragment>
     )
@@ -36,4 +34,4 @@ const mapDispatchToProps = (dispatch) =>{
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
