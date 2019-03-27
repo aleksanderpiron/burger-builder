@@ -26,7 +26,6 @@ const BurgersPreview=(props)=>{
         <Hammer onSwipe={props.swipe}>
             <div className="BurgersPreview">
                 {burgerPreviewContent}
-                <p className="info">You can also use swipe to change burgers</p>
             </div>
         </Hammer>
     )

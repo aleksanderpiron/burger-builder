@@ -2,7 +2,7 @@
     z-index: 1;
     position: absolute;
     top: 0;
-    right: 50%;
+    right: 0;
     list-style: none;
 }
 .notification{
@@ -11,6 +11,11 @@
     display: flex;
     align-items: center;
     background-color: #ccc;
+    transition: 300ms;
+    transform: translateX(240px);
+}
+.notification:hover{
+    transform: translateX(0);
 }
 .notification .icon{
     display: block;
@@ -40,4 +45,11 @@
 .notification.orange .icon{
     background-color: #e67e22;
     background-image: url('../../../assets/img/warning.svg');
+}
+.notification.blue{
+    background-color: #2589bd;
+}
+.notification.blue .icon{
+    background-color: #136592;
+    background-image: url('../../../assets/img/info.svg');
 }

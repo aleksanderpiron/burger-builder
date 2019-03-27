@@ -10,11 +10,14 @@ const Notification=(props)=>{
         case 'orange':
             notiClasses = "notification orange";
         break;
+        case 'blue':
+            notiClasses = "notification blue";
+        break;
         default:
             return notiClasses;
     }
     return(
-		<CSSTransition classNames={'slide-right'} mountOnEnter unmountOnExit timeout={1200} in={props.visible}>
+		<CSSTransition classNames={'slide-right'} unmountOnExit timeout={1200} in={props.visible}>
             <div className={notiClasses} onClick={props.clicked}>
                 <div className="icon"></div>
                 <div className="text">

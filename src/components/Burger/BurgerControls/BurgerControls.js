@@ -31,7 +31,7 @@ const BurgerControls = (props) => {
 					))}
 					<BurgersList />
 			<h3>Total price: {props.price} $</h3>
-			<Button customClass="next-step-btn" btnType="success" clicked={props.nextStep} id="orderBtn" disableBtn={!props.canOrder}>Next step</Button>
+			<Button customClass="next-step-btn" btnType="success" clicked={props.nextStep} id="orderBtn" disableBtn={!props.canOrder || !props.logged}>Next step</Button>
 			<Button customClass="prev-step-btn" btnType="info" clicked={()=>props.close('newOrder')} id="orderBtn">Back</Button>
 		</div>
 	)

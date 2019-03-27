@@ -14,8 +14,7 @@ const BurgersList =(props)=>{
                 onClick={()=>props.switchBurger(obj[0])}
                 key={obj[0]}
                 id={obj[0]}
-                className={obj[0] === props.currentBurger?'current':null}>
-
+                className={obj[0] === props.currentBurger?()=>{obj.classList.add('current')}:()=>{obj.classList.remove('current')}}>
                 </li>
             </CSSTransition>
         )
@@ -27,8 +26,7 @@ const BurgersList =(props)=>{
             </TransitionGroup>
             <Button disableBtn={props.disableAddingButton} clicked={props.addBurger} btnType="success">Add burger</Button>
             <div
-            className={Object.values(props.burgers).length === 1?'hidden':null}
-            >
+            className={Object.values(props.burgers).length === 1?'hidden':null}>
                 <img onClick={()=>props.removeBurger(props.currentBurger)} className="close-btn" src={bin} alt=""/>
             </div>
         </div>

@@ -21,19 +21,26 @@ class BurgerBuilder extends Component{
 		shownBurger:1,
 		orderHistory:false,
 		newOrder:false,
-		errorsList:{
-			loginErr:{
+		notificationListLeft:{
+			login:{
 				status:false,
-				errMessage:'To finish order you have to be logged! Click here to login!',
-				errType:'red',
+				notiMessage:'To finish order you have to be logged! Click here to login!',
+				notiType:'red',
 				clickFunction:()=>{this.props.toggleModal(true)},
 			},
-			IngErr:{
+			Ing:{
 				status:false,
-				errMessage:'All burgers must have at least one ingredient!',
-				errType:'orange',
+				notiMessage:'All burgers must have at least one ingredient!',
+				notiType:'orange',
 			},
-		}
+		},
+		notificationListRight:{
+			swipe:{
+				status:false,
+				notiMessage:'You can also swipe to change current burger!',
+				notiType:'blue',
+			},
+		},
 	}
 
 	updateCanOrderState (ingredients){
@@ -41,17 +48,24 @@ class BurgerBuilder extends Component{
 		let itemAmount;
 		Object.keys(ingredients).map((igKey, ind) => {
 			itemAmount = 0;
-			Object.values(ingredients[igKey]).map((item, index)=>{
+			Object.values(ingredients[igKey]).map((item)=>{
 				itemAmount = itemAmount+item;
 				amountTable[ind] = itemAmount;
 			})
 		});
 		let canGo = true;
-		amountTable.map(it=>{
+		let allBurgersDots = document.querySelectorAll('.BurgersList ul li');
+		amountTable.map((it, index)=>{
 			if(it === 0){
 				canGo = false;
 			}
+			if(it > 0){
+				allBurgersDots[index].classList.add('correct');
+				console.log('added to '+index);
+			}
 		});
+		// console.log(allBurgersDots);
+		// console.log(amountTable);
 		return canGo;
 	}
 
@@ -112,45 +126,66 @@ class BurgerBuilder extends Component{
 		}
 	}
 
-	errorsMessagesHandler=()=>{
-		if(!this.updateCanOrderState(this.props.allIngredients) && !this.state.errorsList.IngErr.status){
+	notificationStatusHandler=()=>{
+		if(!this.updateCanOrderState(this.props.allIngredients) && !this.state.notificationListLeft.Ing.status  && this.state.newOrder){
 			this.setState({
-				errorsList:{
-					...this.state.errorsList,
-					IngErr:{
-						...this.state.errorsList.IngErr,
+				notificationListLeft:{
+					...this.state.notificationListLeft,
+					Ing:{
+						...this.state.notificationListLeft.Ing,
 						status:true
 					}
 				}
 			})
-		}else if(this.updateCanOrderState(this.props.allIngredients) && this.state.errorsList.IngErr.status){
+		}else if(this.updateCanOrderState(this.props.allIngredients) && this.state.notificationListLeft.Ing.status || !this.state.newOrder && this.state.notificationListLeft.Ing.status){
 			this.setState({
-				errorsList:{
-					...this.state.errorsList,
-					IngErr:{
-						...this.state.errorsList.IngErr,
+				notificationListLeft:{
+					...this.state.notificationListLeft,
+					Ing:{
+						...this.state.notificationListLeft.Ing,
 						status:false
 					}
 				}
 			})
 		}
 
-		if(!this.props.logged && !this.state.errorsList.loginErr.status){
+		if(!this.props.logged && !this.state.notificationListLeft.login.status && this.state.newOrder){
 			this.setState({
-				errorsList:{
-					...this.state.errorsList,
-					loginErr:{
-						...this.state.errorsList.loginErr,
+				notificationListLeft:{
+					...this.state.notificationListLeft,
+					login:{
+						...this.state.notificationListLeft.login,
 						status:true
 					}
 				}
 			})
-		}else if(this.props.logged && this.state.errorsList.loginErr.status){
+		}else if(this.props.logged && this.state.notificationListLeft.login.status || !this.state.newOrder && this.state.notificationListLeft.login.status){
 			this.setState({
-				errorsList:{
-					...this.state.errorsList,
-					loginErr:{
-						...this.state.errorsList.loginErr,
+				notificationListLeft:{
+					...this.state.notificationListLeft,
+					login:{
+						...this.state.notificationListLeft.login,
+						status:false
+					}
+				}
+			})
+		}
+		if(Object.keys(this.props.allIngredients).length > 1 && !this.state.notificationListRight.swipe.status){
+			this.setState({
+				notificationListRight:{
+					...this.state.notificationListRight,
+					swipe:{
+						...this.state.notificationListRight.swipe,
+						status:true
+					}
+				}
+			})
+		}else if(Object.keys(this.props.allIngredients).length < 2 && this.state.notificationListRight.swipe.status){
+			this.setState({
+				notificationListRight:{
+					...this.state.notificationListRight,
+					swipe:{
+						...this.state.notificationListRight.swipe,
 						status:false
 					}
 				}
@@ -165,7 +200,7 @@ class BurgerBuilder extends Component{
 	}
 
 	render(){
-		this.errorsMessagesHandler();
+		this.notificationStatusHandler();
 		const isMobile = this.isMobileHandler();
 		let disabledPlusButtons = {...this.props.ingredients};
 		let disabledMinusButtons = {...this.props.ingredients};
@@ -194,6 +229,7 @@ class BurgerBuilder extends Component{
 								<p>to repeat past order</p>
 							</div>
 						</CSSTransition>
+								<NotificationBox toggleModal={this.props.toggleModal} notificationList={this.state.notificationListLeft}/>
 						<CSSTransition classNames={'fade-left'} mountOnEnter unmountOnExit timeout={500} in={this.state.newOrder}>
 							<div>
 								{isMobile?<BurgersPreview swipe={this.swipeBurgerHandler} currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />:null}
@@ -201,6 +237,7 @@ class BurgerBuilder extends Component{
 								nextStep={this.nextStepHandler}
 								close={this.toggleState}
 								canOrder={this.updateCanOrderState(this.props.allIngredients)}
+								logged={this.props.logged}
 								price={this.props.totalPrice}
 								disabledPlusBtns={disabledPlusButtons}
 								disabledMinusBtns={disabledMinusButtons}
@@ -238,16 +275,14 @@ class BurgerBuilder extends Component{
 		return(
 			<React.Fragment>
 				<LoginModal newOrder={this.state.newOrder}/>
-				<LogoBox/>
+				{/* <LogoBox/> */}
 				<div className={this.state.fullScreenPart?'curtain away-pos':this.state.curtainState?'curtain left-pos':'curtain'}>
+					<NotificationBox notificationList={this.state.notificationListRight}/>
 					<CSSTransition classNames={'fade-down'} mountOnEnter unmountOnExit timeout={500} in={this.state.newOrder}>
 						<BurgersPreview swipe={this.swipeBurgerHandler} currentBurger={this.props.currentBurger} allIngredients={this.props.allIngredients} />
 					</CSSTransition>
 				</div>
         <div className="step-box flex-box">
-						<CSSTransition classNames={'slide-right'} mountOnEnter unmountOnExit timeout={1200} in={this.state.newOrder}>
-							<NotificationBox toggleModal={this.props.toggleModal} errorsList={this.state.errorsList}/>
-						</CSSTransition>
 						{leftContent}
 						{rightContent}
 						<p className="by">Created By Aleksander Piron</p>

@@ -30,6 +30,9 @@
 .BurgersList ul li.current{
     background-color: #fff;
 }
+.BurgersList ul li.correct{
+    background-color: #6da34d;
+}
 .BurgersList ul li .Burger{
     margin: 0;
     height: 60px;
