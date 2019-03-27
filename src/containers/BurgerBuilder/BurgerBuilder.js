@@ -61,11 +61,9 @@ class BurgerBuilder extends Component{
 			}
 			if(it > 0){
 				allBurgersDots[index].classList.add('correct');
-				console.log('added to '+index);
+				console.log('added to '+it);
 			}
 		});
-		// console.log(allBurgersDots);
-		// console.log(amountTable);
 		return canGo;
 	}
 

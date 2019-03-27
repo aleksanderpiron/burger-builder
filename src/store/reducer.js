@@ -12,7 +12,6 @@ let newTotalPrice = null;
 let ingPrice = null;
 let validationPassed;
 let updatedBurgerIng;
-let newBurgerId = 2;
 let emailCheckout = localStorage.getItem('userEmail') !==null?localStorage.getItem('userEmail'):'';
 
 
@@ -292,8 +291,16 @@ const reducer=(state=initialState, actions)=>{
         }
 
         case actionsList.ADD_BURGER:
+        let testing = Object.keys({...state.burgersIngredients}).map(item=>{
+            return parseInt(item.replace ( /[^\d.]/g, '' ));
+        })
+        let index = 1;
+        let newBurgerId = 0;
+        while(index !== -1){
+            newBurgerId++;
+            index = testing.indexOf(newBurgerId)
+        } 
         const newBurgerName = "burger_"+newBurgerId;
-        newBurgerId++;
         const newBurgerBody = {
             bacon: 0,
             salad: 0,

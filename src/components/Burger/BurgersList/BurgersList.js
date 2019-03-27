@@ -13,8 +13,7 @@ const BurgersList =(props)=>{
                 <li
                 onClick={()=>props.switchBurger(obj[0])}
                 key={obj[0]}
-                id={obj[0]}
-                className={obj[0] === props.currentBurger?()=>{obj.classList.add('current')}:()=>{obj.classList.remove('current')}}>
+                id={obj[0]}>
                 </li>
             </CSSTransition>
         )
