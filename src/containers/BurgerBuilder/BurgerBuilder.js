@@ -61,7 +61,6 @@ class BurgerBuilder extends Component{
 			}
 			if(it > 0){
 				allBurgersDots[index].classList.add('correct');
-				console.log('added to '+it);
 			}
 		});
 		return canGo;
@@ -107,9 +106,9 @@ class BurgerBuilder extends Component{
 		const burgersList = Object.keys(this.props.allIngredients);
 		let newCurrentBurgerId = burgersList.indexOf(this.props.currentBurger);
 		if(event.direction === 2){
-			newCurrentBurgerId--;
-		}else if(event.direction === 4){
 			newCurrentBurgerId++;
+		}else if(event.direction === 4){
+			newCurrentBurgerId--;
 		}
 		const newCurrentBurger = burgersList[newCurrentBurgerId];
 		this.props.switchBurger(newCurrentBurger);

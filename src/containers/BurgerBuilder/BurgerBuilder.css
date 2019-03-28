@@ -45,7 +45,6 @@ h2{
   position: relative;
 }
 .curtain{
-  position: relative;
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -71,6 +70,8 @@ h2{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  left: 0; 
+  right: 0;
 }
 .BurgersPreviewItem p{
   text-align: center;
@@ -79,14 +80,13 @@ h2{
   text-transform: capitalize;
 }
 .BurgersPreviewItem.active{
-  left: 0;
-  right: 0;
+  transform: translateX(0)
 }
 .BurgersPreviewItem.left{
-  left: -1000px;
+  transform: translateX(1500px);
 }
 .BurgersPreviewItem.right{
-  left: 1000px;
+  transform: translateX(-1500px);
 }
 .step-one{
   background-color: #34495e;
