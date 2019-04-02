@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import CheckoutForm from '../../components/Forms/CheckoutForm/CheckoutForm';
 import {connect} from 'react-redux';
 import './Checkout.css';
-import {Link} from 'react-router-dom';
 import Login from '../../containers/Login/Login';
 import Button from '../../components/Tools/Button/Button';
 import axios from '../../axiosOrders';
@@ -100,7 +99,7 @@ class Checkout extends Component{
                                 <p class="success">Your order has been successfuly placed</p>
                             </div>
             buttons = <div className="buttons text-center">
-                            <Link className="btn info" to="/">Homepage</Link>
+                            <Button btnType="success" clicked={this.props.reset}>Great!</Button>
                         </div>;
         }
         if(this.state.postError !== null){

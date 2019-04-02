@@ -13,6 +13,35 @@ import * as actionsList from '../../store/actions';
 import NotificationBox from '../../components/Tools/NotificationBox/NotificationBox';
 import LogoBox from '../../components/LogoBox/LogoBox';
 
+const initalState = {
+	curtainState:false,
+	fullScreenPart:false,
+	step:1,
+	shownBurger:1,
+	orderHistory:false,
+	newOrder:false,
+	notificationListLeft:{
+		login:{
+			status:false,
+			notiMessage:'To finish order you have to be logged! Click here to login!',
+			notiType:'red',
+			clickFunction:()=>{this.props.toggleModal(true)},
+		},
+		Ing:{
+			status:false,
+			notiMessage:'All burgers must have at least one ingredient!',
+			notiType:'orange',
+		},
+	},
+	notificationListRight:{
+		swipe:{
+			status:false,
+			notiMessage:'You can also swipe to change current burger!',
+			notiType:'blue',
+		},
+	},
+}
+
 class BurgerBuilder extends Component{
 	state = {
 		curtainState:false,
@@ -42,6 +71,9 @@ class BurgerBuilder extends Component{
 			},
 		},
 	}
+	resetState=()=>{
+		this.setState(initalState);
+	}
 
 	updateCanOrderState (ingredients){
 		let amountTable = [];
@@ -58,9 +90,6 @@ class BurgerBuilder extends Component{
 		amountTable.map((it, index)=>{
 			if(it === 0){
 				canGo = false;
-			}
-			if(it > 0){
-				allBurgersDots[index].classList.add('correct');
 			}
 		});
 		return canGo;
@@ -215,6 +244,9 @@ class BurgerBuilder extends Component{
 		if(!this.state.newOrder && !this.props.loginModalShowed){
 			this.props.toggleModal(true);
 		}
+		if(this.state.orderHistory && !this.props.logged){
+			this.setState({orderHistory:false})
+		}
 		let leftContent =
         <div className={this.state.step === 1?"step-one current":"step-one"}>
 						<CSSTransition classNames={'fade'} mountOnEnter unmountOnExit timeout={1200} in={!this.state.orderHistory && !this.state.newOrder}>
@@ -262,7 +294,7 @@ class BurgerBuilder extends Component{
         if(this.state.step>2){
           leftContent =
           <div className={this.state.step === 3?"step-three current":"step-three"}>
-            <Checkout prevStep={this.prevStepHandler} />
+            <Checkout reset={this.resetState} prevStep={this.prevStepHandler} />
           </div>;
 				}
 				if(this.state.fullScreenPart){
@@ -302,6 +334,7 @@ const mapStateToProps = (state) =>{
 }
 const mapDispatchToProps = (dispatch) =>{
 	return{
+		resetState:()=>dispatch({type:actionsList.RESET_STATE}),
 		addIngredientHandler:(ingName)=> dispatch({type: actionsList.ADD_INGREDIENT, ingName:ingName, }),
 		removeIngredientHandler:(ingName)=> dispatch({type: actionsList.REMOVE_INGREDIENT, ingName:ingName}),
 		addBurger:()=> dispatch({type: actionsList.ADD_BURGER}),

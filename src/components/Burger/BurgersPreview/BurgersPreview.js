@@ -4,15 +4,12 @@ import Hammer from 'react-hammerjs';
 
 const BurgersPreview=(props)=>{
     const burgerPreviewContent = Object.entries(props.allIngredients).map((item, index)=>{
-        let burgerId = parseInt(index) + 1;
+        let burgerId = parseInt(item[0].replace(/\D/g,''));
         let currentBrg = props.currentBurger;
-        currentBrg = currentBrg.substr(currentBrg.length - 1);
+        currentBrg = parseInt(currentBrg.substr(currentBrg.length - 1));
         let positon = (currentBrg - burgerId) * 1500;
         let thisClass = 'left';
-        console.log('currentBrg'+currentBrg);
-        console.log('burgerId'+burgerId);
         if(burgerId === currentBrg){
-            console.log("CIpsko");
             thisClass = 'active';
         }
         if(positon > 0){

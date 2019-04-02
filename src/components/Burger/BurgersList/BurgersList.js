@@ -7,10 +7,19 @@ import bin from '../../../assets/img/bin.svg';
 import * as actionsList from '../../../store/actions';
 
 const BurgersList =(props)=>{
+    let correct = Object.values(props.burgers).map(it=>{
+        const sum = Object.values(it).reduce((prevValue, currValue)=>{
+            return prevValue + currValue
+        });
+    })
     let BurgersListBody = Object.entries(props.burgers).map((obj)=>{
+        const sum = Object.values(obj[1]).reduce((prevValue, currValue)=>{
+            return prevValue + currValue
+        });
         return (
             <CSSTransition classNames="fade-left" timeout={1300}>
                 <li
+                className={sum>0?'correct':null}
                 onClick={()=>props.switchBurger(obj[0])}
                 key={obj[0]}
                 id={obj[0]}>
