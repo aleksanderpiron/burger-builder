@@ -6,9 +6,6 @@
     cursor: pointer;
     transition: 300ms;
 }
-.formChanger:hover{
-    color: #ff8800;
-}
 .error-message{
     color:#ec0000;
 }
